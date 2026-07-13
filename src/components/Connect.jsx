@@ -8,44 +8,44 @@ const links = [
 
 export default function Connect() {
   return (
-    <section id="connect" className="relative px-6 sm:px-10 pt-40 pb-16 max-w-6xl mx-auto">
+    <section id="connect" className="relative px-6 sm:px-10 pt-32 pb-16 max-w-6xl mx-auto">
       <motion.div
-        initial={{ opacity: 0, y: 28 }}
+        initial={{ opacity: 0, y: 20 }}
         whileInView={{ opacity: 1, y: 0 }}
         viewport={{ once: true, margin: '-100px' }}
-        transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
-        className="text-center content-scrim content-scrim-center max-w-3xl mx-auto"
+        transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
+        className="text-center content-scrim content-scrim-center max-w-2xl mx-auto"
       >
-        <p className="eyebrow mb-6 justify-center">Connect</p>
-        <h2 className="display font-medium text-[clamp(38px,5.8vw,72px)] max-w-4xl mx-auto">
+        <p className="eyebrow mb-5 justify-center">Connect</p>
+        <h2 className="display text-[clamp(26px,3.6vw,40px)] max-w-xl mx-auto text-ink">
           What would it take to build <em>the next system together?</em>
         </h2>
-        <p className="mt-7 max-w-xl mx-auto text-ink-2 text-lg">
+        <p className="mt-5 max-w-lg mx-auto text-ink-2 text-base">
           Open to software engineering, agentic AI, and programmatic architecture conversations.
         </p>
       </motion.div>
 
-      <div className="mt-16 grid sm:grid-cols-3 gap-5 max-w-3xl mx-auto">
+      <div className="mt-12 grid sm:grid-cols-3 gap-4 max-w-2xl mx-auto">
         {links.map((l, i) => (
           <motion.a
             key={l.label}
             href={l.href}
             target={l.href.startsWith('http') ? '_blank' : undefined}
             rel="noreferrer"
-            initial={{ opacity: 0, y: 22 }}
+            initial={{ opacity: 0, y: 16 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            transition={{ duration: 0.6, delay: i * 0.09, ease: [0.16, 1, 0.3, 1] }}
-            className="card card-hover p-6 text-center"
+            transition={{ duration: 0.55, delay: i * 0.07, ease: [0.16, 1, 0.3, 1] }}
+            className="card card-hover p-5 text-center"
           >
-            <div className="font-display font-medium">{l.label}</div>
-            <div className="mt-1.5 font-mono text-[11.5px] holo-text break-all">{l.sub}</div>
+            <div className="font-display font-semibold text-sm text-ink">{l.label}</div>
+            <div className="mt-1.5 font-mono text-[10.5px] accent-text break-all">{l.sub}</div>
           </motion.a>
         ))}
       </div>
 
-      <footer className="mt-28 border-t border-white/10 pt-7 flex flex-wrap justify-between gap-3 font-mono text-[11px] tracking-[0.12em] uppercase text-ink-3">
-        <span>Bharat Vamsi Reddy · Hyderabad, India</span>
+      <footer className="mt-20 border-t border-line pt-6 flex flex-wrap justify-between gap-3 font-mono text-[10.5px] tracking-[0.08em] uppercase text-ink-3">
+        <span>Bharath Vamsi · Hyderabad, India</span>
         <span>© 2026 · Orchestrating scale · Engineering intelligence</span>
       </footer>
     </section>

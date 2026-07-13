@@ -22,24 +22,24 @@ export default function Nav() {
     <>
       {/* reading progress */}
       <div
-        className="fixed top-0 left-0 h-[3px] z-[100] bg-gradient-to-r from-cyan via-violet to-magenta shadow-[0_0_12px_rgba(0,240,255,0.6)]"
+        className="fixed top-0 left-0 h-[2px] z-[100] bg-lime"
         style={{ width: `${progress * 100}%` }}
       />
       <motion.header
-        initial={{ y: -30, opacity: 0 }}
+        initial={{ y: -24, opacity: 0 }}
         animate={{ y: 0, opacity: 1 }}
-        transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
+        transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
         className="glass-nav fixed top-0 inset-x-0 z-50 flex items-center justify-between px-6 sm:px-10 py-4"
       >
-        <a href="#top" className="font-display text-[13px] tracking-[0.15em] uppercase text-ink-2">
-          <b className="text-ink font-medium">Bharat Vamsi</b> · Reddy
+        <a href="#top" className="font-display text-[14px] font-semibold tracking-tight text-ink">
+          Bharath Vamsi
         </a>
         <nav className="hidden md:flex items-center gap-7">
           {links.map(([label, href]) => (
             <a
               key={href}
               href={href}
-              className="font-mono text-xs uppercase tracking-[0.14em] text-ink-3 hover:text-cyan transition-colors"
+              className="font-mono text-[11px] uppercase tracking-[0.1em] text-ink-2 hover:text-lime transition-colors"
             >
               {label}
             </a>

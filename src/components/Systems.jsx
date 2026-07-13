@@ -30,41 +30,42 @@ const systems = [
 
 export default function Systems() {
   return (
-    <section id="systems" className="relative px-6 sm:px-10 py-36 max-w-6xl mx-auto">
+    <section id="systems" className="relative px-6 sm:px-10 py-32 max-w-6xl mx-auto">
       <motion.div
-        initial={{ opacity: 0, y: 28 }}
+        initial={{ opacity: 0, y: 20 }}
         whileInView={{ opacity: 1, y: 0 }}
         viewport={{ once: true, margin: '-100px' }}
-        transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
+        transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
         className="content-scrim max-w-3xl"
       >
-        <p className="eyebrow mb-6">Engineered systems <span className="text-ink-3">·</span> the AI layer</p>
-        <h2 className="display font-medium text-[clamp(36px,5vw,58px)] max-w-3xl">
+        <p className="eyebrow mb-5">Engineered systems · the AI layer</p>
+        <h2 className="display text-[clamp(26px,3.2vw,38px)] max-w-3xl text-ink">
           Not a person on the portfolio — <em>a system on the portfolio.</em>
         </h2>
-        <p className="mt-7 max-w-2xl text-ink-2 text-lg leading-relaxed">
+        <p className="mt-5 max-w-2xl text-ink-2 text-base leading-relaxed">
           The scale numbers only hold because the manual work keeps getting engineered away. These
           are the four systems doing that work today.
         </p>
-        <div className="hairline mt-14 w-full" />
       </motion.div>
 
-      <div className="mt-14 grid md:grid-cols-2 gap-5">
+      <div className="mt-12 grid md:grid-cols-2 gap-4">
         {systems.map((s, i) => (
           <motion.div
             key={s.idx}
-            initial={{ opacity: 0, y: 30 }}
+            initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true, margin: '-70px' }}
-            transition={{ duration: 0.7, delay: (i % 2) * 0.1, ease: [0.16, 1, 0.3, 1] }}
-            className="card card-hover p-8 sm:p-9"
+            transition={{ duration: 0.6, delay: (i % 2) * 0.08, ease: [0.16, 1, 0.3, 1] }}
+            className="card card-hover p-7 sm:p-8"
           >
             <div className="flex items-baseline justify-between gap-4">
-              <span className="font-mono text-xs tracking-[0.18em] text-cyan">{s.idx}</span>
-              <span className="font-mono text-[11px] tracking-[0.08em] text-good text-right">✓ {s.outcome}</span>
+              <span className="font-mono text-[11px] tracking-[0.12em] text-ink-3">{s.idx}</span>
+              <span className="font-mono text-[11px] tracking-[0.02em] text-good text-right">✓ {s.outcome}</span>
             </div>
-            <h3 className="mt-5 font-display font-medium text-xl sm:text-[22px] tracking-tight leading-snug">{s.name}</h3>
-            <p className="mt-4 text-[15px] text-ink-2 leading-relaxed">{s.body}</p>
+            <h3 className="mt-4 font-display font-semibold text-lg tracking-tight leading-snug text-ink">
+              {s.name}
+            </h3>
+            <p className="mt-3 text-[14.5px] text-ink-2 leading-relaxed">{s.body}</p>
           </motion.div>
         ))}
       </div>

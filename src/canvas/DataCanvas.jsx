@@ -176,26 +176,29 @@ const fragmentShader = /* glsl */ `
     float d = length(uv);
     float alpha = smoothstep(0.5, 0.05, d);
 
-    vec3 cyan    = vec3(0.0, 0.941, 1.0);   // #00F0FF
-    vec3 violet  = vec3(0.659, 0.333, 0.969); // #A855F7
-    vec3 magenta = vec3(1.0, 0.180, 0.592);  // #FF2E97
-    vec3 amber   = vec3(1.0, 0.761, 0.294);  // #FFC24B
+    // restrained monochrome field — near-white particles with a disciplined
+    // lime accent reserved for a minority of points, plus amber during the
+    // pipeline/helix scenes only. No rainbow gradient.
+    vec3 dim    = vec3(0.42, 0.42, 0.46);
+    vec3 bright = vec3(0.92, 0.93, 0.95);
+    vec3 lime   = vec3(0.831, 1.0, 0.373);  // #D4FF5F
+    vec3 amber  = vec3(1.0, 0.706, 0.329);  // #FFB454
 
-    // base holographic gradient: cyan → violet → magenta across the seed spectrum
-    vec3 base = mix(cyan, violet, smoothstep(0.0, 0.6, vSeed));
-    base = mix(base, magenta, smoothstep(0.55, 1.0, vSeed));
+    vec3 base = mix(dim, bright, smoothstep(0.0, 1.0, vSeed));
+    // a slim accent band gets the lime signal, always present but restrained
+    base = mix(base, lime, smoothstep(0.86, 0.94, vSeed) * (1.0 - smoothstep(0.97, 1.0, vSeed)));
 
-    // pipeline: hot amber sparks on the fastest particles
-    base = mix(base, amber, uM1 * (1.0 - uM2) * smoothstep(0.82, 1.0, vSeed));
-    // helix: amber rungs (kind-based seeds trend mid-range)
-    base = mix(base, amber, uM2 * (1.0 - uM3) * smoothstep(0.45, 0.55, vSeed) * (1.0 - smoothstep(0.6, 0.7, vSeed)) * 0.9);
-    // lattice: white-hot node cores
-    base = mix(base, vec3(1.0), uM3 * smoothstep(0.75, 1.0, vSeed));
+    // pipeline: amber sparks on the fastest particles
+    base = mix(base, amber, uM1 * (1.0 - uM2) * smoothstep(0.9, 1.0, vSeed) * 0.85);
+    // helix: amber rungs
+    base = mix(base, amber, uM2 * (1.0 - uM3) * smoothstep(0.45, 0.55, vSeed) * (1.0 - smoothstep(0.6, 0.7, vSeed)) * 0.75);
+    // lattice: lime node cores
+    base = mix(base, lime, uM3 * smoothstep(0.8, 1.0, vSeed) * 0.8);
 
-    // hot center, punched up for bloom to catch
-    base += vec3(0.5) * smoothstep(0.2, 0.0, d);
+    // soft hot center
+    base += vec3(0.22) * smoothstep(0.2, 0.0, d);
 
-    gl_FragColor = vec4(base * 1.35, alpha * (0.34 + 0.7 * vDepth));
+    gl_FragColor = vec4(base, alpha * (0.26 + 0.55 * vDepth));
   }
 `
 
@@ -287,7 +290,7 @@ function MorphField() {
       {/* faint icosahedral halo around the core */}
       <mesh scale={2.9}>
         <icosahedronGeometry args={[1, 1]} />
-        <meshBasicMaterial color="#A855F7" wireframe transparent opacity={0.06} />
+        <meshBasicMaterial color="#6b6b74" wireframe transparent opacity={0.05} />
       </mesh>
     </group>
   )
@@ -303,14 +306,14 @@ export default function DataCanvas() {
       >
         <MorphField />
         <EffectComposer multisampling={0}>
-          <Bloom intensity={0.55} luminanceThreshold={0.28} luminanceSmoothing={0.3} mipmapBlur radius={0.5} />
-          <Vignette eskil={false} offset={0.25} darkness={0.85} />
+          <Bloom intensity={0.32} luminanceThreshold={0.4} luminanceSmoothing={0.25} mipmapBlur radius={0.4} />
+          <Vignette eskil={false} offset={0.3} darkness={0.9} />
         </EffectComposer>
         <AdaptiveDpr pixelated />
         <Preload all />
       </Canvas>
       {/* extra vignette so the editorial layer always stays readable */}
-      <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(ellipse_at_center,transparent_25%,#030309_100%)]" />
+      <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(ellipse_at_center,transparent_25%,#0a0a0c_100%)]" />
     </div>
   )
 }

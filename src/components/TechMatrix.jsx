@@ -48,12 +48,12 @@ const categories = [
 ]
 
 const certs = [
-  { name: 'The Trade Desk · Edge Academy', detail: 'Kokai Certification — Advanced Programmatic', mark: '◆' },
-  { name: 'Google', detail: 'Display & Video 360 Certification', mark: '◇' },
-  { name: 'Amazon', detail: 'Amazon DSP Certification', mark: '◆' },
-  { name: 'Google', detail: 'AI for App Building', mark: '◇' },
-  { name: 'Google', detail: 'AI Writing, Brainstorming & Planning', mark: '◆' },
-  { name: 'Skillsoft', detail: 'AI & Machine Learning Fundamentals', mark: '◇' },
+  { name: 'The Trade Desk · Edge Academy', detail: 'Kokai Certification — Advanced Programmatic' },
+  { name: 'Google', detail: 'Display & Video 360 Certification' },
+  { name: 'Amazon', detail: 'Amazon DSP Certification' },
+  { name: 'Google', detail: 'AI for App Building' },
+  { name: 'Google', detail: 'AI Writing, Brainstorming & Planning' },
+  { name: 'Skillsoft', detail: 'AI & Machine Learning Fundamentals' },
 ]
 
 const awards = [
@@ -63,38 +63,37 @@ const awards = [
 
 export default function TechMatrix() {
   return (
-    <section id="stack" className="relative px-6 sm:px-10 py-36 max-w-6xl mx-auto">
+    <section id="stack" className="relative px-6 sm:px-10 py-32 max-w-6xl mx-auto">
       <motion.div
-        initial={{ opacity: 0, y: 28 }}
+        initial={{ opacity: 0, y: 20 }}
         whileInView={{ opacity: 1, y: 0 }}
         viewport={{ once: true, margin: '-100px' }}
-        transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
+        transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
         className="content-scrim max-w-3xl"
       >
-        <p className="eyebrow mb-6">The matrix <span className="text-ink-3">·</span> stack & signals</p>
-        <h2 className="display font-medium text-[clamp(36px,5vw,58px)] max-w-3xl">
+        <p className="eyebrow mb-5">The matrix · stack & signals</p>
+        <h2 className="display text-[clamp(26px,3.2vw,38px)] max-w-3xl text-ink">
           Every platform, one <em>operating discipline.</em>
         </h2>
-        <div className="hairline mt-14 w-full" />
       </motion.div>
 
       {/* skills — ruled ledger columns */}
-      <div className="mt-14 grid sm:grid-cols-2 lg:grid-cols-4 gap-x-10 gap-y-12">
+      <div className="mt-12 grid sm:grid-cols-2 lg:grid-cols-4 gap-x-8 gap-y-10">
         {categories.map((cat, i) => (
           <motion.div
             key={cat.title}
-            initial={{ opacity: 0, y: 24 }}
+            initial={{ opacity: 0, y: 16 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true, margin: '-60px' }}
-            transition={{ duration: 0.7, delay: i * 0.08, ease: [0.16, 1, 0.3, 1] }}
+            transition={{ duration: 0.6, delay: i * 0.06, ease: [0.16, 1, 0.3, 1] }}
             className="content-scrim"
           >
-            <h3 className="font-mono text-xs tracking-[0.2em] uppercase text-cyan pb-4 border-b border-white/10">
+            <h3 className="font-mono text-[11px] tracking-[0.12em] uppercase text-ink-2 pb-3 border-b border-line">
               {cat.title}
             </h3>
-            <ul className="mt-5 space-y-3">
+            <ul className="mt-4 space-y-2.5">
               {cat.skills.map((skill) => (
-                <li key={skill} className="text-[15px] text-ink-2 leading-snug hover:text-ink transition-colors">
+                <li key={skill} className="text-sm text-ink-2 leading-snug hover:text-ink transition-colors">
                   {skill}
                 </li>
               ))}
@@ -109,43 +108,43 @@ export default function TechMatrix() {
         initial={{ opacity: 0 }}
         whileInView={{ opacity: 1 }}
         viewport={{ once: true }}
-        transition={{ duration: 0.8 }}
-        className="mt-28 content-scrim max-w-3xl"
+        transition={{ duration: 0.7 }}
+        className="mt-24 content-scrim max-w-3xl"
       >
-        <p className="eyebrow eyebrow-amber mb-6">Credentials <span className="text-ink-3">·</span> certified & awarded</p>
-        <h3 className="display font-medium text-[clamp(28px,3.6vw,42px)] max-w-3xl">
+        <p className="eyebrow eyebrow-amber mb-5">Credentials · certified & awarded</p>
+        <h3 className="display text-[clamp(22px,2.6vw,30px)] max-w-3xl text-ink">
           Verified on the platforms <em>that matter.</em>
         </h3>
       </motion.div>
 
-      <div className="mt-12 grid sm:grid-cols-2 lg:grid-cols-3 gap-5">
+      <div className="mt-10 grid sm:grid-cols-2 lg:grid-cols-3 gap-4">
         {certs.map((c, i) => (
           <motion.div
             key={c.detail}
-            initial={{ opacity: 0, y: 34, rotateX: 10 }}
-            whileInView={{ opacity: 1, y: 0, rotateX: 0 }}
+            initial={{ opacity: 0, y: 18 }}
+            whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true, margin: '-50px' }}
-            transition={{ duration: 0.75, delay: (i % 3) * 0.1, ease: [0.16, 1, 0.3, 1] }}
-            className="card card-hover p-7"
+            transition={{ duration: 0.6, delay: (i % 3) * 0.07, ease: [0.16, 1, 0.3, 1] }}
+            className="card card-hover p-6"
           >
             <div className="flex items-start justify-between">
-              <span className="font-display text-2xl holo-text leading-none">{c.mark}</span>
-              <span className="font-mono text-[10px] uppercase tracking-[0.2em] text-good border border-good/30 rounded-full px-3 py-1">
+              <span className="font-mono text-[11px] tracking-[0.1em] text-ink-3">{String(i + 1).padStart(2, '0')}</span>
+              <span className="font-mono text-[10px] uppercase tracking-[0.12em] text-good border border-good/30 rounded px-2.5 py-1">
                 Certified
               </span>
             </div>
-            <div className="mt-6 font-display font-medium text-ink">{c.name}</div>
-            <div className="mt-1.5 text-sm text-ink-2 leading-snug">{c.detail}</div>
+            <div className="mt-5 font-display font-semibold text-ink">{c.name}</div>
+            <div className="mt-1.5 text-[13px] text-ink-2 leading-snug">{c.detail}</div>
           </motion.div>
         ))}
       </div>
 
       <motion.div
-        initial={{ opacity: 0, y: 20 }}
+        initial={{ opacity: 0, y: 14 }}
         whileInView={{ opacity: 1, y: 0 }}
         viewport={{ once: true }}
-        transition={{ duration: 0.7 }}
-        className="mt-10 flex flex-wrap gap-3"
+        transition={{ duration: 0.6 }}
+        className="mt-8 flex flex-wrap gap-2.5"
       >
         {awards.map((a) => (
           <span key={a} className="chip chip-amber">
