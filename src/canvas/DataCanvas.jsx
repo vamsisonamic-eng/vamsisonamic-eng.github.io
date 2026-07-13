@@ -4,13 +4,14 @@ import { AdaptiveDpr, Preload } from '@react-three/drei'
 import * as THREE from 'three'
 import { scrollState } from '../store/scrollState'
 
-const COUNT = 6000
+const COUNT = 7000
 
 /* ------------------------------------------------------------------ */
-/*  Morph targets — all generated procedurally, zero asset downloads   */
+/*  Four procedural morph targets — zero asset downloads               */
+/*  core → spend pipeline → neural helix → node lattice                */
 /* ------------------------------------------------------------------ */
 
-// Scene 1 · The Core: a dense quantum sphere with an orbital shell
+// Scene 1 · The Core: dense quantum sphere with a sparse outer shell
 function buildCore() {
   const pos = new Float32Array(COUNT * 3)
   for (let i = 0; i < COUNT; i++) {
@@ -25,13 +26,13 @@ function buildCore() {
   return pos
 }
 
-// Scene 2 · Data Pipelines: braided fiber-optic streams flowing on curves
+// Scene 2 · Spend Pipelines: braided fiber-optic streams
 function buildPipeline() {
   const pos = new Float32Array(COUNT * 3)
   const STREAMS = 7
   for (let i = 0; i < COUNT; i++) {
     const s = i % STREAMS
-    const t = (i / COUNT) * 2 - 1 // -1 → 1 along the stream
+    const t = (i / COUNT) * 2 - 1
     const x = t * 9
     const phase = s * 1.7
     const braidR = 0.55 + 0.25 * Math.sin(s * 2.1)
@@ -44,7 +45,41 @@ function buildPipeline() {
   return pos
 }
 
-// Scene 3 · Tech Matrix: interconnected lattice of node clusters
+// Scene 3 · Neural Helix: double helix with cross-links — the AI layer
+function buildHelix() {
+  const pos = new Float32Array(COUNT * 3)
+  for (let i = 0; i < COUNT; i++) {
+    const kind = i % 5
+    const t = (i / COUNT) * 2 - 1 // -1 → 1 along axis
+    const y = t * 4.6
+    const angle = t * Math.PI * 4.2
+    const R = 1.7
+    if (kind < 2) {
+      // strand A / strand B
+      const a = angle + (kind === 1 ? Math.PI : 0)
+      pos[i * 3] = Math.cos(a) * R + (Math.random() - 0.5) * 0.16
+      pos[i * 3 + 1] = y + (Math.random() - 0.5) * 0.1
+      pos[i * 3 + 2] = Math.sin(a) * R + (Math.random() - 0.5) * 0.16
+    } else if (kind === 2) {
+      // rungs between strands
+      const f = Math.random()
+      const a1 = angle
+      pos[i * 3] = Math.cos(a1) * R * (1 - 2 * f)
+      pos[i * 3 + 1] = y
+      pos[i * 3 + 2] = Math.sin(a1) * R * (1 - 2 * f)
+    } else {
+      // ambient thought-cloud around the helix
+      const r = 2.6 + Math.random() * 1.6
+      const th = Math.random() * Math.PI * 2
+      pos[i * 3] = Math.cos(th) * r
+      pos[i * 3 + 1] = (Math.random() * 2 - 1) * 4.4
+      pos[i * 3 + 2] = Math.sin(th) * r
+    }
+  }
+  return pos
+}
+
+// Scene 4 · Node Lattice: interconnected clusters — the tech matrix
 function buildGrid() {
   const pos = new Float32Array(COUNT * 3)
   const NODES = 48
@@ -58,7 +93,6 @@ function buildGrid() {
   }
   for (let i = 0; i < COUNT; i++) {
     if (i % 4 === 0) {
-      // connective tissue between two random nodes
       const a = nodes[i % NODES]
       const b = nodes[(i * 7 + 13) % NODES]
       const t = Math.random()
@@ -66,7 +100,6 @@ function buildGrid() {
       pos[i * 3 + 1] = a[1] + (b[1] - a[1]) * t
       pos[i * 3 + 2] = a[2] + (b[2] - a[2]) * t
     } else {
-      // node cluster
       const n = nodes[i % NODES]
       const r = 0.28 * Math.cbrt(Math.random())
       const theta = Math.random() * Math.PI * 2
@@ -80,17 +113,19 @@ function buildGrid() {
 }
 
 /* ------------------------------------------------------------------ */
-/*  Custom shader: GPU-side morphing, flow motion, neon color ramp     */
+/*  GPU morph shader — cyan signal, amber sparks, white-hot centers    */
 /* ------------------------------------------------------------------ */
 
 const vertexShader = /* glsl */ `
   attribute vec3 aPipe;
+  attribute vec3 aHelix;
   attribute vec3 aGrid;
   attribute float aSeed;
 
   uniform float uTime;
-  uniform float uMorphPipe;  // core → pipeline
-  uniform float uMorphGrid;  // pipeline → grid
+  uniform float uM1; // core → pipeline
+  uniform float uM2; // pipeline → helix
+  uniform float uM3; // helix → grid
   uniform vec2 uMouse;
   uniform float uPixelRatio;
 
@@ -98,18 +133,22 @@ const vertexShader = /* glsl */ `
   varying float vDepth;
 
   void main() {
-    vec3 p = mix(position, aPipe, uMorphPipe);
-    p = mix(p, aGrid, uMorphGrid);
+    vec3 p = mix(position, aPipe, uM1);
+    p = mix(p, aHelix, uM2);
+    p = mix(p, aGrid, uM3);
 
-    // organic breathing / flow
     float t = uTime * 0.6 + aSeed * 6.2831;
     p += 0.06 * vec3(sin(t + p.y * 2.0), cos(t * 1.3 + p.x * 1.7), sin(t * 0.7 + p.z * 2.3));
 
-    // pipeline current: particles race along x while in stream form
-    p.x += uMorphPipe * (1.0 - uMorphGrid) * sin(uTime * 0.9 + aSeed * 40.0) * 0.25;
+    // pipeline current while in stream form
+    p.x += uM1 * (1.0 - uM2) * sin(uTime * 0.9 + aSeed * 40.0) * 0.25;
+    // helix slow spin while in helix form
+    float spin = uM2 * (1.0 - uM3) * uTime * 0.25;
+    float cs = cos(spin), sn = sin(spin);
+    p.xz = mat2(cs, -sn, sn, cs) * p.xz;
 
     // magnetic mouse pull on the core
-    float coreness = 1.0 - uMorphPipe;
+    float coreness = 1.0 - uM1;
     p.xy += uMouse * coreness * 0.45 * (0.4 + aSeed * 0.6);
 
     vec4 mv = modelViewMatrix * vec4(p, 1.0);
@@ -124,8 +163,9 @@ const vertexShader = /* glsl */ `
 `
 
 const fragmentShader = /* glsl */ `
-  uniform float uMorphPipe;
-  uniform float uMorphGrid;
+  uniform float uM1;
+  uniform float uM2;
+  uniform float uM3;
 
   varying float vSeed;
   varying float vDepth;
@@ -135,19 +175,23 @@ const fragmentShader = /* glsl */ `
     float d = length(uv);
     float alpha = smoothstep(0.5, 0.05, d);
 
-    vec3 cyan   = vec3(0.13, 0.89, 1.0);
-    vec3 violet = vec3(0.49, 0.36, 1.0);
-    vec3 pink   = vec3(1.0, 0.24, 0.51);
-    vec3 mint   = vec3(0.24, 1.0, 0.69);
+    vec3 cyan     = vec3(0.165, 0.784, 0.855); // #2AC8DA
+    vec3 deepTeal = vec3(0.078, 0.616, 0.686); // #149DAF
+    vec3 amber    = vec3(0.910, 0.706, 0.290); // #E8B44A
+    vec3 iceWhite = vec3(0.937, 0.949, 0.969); // #EFF2F7
 
-    vec3 base = mix(cyan, violet, vSeed);
-    base = mix(base, pink, uMorphPipe * smoothstep(0.6, 1.0, vSeed));
-    base = mix(base, mint, uMorphGrid * smoothstep(0.7, 1.0, vSeed));
+    vec3 base = mix(deepTeal, cyan, vSeed);
+    // pipeline: hot amber sparks on the fastest particles
+    base = mix(base, amber, uM1 * (1.0 - uM2) * smoothstep(0.82, 1.0, vSeed));
+    // helix: amber rungs (kind-based seeds trend mid-range) + brighter strands
+    base = mix(base, amber, uM2 * (1.0 - uM3) * smoothstep(0.45, 0.55, vSeed) * (1.0 - smoothstep(0.6, 0.7, vSeed)) * 0.9);
+    // lattice: ice-white node cores
+    base = mix(base, iceWhite, uM3 * smoothstep(0.75, 1.0, vSeed));
 
     // hot center
-    base += vec3(0.35) * smoothstep(0.18, 0.0, d);
+    base += vec3(0.32) * smoothstep(0.18, 0.0, d);
 
-    gl_FragColor = vec4(base, alpha * (0.35 + 0.65 * vDepth));
+    gl_FragColor = vec4(base, alpha * (0.32 + 0.68 * vDepth));
   }
 `
 
@@ -155,10 +199,11 @@ function MorphField() {
   const mat = useRef()
   const group = useRef()
 
-  const { core, pipe, grid, seeds } = useMemo(
+  const { core, pipe, helix, grid, seeds } = useMemo(
     () => ({
       core: buildCore(),
       pipe: buildPipeline(),
+      helix: buildHelix(),
       grid: buildGrid(),
       seeds: Float32Array.from({ length: COUNT }, () => Math.random()),
     }),
@@ -168,8 +213,9 @@ function MorphField() {
   const uniforms = useMemo(
     () => ({
       uTime: { value: 0 },
-      uMorphPipe: { value: 0 },
-      uMorphGrid: { value: 0 },
+      uM1: { value: 0 },
+      uM2: { value: 0 },
+      uM3: { value: 0 },
       uMouse: { value: new THREE.Vector2() },
       uPixelRatio: { value: Math.min(window.devicePixelRatio, 2) },
     }),
@@ -180,19 +226,21 @@ function MorphField() {
     const u = mat.current.uniforms
     u.uTime.value += delta
 
-    // section blend windows across page scroll (4 sections)
+    // scene blend windows across page scroll (5 sections)
     const p = scrollState.progress
-    const targetPipe = THREE.MathUtils.smoothstep(p, 0.12, 0.34)
-    const targetGrid = THREE.MathUtils.smoothstep(p, 0.45, 0.68)
-    u.uMorphPipe.value = THREE.MathUtils.damp(u.uMorphPipe.value, targetPipe, 4, delta)
-    u.uMorphGrid.value = THREE.MathUtils.damp(u.uMorphGrid.value, targetGrid, 4, delta)
+    const t1 = THREE.MathUtils.smoothstep(p, 0.08, 0.24)
+    const t2 = THREE.MathUtils.smoothstep(p, 0.34, 0.5)
+    const t3 = THREE.MathUtils.smoothstep(p, 0.6, 0.78)
+    u.uM1.value = THREE.MathUtils.damp(u.uM1.value, t1, 4, delta)
+    u.uM2.value = THREE.MathUtils.damp(u.uM2.value, t2, 4, delta)
+    u.uM3.value = THREE.MathUtils.damp(u.uM3.value, t3, 4, delta)
     u.uMouse.value.x = THREE.MathUtils.damp(u.uMouse.value.x, scrollState.mouseX, 3, delta)
     u.uMouse.value.y = THREE.MathUtils.damp(u.uMouse.value.y, scrollState.mouseY, 3, delta)
 
-    // slow cinematic drift + camera choreography by scroll
+    // cinematic drift + camera choreography
     group.current.rotation.y = THREE.MathUtils.damp(
       group.current.rotation.y,
-      p * 1.2 + scrollState.mouseX * 0.12,
+      p * 1.1 + scrollState.mouseX * 0.12,
       2.5,
       delta
     )
@@ -204,11 +252,11 @@ function MorphField() {
     )
     state.camera.position.z = THREE.MathUtils.damp(
       state.camera.position.z,
-      7 - targetPipe * 1.2 + targetGrid * 2.2,
+      7 - t1 * 1.2 + t2 * 0.8 + t3 * 1.6,
       2.5,
       delta
     )
-    state.camera.position.y = THREE.MathUtils.damp(state.camera.position.y, targetGrid * 0.6, 2.5, delta)
+    state.camera.position.y = THREE.MathUtils.damp(state.camera.position.y, t3 * 0.6, 2.5, delta)
   })
 
   return (
@@ -217,6 +265,7 @@ function MorphField() {
         <bufferGeometry>
           <bufferAttribute attach="attributes-position" count={COUNT} array={core} itemSize={3} />
           <bufferAttribute attach="attributes-aPipe" count={COUNT} array={pipe} itemSize={3} />
+          <bufferAttribute attach="attributes-aHelix" count={COUNT} array={helix} itemSize={3} />
           <bufferAttribute attach="attributes-aGrid" count={COUNT} array={grid} itemSize={3} />
           <bufferAttribute attach="attributes-aSeed" count={COUNT} array={seeds} itemSize={1} />
         </bufferGeometry>
@@ -231,10 +280,10 @@ function MorphField() {
         />
       </points>
 
-      {/* wireframe halo accent around the core */}
+      {/* faint icosahedral halo around the core */}
       <mesh scale={2.9}>
         <icosahedronGeometry args={[1, 1]} />
-        <meshBasicMaterial color="#7c5cff" wireframe transparent opacity={0.06} />
+        <meshBasicMaterial color="#149DAF" wireframe transparent opacity={0.05} />
       </mesh>
     </group>
   )
@@ -252,8 +301,8 @@ export default function DataCanvas() {
         <AdaptiveDpr pixelated />
         <Preload all />
       </Canvas>
-      {/* vignette + depth gradient so UI text always stays readable */}
-      <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(ellipse_at_center,transparent_35%,#05060a_100%)]" />
+      {/* vignette so the editorial layer always stays readable */}
+      <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(ellipse_at_center,transparent_30%,#05080e_100%)]" />
     </div>
   )
 }

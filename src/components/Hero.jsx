@@ -2,31 +2,27 @@ import { motion } from 'framer-motion'
 import CountUp from './CountUp'
 
 const stats = [
-  { value: 275, prefix: '$', suffix: 'M+', label: 'Annualized Budget Orchestrated', accent: 'text-glow-cyan' },
-  { value: 7, prefix: '$', suffix: 'M', label: 'Peak Weekly Pacing Architecture', accent: 'text-glow-violet' },
-  { value: 10, prefix: '', suffix: '+ Yrs', label: 'Digital Systems Evolution', accent: 'text-glow-cyan' },
+  { value: 390, prefix: '$', suffix: 'M', label: 'Peak annual portfolio governed', hot: true },
+  { value: 4.2, prefix: '', suffix: 'x', decimals: 1, label: 'ROAS — lifted from 1.8x', hot: false },
+  { value: 98, prefix: '>', suffix: '%', label: 'Delivery-in-full, held at scale', hot: false },
+  { value: 100, prefix: '', suffix: '', label: 'Concurrent campaigns, 5 platforms', hot: false },
+  { value: 8, prefix: '', suffix: '+ yrs', label: 'Programmatic & search systems', hot: false },
 ]
 
 const fadeUp = {
-  hidden: { opacity: 0, y: 40 },
+  hidden: { opacity: 0, y: 36 },
   show: (i) => ({
     opacity: 1,
     y: 0,
-    transition: { delay: 0.15 * i, duration: 0.9, ease: [0.22, 1, 0.36, 1] },
+    transition: { delay: 0.12 * i, duration: 0.9, ease: [0.16, 1, 0.3, 1] },
   }),
 }
 
 export default function Hero() {
   return (
-    <section id="core" className="relative min-h-screen flex flex-col items-center justify-center px-6 pt-28 pb-20">
-      <motion.p
-        variants={fadeUp}
-        initial="hidden"
-        animate="show"
-        custom={0}
-        className="font-mono text-xs sm:text-sm tracking-[0.35em] uppercase text-neon/80 mb-6"
-      >
-        Programmatic Systems · Agentic AI Engineering
+    <section id="top" className="relative min-h-screen flex flex-col justify-center px-6 sm:px-10 max-w-6xl mx-auto pt-32 pb-24">
+      <motion.p variants={fadeUp} initial="hidden" animate="show" custom={0} className="eyebrow mb-8">
+        Programmatic systems <span className="text-ink-3">·</span> Agentic AI engineering <span className="text-ink-3">·</span> Hyderabad, IN
       </motion.p>
 
       <motion.h1
@@ -34,11 +30,11 @@ export default function Hero() {
         initial="hidden"
         animate="show"
         custom={1}
-        className="text-center text-4xl sm:text-6xl lg:text-7xl font-bold leading-[1.05] tracking-tight max-w-5xl"
+        className="display text-[clamp(52px,9vw,120px)]"
       >
-        Orchestrating <span className="gradient-text">Scale.</span>
+        Orchestrating scale<span className="text-cyan">.</span>
         <br />
-        Engineering <span className="gradient-text">Intelligence.</span>
+        Engineering <em>intelligence.</em>
       </motion.h1>
 
       <motion.p
@@ -46,44 +42,45 @@ export default function Hero() {
         initial="hidden"
         animate="show"
         custom={2}
-        className="mt-8 max-w-2xl text-center text-white/60 text-base sm:text-lg leading-relaxed"
+        className="mt-9 max-w-2xl text-ink-2 text-lg leading-relaxed"
       >
-        Architecting nine-figure media systems at a global Tier-1 agency network —
-        now compiling a decade of data-driven growth into software and agentic AI engineering.
+        I run the operating engine behind a nine-figure retail media portfolio at a{' '}
+        <strong className="text-ink font-semibold">global Tier-1 media network</strong> — and I build
+        the AI systems that make that scale possible. Eight years from search architecture to
+        programmatic command, now compiling into software and agentic AI engineering.
       </motion.p>
 
-      <div className="mt-16 grid grid-cols-1 sm:grid-cols-3 gap-5 w-full max-w-4xl">
-        {stats.map((s, i) => (
-          <motion.div
-            key={s.label}
-            variants={fadeUp}
-            initial="hidden"
-            whileInView="show"
-            viewport={{ once: true }}
-            custom={i + 3}
-            className="glass glass-hover rounded-2xl px-6 py-8 text-center"
-          >
-            <div className={`text-4xl lg:text-5xl font-bold font-mono ${s.accent}`}>
-              <CountUp value={s.value} prefix={s.prefix} suffix={s.suffix} />
+      {/* stat ledger — ruled columns, not floating cards */}
+      <motion.div
+        variants={fadeUp}
+        initial="hidden"
+        animate="show"
+        custom={3}
+        className="mt-20 grid grid-cols-2 md:grid-cols-5 border-t border-white/10"
+      >
+        {stats.map((s) => (
+          <div key={s.label} className="pt-6 pr-6 md:border-r md:border-white/10 md:mr-6 last:border-r-0 last:mr-0 pb-2">
+            <div className={`tabular font-semibold text-[clamp(26px,2.6vw,38px)] tracking-tight ${s.hot ? 'text-cyan glow-cyan' : 'text-ink'}`}>
+              <CountUp value={s.value} prefix={s.prefix} suffix={s.suffix} decimals={s.decimals ?? 0} />
             </div>
-            <div className="mt-3 text-xs font-mono uppercase tracking-[0.18em] text-white/45">
+            <div className="mt-2 font-mono text-[10.5px] uppercase tracking-[0.12em] text-ink-3 leading-relaxed">
               {s.label}
             </div>
-          </motion.div>
+          </div>
         ))}
-      </div>
+      </motion.div>
 
       <motion.div
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
-        transition={{ delay: 1.6, duration: 1 }}
-        className="absolute bottom-8 flex flex-col items-center gap-2 text-white/30"
+        transition={{ delay: 1.8, duration: 1 }}
+        className="absolute bottom-9 left-1/2 -translate-x-1/2 flex flex-col items-center gap-3 text-ink-3"
       >
         <span className="font-mono text-[10px] tracking-[0.3em] uppercase">Scroll</span>
         <motion.div
-          animate={{ y: [0, 8, 0] }}
-          transition={{ repeat: Infinity, duration: 1.8, ease: 'easeInOut' }}
-          className="h-8 w-px bg-gradient-to-b from-neon/70 to-transparent"
+          animate={{ scaleY: [0, 1, 1, 0] }}
+          transition={{ repeat: Infinity, duration: 2.2, ease: 'easeInOut', times: [0, 0.45, 0.55, 1] }}
+          className="h-11 w-px bg-gradient-to-b from-cyan to-transparent origin-top"
         />
       </motion.div>
     </section>

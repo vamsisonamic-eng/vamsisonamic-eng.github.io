@@ -1,36 +1,51 @@
-import { motion } from 'framer-motion'
+import { useEffect, useState } from 'react'
+import { motion, useScroll } from 'framer-motion'
 
 const links = [
-  ['Core', '#core'],
-  ['Pipelines', '#pipelines'],
-  ['Matrix', '#matrix'],
+  ['Journey', '#journey'],
+  ['Systems', '#systems'],
+  ['Stack', '#stack'],
+  ['Credentials', '#credentials'],
   ['Connect', '#connect'],
 ]
 
 export default function Nav() {
+  const { scrollYProgress } = useScroll()
+  const [progress, setProgress] = useState(0)
+
+  useEffect(
+    () => scrollYProgress.on('change', (v) => setProgress(v)),
+    [scrollYProgress]
+  )
+
   return (
-    <motion.header
-      initial={{ y: -40, opacity: 0 }}
-      animate={{ y: 0, opacity: 1 }}
-      transition={{ duration: 0.8, ease: [0.22, 1, 0.36, 1] }}
-      className="fixed top-0 inset-x-0 z-50 flex justify-center pt-5 px-4"
-    >
-      <nav className="glass rounded-full px-6 py-3 flex items-center gap-8">
-        <a href="#core" className="font-mono text-sm font-semibold tracking-widest gradient-text">
-          VS://2026
+    <>
+      {/* reading progress */}
+      <div
+        className="fixed top-0 left-0 h-[3px] z-[100] bg-gradient-to-r from-cyan-deep to-cyan"
+        style={{ width: `${progress * 100}%` }}
+      />
+      <motion.header
+        initial={{ y: -30, opacity: 0 }}
+        animate={{ y: 0, opacity: 1 }}
+        transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
+        className="glass-nav fixed top-0 inset-x-0 z-50 flex items-center justify-between px-6 sm:px-10 py-4"
+      >
+        <a href="#top" className="font-mono text-[13px] tracking-[0.2em] uppercase text-ink-2">
+          <b className="text-ink font-semibold">Bharat Vamsi</b> · Reddy
         </a>
-        <div className="hidden sm:flex items-center gap-6">
+        <nav className="hidden md:flex items-center gap-7">
           {links.map(([label, href]) => (
             <a
               key={href}
               href={href}
-              className="text-xs font-mono uppercase tracking-[0.2em] text-white/50 hover:text-neon transition-colors"
+              className="font-mono text-xs uppercase tracking-[0.14em] text-ink-3 hover:text-cyan transition-colors"
             >
               {label}
             </a>
           ))}
-        </div>
-      </nav>
-    </motion.header>
+        </nav>
+      </motion.header>
+    </>
   )
 }
