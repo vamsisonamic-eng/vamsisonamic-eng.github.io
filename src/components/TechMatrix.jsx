@@ -69,9 +69,10 @@ export default function TechMatrix() {
         whileInView={{ opacity: 1, y: 0 }}
         viewport={{ once: true, margin: '-100px' }}
         transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
+        className="content-scrim max-w-3xl"
       >
         <p className="eyebrow mb-6">The matrix <span className="text-ink-3">·</span> stack & signals</p>
-        <h2 className="display text-[clamp(38px,5.4vw,64px)] max-w-3xl">
+        <h2 className="display font-medium text-[clamp(36px,5vw,58px)] max-w-3xl">
           Every platform, one <em>operating discipline.</em>
         </h2>
         <div className="hairline mt-14 w-full" />
@@ -86,6 +87,7 @@ export default function TechMatrix() {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true, margin: '-60px' }}
             transition={{ duration: 0.7, delay: i * 0.08, ease: [0.16, 1, 0.3, 1] }}
+            className="content-scrim"
           >
             <h3 className="font-mono text-xs tracking-[0.2em] uppercase text-cyan pb-4 border-b border-white/10">
               {cat.title}
@@ -108,10 +110,10 @@ export default function TechMatrix() {
         whileInView={{ opacity: 1 }}
         viewport={{ once: true }}
         transition={{ duration: 0.8 }}
-        className="mt-28"
+        className="mt-28 content-scrim max-w-3xl"
       >
         <p className="eyebrow eyebrow-amber mb-6">Credentials <span className="text-ink-3">·</span> certified & awarded</p>
-        <h3 className="display text-[clamp(30px,4vw,46px)] max-w-3xl">
+        <h3 className="display font-medium text-[clamp(28px,3.6vw,42px)] max-w-3xl">
           Verified on the platforms <em>that matter.</em>
         </h3>
       </motion.div>
@@ -127,12 +129,12 @@ export default function TechMatrix() {
             className="card card-hover p-7"
           >
             <div className="flex items-start justify-between">
-              <span className="font-serif italic text-3xl text-cyan leading-none">{c.mark}</span>
+              <span className="font-display text-2xl holo-text leading-none">{c.mark}</span>
               <span className="font-mono text-[10px] uppercase tracking-[0.2em] text-good border border-good/30 rounded-full px-3 py-1">
                 Certified
               </span>
             </div>
-            <div className="mt-6 font-semibold text-ink">{c.name}</div>
+            <div className="mt-6 font-display font-medium text-ink">{c.name}</div>
             <div className="mt-1.5 text-sm text-ink-2 leading-snug">{c.detail}</div>
           </motion.div>
         ))}

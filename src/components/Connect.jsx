@@ -14,10 +14,10 @@ export default function Connect() {
         whileInView={{ opacity: 1, y: 0 }}
         viewport={{ once: true, margin: '-100px' }}
         transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
-        className="text-center"
+        className="text-center content-scrim content-scrim-center max-w-3xl mx-auto"
       >
         <p className="eyebrow mb-6 justify-center">Connect</p>
-        <h2 className="display text-[clamp(40px,6.4vw,80px)] max-w-4xl mx-auto">
+        <h2 className="display font-medium text-[clamp(38px,5.8vw,72px)] max-w-4xl mx-auto">
           What would it take to build <em>the next system together?</em>
         </h2>
         <p className="mt-7 max-w-xl mx-auto text-ink-2 text-lg">
@@ -38,8 +38,8 @@ export default function Connect() {
             transition={{ duration: 0.6, delay: i * 0.09, ease: [0.16, 1, 0.3, 1] }}
             className="card card-hover p-6 text-center"
           >
-            <div className="font-semibold">{l.label}</div>
-            <div className="mt-1.5 font-mono text-[11.5px] text-cyan/80 break-all">{l.sub}</div>
+            <div className="font-display font-medium">{l.label}</div>
+            <div className="mt-1.5 font-mono text-[11.5px] holo-text break-all">{l.sub}</div>
           </motion.a>
         ))}
       </div>

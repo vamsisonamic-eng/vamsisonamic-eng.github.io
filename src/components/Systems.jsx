@@ -36,9 +36,10 @@ export default function Systems() {
         whileInView={{ opacity: 1, y: 0 }}
         viewport={{ once: true, margin: '-100px' }}
         transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
+        className="content-scrim max-w-3xl"
       >
         <p className="eyebrow mb-6">Engineered systems <span className="text-ink-3">·</span> the AI layer</p>
-        <h2 className="display text-[clamp(38px,5.4vw,64px)] max-w-3xl">
+        <h2 className="display font-medium text-[clamp(36px,5vw,58px)] max-w-3xl">
           Not a person on the portfolio — <em>a system on the portfolio.</em>
         </h2>
         <p className="mt-7 max-w-2xl text-ink-2 text-lg leading-relaxed">
@@ -62,7 +63,7 @@ export default function Systems() {
               <span className="font-mono text-xs tracking-[0.18em] text-cyan">{s.idx}</span>
               <span className="font-mono text-[11px] tracking-[0.08em] text-good text-right">✓ {s.outcome}</span>
             </div>
-            <h3 className="mt-5 text-xl sm:text-[22px] font-semibold tracking-tight leading-snug">{s.name}</h3>
+            <h3 className="mt-5 font-display font-medium text-xl sm:text-[22px] tracking-tight leading-snug">{s.name}</h3>
             <p className="mt-4 text-[15px] text-ink-2 leading-relaxed">{s.body}</p>
           </motion.div>
         ))}

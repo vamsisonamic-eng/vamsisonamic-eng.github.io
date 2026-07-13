@@ -19,6 +19,7 @@ export default function App() {
       <Suspense fallback={<div className="fixed inset-0 bg-page" />}>
         <DataCanvas />
       </Suspense>
+      <div className="aurora" aria-hidden="true" />
 
       <div className="relative z-10">
         <Nav />

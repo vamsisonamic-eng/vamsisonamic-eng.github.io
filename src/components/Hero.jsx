@@ -21,6 +21,7 @@ const fadeUp = {
 export default function Hero() {
   return (
     <section id="top" className="relative min-h-screen flex flex-col justify-center px-6 sm:px-10 max-w-6xl mx-auto pt-32 pb-24">
+      <div className="content-scrim max-w-3xl">
       <motion.p variants={fadeUp} initial="hidden" animate="show" custom={0} className="eyebrow mb-8">
         Programmatic systems <span className="text-ink-3">·</span> Agentic AI engineering <span className="text-ink-3">·</span> Hyderabad, IN
       </motion.p>
@@ -32,7 +33,7 @@ export default function Hero() {
         custom={1}
         className="display text-[clamp(52px,9vw,120px)]"
       >
-        Orchestrating scale<span className="text-cyan">.</span>
+        Orchestrating scale<span className="holo-text">.</span>
         <br />
         Engineering <em>intelligence.</em>
       </motion.h1>
@@ -49,6 +50,7 @@ export default function Hero() {
         the AI systems that make that scale possible. Eight years from search architecture to
         programmatic command, now compiling into software and agentic AI engineering.
       </motion.p>
+      </div>
 
       {/* stat ledger — ruled columns, not floating cards */}
       <motion.div
@@ -60,7 +62,7 @@ export default function Hero() {
       >
         {stats.map((s) => (
           <div key={s.label} className="pt-6 pr-6 md:border-r md:border-white/10 md:mr-6 last:border-r-0 last:mr-0 pb-2">
-            <div className={`tabular font-semibold text-[clamp(26px,2.6vw,38px)] tracking-tight ${s.hot ? 'text-cyan glow-cyan' : 'text-ink'}`}>
+            <div className={`tabular font-display font-medium text-[clamp(26px,2.6vw,38px)] tracking-tight ${s.hot ? 'holo-text glow-cyan' : 'text-ink'}`}>
               <CountUp value={s.value} prefix={s.prefix} suffix={s.suffix} decimals={s.decimals ?? 0} />
             </div>
             <div className="mt-2 font-mono text-[10.5px] uppercase tracking-[0.12em] text-ink-3 leading-relaxed">
@@ -80,7 +82,7 @@ export default function Hero() {
         <motion.div
           animate={{ scaleY: [0, 1, 1, 0] }}
           transition={{ repeat: Infinity, duration: 2.2, ease: 'easeInOut', times: [0, 0.45, 0.55, 1] }}
-          className="h-11 w-px bg-gradient-to-b from-cyan to-transparent origin-top"
+          className="h-11 w-px bg-gradient-to-b from-cyan via-violet to-transparent origin-top"
         />
       </motion.div>
     </section>

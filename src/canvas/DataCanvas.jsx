@@ -1,6 +1,7 @@
 import { useMemo, useRef } from 'react'
 import { Canvas, useFrame } from '@react-three/fiber'
 import { AdaptiveDpr, Preload } from '@react-three/drei'
+import { EffectComposer, Bloom, Vignette } from '@react-three/postprocessing'
 import * as THREE from 'three'
 import { scrollState } from '../store/scrollState'
 
@@ -175,23 +176,26 @@ const fragmentShader = /* glsl */ `
     float d = length(uv);
     float alpha = smoothstep(0.5, 0.05, d);
 
-    vec3 cyan     = vec3(0.165, 0.784, 0.855); // #2AC8DA
-    vec3 deepTeal = vec3(0.078, 0.616, 0.686); // #149DAF
-    vec3 amber    = vec3(0.910, 0.706, 0.290); // #E8B44A
-    vec3 iceWhite = vec3(0.937, 0.949, 0.969); // #EFF2F7
+    vec3 cyan    = vec3(0.0, 0.941, 1.0);   // #00F0FF
+    vec3 violet  = vec3(0.659, 0.333, 0.969); // #A855F7
+    vec3 magenta = vec3(1.0, 0.180, 0.592);  // #FF2E97
+    vec3 amber   = vec3(1.0, 0.761, 0.294);  // #FFC24B
 
-    vec3 base = mix(deepTeal, cyan, vSeed);
+    // base holographic gradient: cyan → violet → magenta across the seed spectrum
+    vec3 base = mix(cyan, violet, smoothstep(0.0, 0.6, vSeed));
+    base = mix(base, magenta, smoothstep(0.55, 1.0, vSeed));
+
     // pipeline: hot amber sparks on the fastest particles
     base = mix(base, amber, uM1 * (1.0 - uM2) * smoothstep(0.82, 1.0, vSeed));
-    // helix: amber rungs (kind-based seeds trend mid-range) + brighter strands
+    // helix: amber rungs (kind-based seeds trend mid-range)
     base = mix(base, amber, uM2 * (1.0 - uM3) * smoothstep(0.45, 0.55, vSeed) * (1.0 - smoothstep(0.6, 0.7, vSeed)) * 0.9);
-    // lattice: ice-white node cores
-    base = mix(base, iceWhite, uM3 * smoothstep(0.75, 1.0, vSeed));
+    // lattice: white-hot node cores
+    base = mix(base, vec3(1.0), uM3 * smoothstep(0.75, 1.0, vSeed));
 
-    // hot center
-    base += vec3(0.32) * smoothstep(0.18, 0.0, d);
+    // hot center, punched up for bloom to catch
+    base += vec3(0.5) * smoothstep(0.2, 0.0, d);
 
-    gl_FragColor = vec4(base, alpha * (0.32 + 0.68 * vDepth));
+    gl_FragColor = vec4(base * 1.35, alpha * (0.34 + 0.7 * vDepth));
   }
 `
 
@@ -283,7 +287,7 @@ function MorphField() {
       {/* faint icosahedral halo around the core */}
       <mesh scale={2.9}>
         <icosahedronGeometry args={[1, 1]} />
-        <meshBasicMaterial color="#149DAF" wireframe transparent opacity={0.05} />
+        <meshBasicMaterial color="#A855F7" wireframe transparent opacity={0.06} />
       </mesh>
     </group>
   )
@@ -298,11 +302,15 @@ export default function DataCanvas() {
         gl={{ antialias: false, powerPreference: 'high-performance', alpha: true }}
       >
         <MorphField />
+        <EffectComposer multisampling={0}>
+          <Bloom intensity={0.55} luminanceThreshold={0.28} luminanceSmoothing={0.3} mipmapBlur radius={0.5} />
+          <Vignette eskil={false} offset={0.25} darkness={0.85} />
+        </EffectComposer>
         <AdaptiveDpr pixelated />
         <Preload all />
       </Canvas>
-      {/* vignette so the editorial layer always stays readable */}
-      <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(ellipse_at_center,transparent_30%,#05080e_100%)]" />
+      {/* extra vignette so the editorial layer always stays readable */}
+      <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(ellipse_at_center,transparent_25%,#030309_100%)]" />
     </div>
   )
 }

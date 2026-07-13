@@ -83,9 +83,10 @@ export default function Journey() {
         whileInView={{ opacity: 1, y: 0 }}
         viewport={{ once: true, margin: '-100px' }}
         transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
+        className="content-scrim max-w-3xl"
       >
         <p className="eyebrow mb-6">The journey <span className="text-ink-3">·</span> 2015 → now</p>
-        <h2 className="display text-[clamp(38px,5.4vw,64px)] max-w-3xl">
+        <h2 className="display font-medium text-[clamp(36px,5vw,58px)] max-w-3xl">
           Eight years, one direction: <em>more scale, more system.</em>
         </h2>
         <p className="mt-7 max-w-2xl text-ink-2 text-lg leading-relaxed">
@@ -103,18 +104,18 @@ export default function Journey() {
             whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true, margin: '-80px' }}
             transition={{ duration: 0.7, delay: Math.min(i * 0.08, 0.24), ease: [0.16, 1, 0.3, 1] }}
-            className="relative py-12 border-b border-white/5 last:border-b-0"
+            className="relative py-12 border-b border-white/5 last:border-b-0 content-scrim"
           >
             <span
               className={`absolute -left-[38px] sm:-left-[62px] top-[58px] h-[11px] w-[11px] rounded-full ring-2 ring-page ${
-                i === 0 ? 'bg-cyan shadow-[0_0_14px_rgba(42,200,218,0.6)]' : 'bg-ink-3/60'
+                i === 0 ? 'bg-cyan shadow-[0_0_16px_rgba(0,240,255,0.75)]' : 'bg-ink-3/60'
               }`}
             />
             <div className="flex flex-wrap items-baseline gap-x-5 gap-y-1">
               <span className="font-mono text-xs tracking-[0.22em] text-ink-3">{item.era}</span>
-              <span className="font-serif italic text-cyan text-lg">{item.org}</span>
+              <span className="font-mono text-sm tracking-wide holo-text">{item.org}</span>
             </div>
-            <h3 className="mt-3 text-2xl sm:text-[28px] font-semibold tracking-tight">{item.role}</h3>
+            <h3 className="mt-3 font-display font-medium text-2xl sm:text-[28px] tracking-tight">{item.role}</h3>
             <ul className="mt-5 space-y-3 max-w-3xl text-[15.5px] sm:text-base text-ink-2 leading-relaxed">
               {item.points.map((pt) => (
                 <li key={pt} className="flex gap-3">
