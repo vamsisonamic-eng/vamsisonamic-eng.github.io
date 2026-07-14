@@ -227,6 +227,59 @@
   footer .frow .lset{display:flex;gap:22px}
   footer .frow a{color:var(--ink-2);transition:color .3s}footer .frow a:hover{color:var(--coral)}
 
+  /* ---------- SKILLS MATRIX ---------- */
+  .skills{display:grid;grid-template-columns:repeat(4,1fr);gap:14px}
+  @media(max-width:900px){.skills{grid-template-columns:repeat(2,1fr)}}
+  @media(max-width:520px){.skills{grid-template-columns:1fr}}
+  .skcol{border:1px solid var(--line);border-radius:18px;background:var(--card);padding:24px;transition:transform .4s var(--ease),box-shadow .4s}
+  .skcol:hover{transform:translateY(-4px);box-shadow:0 16px 36px rgba(120,70,20,.1)}
+  .skcol h4{font-family:var(--mono);font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--coral);padding-bottom:12px;border-bottom:1px solid var(--line)}
+  .skcol ul{margin-top:14px;display:grid;gap:9px;list-style:none}
+  .skcol li{font-size:14px;color:var(--ink-2);line-height:1.4}
+
+  /* ---------- FEATURE / VALUE BLOCK (glass) ---------- */
+  .valueblock{position:relative;border-radius:26px;overflow:hidden;padding:clamp(30px,5vw,60px);
+    background:linear-gradient(150deg,#fff4e6,#ffe6c8);border:1px solid var(--line)}
+  .valueblock::after{content:'';position:absolute;right:-60px;top:-60px;width:280px;height:280px;border-radius:50%;
+    background:radial-gradient(circle,rgba(255,106,61,.28),transparent 65%);filter:blur(20px)}
+  .valueblock .vb-k{font-family:var(--mono);font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--coral);position:relative;z-index:2}
+  .valueblock h3{position:relative;z-index:2;font-size:clamp(1.5rem,3.4vw,2.6rem);font-weight:800;color:var(--ink);letter-spacing:-.02em;margin-top:16px;max-width:20ch;line-height:1.1}
+  .valueblock .vb-grid{position:relative;z-index:2;margin-top:34px;display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
+  @media(max-width:760px){.valueblock .vb-grid{grid-template-columns:1fr}}
+  .vb-item{background:rgba(255,255,255,.6);border:1px solid rgba(255,255,255,.8);border-radius:16px;padding:22px;backdrop-filter:blur(8px)}
+  .vb-item .vi-n{font-family:var(--disp);font-weight:800;color:var(--coral);font-size:1.4rem}
+  .vb-item h5{font-family:var(--disp);font-weight:700;color:var(--ink);font-size:15.5px;margin:8px 0 6px}
+  .vb-item p{font-size:13.5px;color:var(--ink-2);line-height:1.55}
+
+  /* ---------- 3D CERTIFICATIONS FLOW ---------- */
+  .certflow{position:relative;height:clamp(420px,52vh,520px);perspective:1400px;margin-top:10px;overflow:hidden}
+  .cf-stage{position:absolute;inset:0;transform-style:preserve-3d;animation:cfspin 34s linear infinite}
+  .certflow:hover .cf-stage,.certflow.paused .cf-stage{animation-play-state:paused}
+  @keyframes cfspin{from{transform:rotateY(0)}to{transform:rotateY(-360deg)}}
+  .cf-card{position:absolute;top:50%;left:50%;width:clamp(220px,26vw,290px);height:clamp(300px,36vh,380px);
+    margin:-190px 0 0 -145px;border-radius:20px;overflow:hidden;
+    background:linear-gradient(165deg,#ffffff,#fff3e6);border:1px solid var(--line);
+    box-shadow:0 24px 50px rgba(120,70,20,.18);backface-visibility:hidden;
+    display:flex;flex-direction:column;justify-content:space-between;padding:26px 24px}
+  .cf-card::before{content:'';position:absolute;inset:0;background:linear-gradient(135deg,rgba(255,106,61,.14),transparent 55%);pointer-events:none}
+  .cf-card .cf-seal{width:52px;height:52px;border-radius:14px;background:var(--coral-soft);border:1px solid rgba(255,106,61,.3);display:flex;align-items:center;justify-content:center}
+  .cf-card .cf-seal svg{width:26px;height:26px}
+  .cf-card .cf-issuer{font-family:var(--mono);font-size:10.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--coral);margin-top:auto}
+  .cf-card .cf-name{font-family:var(--disp);font-weight:800;color:var(--ink);font-size:1.15rem;letter-spacing:-.01em;line-height:1.14;margin-top:8px}
+  .cf-card .cf-tag{font-size:12.5px;color:var(--ink-2);margin-top:8px;line-height:1.4}
+  .cf-card .cf-verify{margin-top:14px;font-family:var(--mono);font-size:9.5px;letter-spacing:.12em;text-transform:uppercase;color:#2fa06e;border:1px solid rgba(47,160,110,.3);border-radius:999px;padding:5px 10px;align-self:flex-start}
+  .cf-controls{position:absolute;left:50%;bottom:6px;transform:translateX(-50%);display:flex;gap:10px;z-index:10}
+  .cf-controls button{font-family:var(--mono);font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--ink);background:var(--card);border:1px solid var(--line);border-radius:999px;padding:8px 16px;cursor:pointer;transition:background .3s,color .3s}
+  .cf-controls button:hover{background:var(--coral);color:#fff;border-color:var(--coral)}
+  @media(max-width:640px){.certflow{height:440px}}
+  @media(prefers-reduced-motion:reduce){.cf-stage{animation:none}}
+  .certflow-fallback{display:none}
+  @media(prefers-reduced-motion:reduce){
+    .certflow{display:none}
+    .certflow-fallback{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}
+    @media(max-width:760px){.certflow-fallback{grid-template-columns:1fr}}
+  }
+
   @media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}*{animation:none!important;transition:none!important}.rv{opacity:1;transform:none}}
 </style>
 </head>
@@ -311,10 +364,39 @@
     </div>
   </section>
 
+  <!-- HOW I DRIVE PERFORMANCE (value block) -->
+  <section id="approach">
+    <div class="wrap">
+      <div class="valueblock rv">
+        <div class="vb-k">How I move a number</div>
+        <h3>Performance is a system, not a lucky week.</h3>
+        <div class="vb-grid">
+          <div class="vb-item"><div class="vi-n">01</div><h5>Read the signal</h5><p>Start from conversion data and pacing, not opinions. Find the one lever that actually moves the account, then pull it hard.</p></div>
+          <div class="vb-item"><div class="vi-n">02</div><h5>Engineer the gate</h5><p>Build the QA check-gates, scrapers, and alerts that catch a slip at 2am instead of at the QBR. Reliability is the product.</p></div>
+          <div class="vb-item"><div class="vi-n">03</div><h5>Compound it</h5><p>Turn a one-time win into a standing SOP so the next person, or the next agent, gets the same result without me in the room.</p></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SKILLS MATRIX -->
+  <section id="skills">
+    <div class="wrap">
+      <div class="head rv"><span class="idx">/ 03</span><h2>What I actually do</h2></div>
+      <p class="lead-note rv">Eight years of it, across search, programmatic, and the automation layer that ties it together.</p>
+      <div class="skills">
+        <div class="skcol rv"><h4>Programmatic &amp; DSP</h4><ul><li>DV360</li><li>The Trade Desk · Kokai</li><li>Amazon DSP</li><li>GAM 360 (SSP)</li><li>Meta · Pinterest</li><li>Connected TV · RTB</li></ul></div>
+        <div class="skcol rv d1"><h4>Performance &amp; Data</h4><ul><li>ROAS optimization</li><li>Bid-strategy calibration</li><li>Audience cohort analysis</li><li>A/B experimentation</li><li>Behavioral data reporting</li><li>GTM · Floodlight</li></ul></div>
+        <div class="skcol rv d2"><h4>AI &amp; Automation</h4><ul><li>Agentic AI workflows</li><li>Microsoft Copilot agents</li><li>Python</li><li>Automated alerting</li><li>Reporting pipelines</li><li>Optimization frameworks</li></ul></div>
+        <div class="skcol rv d3"><h4>Growth Foundations</h4><ul><li>Go-to-market strategy</li><li>Retail media networks</li><li>PG deal negotiation</li><li>Technical SEO</li><li>Landing-page CRO</li><li>Cross-channel paid media</li></ul></div>
+      </div>
+    </div>
+  </section>
+
   <!-- WORK EXPERIENCE -->
   <section id="experience">
     <div class="wrap">
-      <div class="head rv"><span class="idx">/ 03</span><h2>Work experience</h2></div>
+      <div class="head rv"><span class="idx">/ 04</span><h2>Work experience</h2></div>
       <div class="xp">
         <article class="xp-card rv">
           <div class="xp-top"><div class="xp-id"><span class="xp-logo"><svg viewBox="0 0 24 24" fill="none" stroke="#ff6a3d" stroke-width="1.6"><path d="M12 3v18M4 8l8 5 8-5"/><circle cx="12" cy="12" r="9"/></svg></span><div><div class="xp-role">Senior Account Manager, Programmatic</div><div class="xp-org">Global Tier-1 Media Agency Network</div></div></div><div class="xp-date">Apr 2026 to Present</div></div>
@@ -348,7 +430,7 @@
   <!-- SELECTED WORK -->
   <section id="selected">
     <div class="wrap">
-      <div class="head rv"><span class="idx">/ 04</span><h2>Selected work</h2></div>
+      <div class="head rv"><span class="idx">/ 05</span><h2>Selected work</h2></div>
       <div class="works">
         <article class="work rv">
           <div class="thumb"><svg viewBox="0 0 400 250" preserveAspectRatio="xMidYMid slice"><defs><linearGradient id="g1" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#ffe9cf"/><stop offset="1" stop-color="#ffd0a3"/></linearGradient></defs><rect width="400" height="250" fill="url(#g1)"/><g stroke="#ff6a3d" stroke-width="2" opacity=".7" fill="none"><path d="M40 200 Q120 60 200 120 T360 70"/></g><circle cx="200" cy="120" r="5" fill="#ff6a3d"/><circle cx="360" cy="70" r="5" fill="#ff6a3d"/></svg><span class="badge2">Governance</span><span class="big-n">01</span></div>
@@ -377,7 +459,7 @@
   <!-- CASE STUDY -->
   <section id="case">
     <div class="wrap">
-      <div class="head rv"><span class="idx">/ 05</span><h2>Isolating the unseen crawl defect</h2></div>
+      <div class="head rv"><span class="idx">/ 06</span><h2>Isolating the unseen crawl defect</h2></div>
       <div class="case rv">
         <div class="case-top"><h3>A mass creative-rejection event, traced to a single line of infrastructure.</h3><span class="badge">Root cause · Externally confirmed</span></div>
         <div class="split">
@@ -399,6 +481,57 @@
             </div>
           </div>
         </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 3D CERTIFICATIONS FLOW -->
+  <section id="certs">
+    <div class="wrap">
+      <div class="head rv"><span class="idx">/ 07</span><h2>Certifications, in orbit</h2></div>
+      <p class="lead-note rv">Every credential is current and verifiable. Hover to pause the flow.</p>
+      <div class="certflow rv" id="certflow" aria-label="Certifications carousel">
+        <div class="cf-stage" id="cfStage">
+          <div class="cf-card">
+            <div class="cf-seal"><svg viewBox="0 0 24 24" fill="none" stroke="#ff6a3d" stroke-width="1.6"><path d="M4 18l6-12 4 8 2-4 4 8"/></svg></div>
+            <div><div class="cf-issuer">The Trade Desk</div><div class="cf-name">Kokai Certification</div><div class="cf-tag">Edge Academy · Advanced Programmatic</div><span class="cf-verify">Verified</span></div>
+          </div>
+          <div class="cf-card">
+            <div class="cf-seal"><svg viewBox="0 0 24 24" fill="none" stroke="#ff6a3d" stroke-width="1.6"><path d="M12 3v18M4 8l8 5 8-5"/><circle cx="12" cy="12" r="9"/></svg></div>
+            <div><div class="cf-issuer">Google</div><div class="cf-name">Display &amp; Video 360</div><div class="cf-tag">DV360 platform certification</div><span class="cf-verify">Verified</span></div>
+          </div>
+          <div class="cf-card">
+            <div class="cf-seal"><svg viewBox="0 0 24 24" fill="none" stroke="#ff6a3d" stroke-width="1.6"><path d="M3 15c5 3 13 3 18 0"/><circle cx="12" cy="8" r="3"/></svg></div>
+            <div><div class="cf-issuer">Amazon</div><div class="cf-name">Amazon DSP</div><div class="cf-tag">Demand-side platform certification</div><span class="cf-verify">Verified</span></div>
+          </div>
+          <div class="cf-card">
+            <div class="cf-seal"><svg viewBox="0 0 24 24" fill="none" stroke="#ff6a3d" stroke-width="1.6"><rect x="4" y="4" width="16" height="16" rx="3"/><path d="M9 12l2 2 4-4"/></svg></div>
+            <div><div class="cf-issuer">Google</div><div class="cf-name">AI for App Building</div><div class="cf-tag">Applied generative AI</div><span class="cf-verify">Verified</span></div>
+          </div>
+          <div class="cf-card">
+            <div class="cf-seal"><svg viewBox="0 0 24 24" fill="none" stroke="#ff6a3d" stroke-width="1.6"><path d="M5 20V6a2 2 0 0 1 2-2h8l4 4v12"/><path d="M9 9h6M9 13h6"/></svg></div>
+            <div><div class="cf-issuer">Google</div><div class="cf-name">AI Writing &amp; Planning</div><div class="cf-tag">Writing, brainstorming, planning</div><span class="cf-verify">Verified</span></div>
+          </div>
+          <div class="cf-card">
+            <div class="cf-seal"><svg viewBox="0 0 24 24" fill="none" stroke="#ff6a3d" stroke-width="1.6"><circle cx="12" cy="12" r="4"/><path d="M12 2v3M12 19v3M2 12h3M19 12h3M5 5l2 2M17 17l2 2M19 5l-2 2M7 17l-2 2"/></svg></div>
+            <div><div class="cf-issuer">Skillsoft</div><div class="cf-name">AI &amp; ML Fundamentals</div><div class="cf-tag">Machine learning foundations</div><span class="cf-verify">Verified</span></div>
+          </div>
+          <div class="cf-card">
+            <div class="cf-seal"><svg viewBox="0 0 24 24" fill="none" stroke="#ff6a3d" stroke-width="1.6"><path d="M8 21h8M12 17v4M7 4h10v5a5 5 0 0 1-10 0zM7 5H4v2a3 3 0 0 0 3 3M17 5h3v2a3 3 0 0 1-3 3"/></svg></div>
+            <div><div class="cf-issuer">Award · Q1 2025</div><div class="cf-name">Climb High Award</div><div class="cf-tag">High Impact Performer</div><span class="cf-verify">Recognized</span></div>
+          </div>
+          <div class="cf-card">
+            <div class="cf-seal"><svg viewBox="0 0 24 24" fill="none" stroke="#ff6a3d" stroke-width="1.6"><path d="M8 21h8M12 17v4M7 4h10v5a5 5 0 0 1-10 0zM7 5H4v2a3 3 0 0 0 3 3M17 5h3v2a3 3 0 0 1-3 3"/></svg></div>
+            <div><div class="cf-issuer">Award · Q1 2026</div><div class="cf-name">Make it Real Award</div><div class="cf-tag">Top Performer</div><span class="cf-verify">Recognized</span></div>
+          </div>
+        </div>
+        <div class="cf-controls"><button id="cfPause" type="button">Pause</button></div>
+      </div>
+      <!-- reduced-motion / no-3D fallback grid -->
+      <div class="certflow-fallback">
+        <div class="cf-card" style="position:static;margin:0;width:auto;height:auto"><div class="cf-issuer">The Trade Desk</div><div class="cf-name">Kokai Certification</div></div>
+        <div class="cf-card" style="position:static;margin:0;width:auto;height:auto"><div class="cf-issuer">Google</div><div class="cf-name">Display &amp; Video 360</div></div>
+        <div class="cf-card" style="position:static;margin:0;width:auto;height:auto"><div class="cf-issuer">Amazon</div><div class="cf-name">Amazon DSP</div></div>
       </div>
     </div>
   </section>
@@ -459,6 +592,20 @@
   else { var cio=new IntersectionObserver(function(es){ es.forEach(function(e){ if(e.isIntersecting){ countUp(e.target); cio.unobserve(e.target); } }); },{threshold:.45}); counts.forEach(function(e){ cio.observe(e); }); }
   var nav=document.getElementById('nav'), last=0;
   if(nav){ addEventListener('scroll',function(){ var y=pageYOffset||0; if(y>last&&y>200) nav.classList.add('hide'); else nav.classList.remove('hide'); last=y; },{passive:true}); }
+
+  /* ---------- 3D certifications flow ---------- */
+  var stage=document.getElementById('cfStage');
+  if(stage){
+    var cards=Array.prototype.slice.call(stage.children), n=cards.length;
+    var radius=Math.round((280) / (2*Math.tan(Math.PI/n))) + 40; // fit ring to card width
+    cards.forEach(function(card,i){
+      card.style.transform='rotateY('+(i*(360/n))+'deg) translateZ('+radius+'px)';
+    });
+    var flow=document.getElementById('certflow'), btn=document.getElementById('cfPause'), paused=false;
+    if(btn){ btn.addEventListener('click',function(){
+      paused=!paused; flow.classList.toggle('paused',paused); btn.textContent=paused?'Play':'Pause';
+    }); }
+  }
 })();
 </script>
 </body>
