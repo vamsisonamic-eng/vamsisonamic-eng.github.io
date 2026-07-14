@@ -195,6 +195,67 @@
   footer .frow a{color:var(--mut);transition:color .3s}
   footer .frow a:hover{color:var(--gold)}
 
+  /* ---------- PLATFORMS WALL (marquee) ---------- */
+  .lead-note{color:var(--mut);font-size:14.5px;max-width:60ch;margin:-18px 0 30px}
+  .logowall{position:relative;overflow:hidden;border-top:1px solid var(--line);border-bottom:1px solid var(--line);padding:24px 0;
+    -webkit-mask-image:linear-gradient(90deg,transparent,#000 7%,#000 93%,transparent);mask-image:linear-gradient(90deg,transparent,#000 7%,#000 93%,transparent)}
+  .lw-track{display:flex;gap:52px;width:max-content;align-items:center;animation:marq 34s linear infinite}
+  .logowall:hover .lw-track{animation-play-state:paused}
+  .logowall.rev .lw-track{animation-direction:reverse;animation-duration:40s}
+  @keyframes marq{from{transform:translateX(0)}to{transform:translateX(-50%)}}
+  .lw-item{display:flex;align-items:center;gap:12px;white-space:nowrap;color:var(--mut);transition:color .3s}
+  .lw-item:hover{color:var(--white)}
+  .lw-item svg{width:22px;height:22px;flex:none}
+  .lw-item .n{font-family:var(--disp);font-weight:600;font-size:18px;letter-spacing:-.01em}
+  @media(prefers-reduced-motion:reduce){.lw-track{animation:none;flex-wrap:wrap;width:auto;justify-content:center}}
+
+  /* ---------- BRANDS / SECTORS ---------- */
+  .sectors{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;margin-top:26px}
+  @media(max-width:820px){.sectors{grid-template-columns:1fr 1fr}}
+  @media(max-width:480px){.sectors{grid-template-columns:1fr}}
+  .sector{border:1px solid var(--line);border-radius:14px;background:var(--panel);padding:22px;transition:border-color .4s,transform .4s var(--ease)}
+  .sector:hover{border-color:var(--gold-line);transform:translateY(-3px)}
+  .sector .s-t{font-family:var(--disp);font-weight:600;color:var(--white);font-size:15.5px;letter-spacing:-.01em}
+  .sector .s-d{font-family:var(--mono);font-size:10.5px;letter-spacing:.1em;text-transform:uppercase;color:var(--gold);margin-top:10px}
+
+  /* ---------- WORK EXPERIENCE CARDS ---------- */
+  .xp{display:grid;gap:14px}
+  .xp-card{border:1px solid var(--line);border-radius:18px;background:var(--panel);padding:clamp(22px,2.6vw,34px);
+    transition:border-color .45s,background .45s,transform .45s var(--ease)}
+  .xp-card:hover{border-color:var(--gold-line);background:var(--panel-2);transform:translateY(-3px)}
+  .xp-top{display:flex;justify-content:space-between;gap:20px;align-items:flex-start;flex-wrap:wrap}
+  .xp-id{display:flex;align-items:center;gap:16px}
+  .xp-logo{width:46px;height:46px;border-radius:11px;background:var(--gold-soft);border:1px solid var(--gold-line);
+    display:flex;align-items:center;justify-content:center;flex:none}
+  .xp-logo svg{width:22px;height:22px}
+  .xp-role{font-family:var(--disp);font-weight:700;color:var(--white);font-size:clamp(1.1rem,2.2vw,1.4rem);letter-spacing:-.015em;line-height:1.15}
+  .xp-org{font-family:var(--mono);font-size:11.5px;letter-spacing:.06em;color:var(--gold);margin-top:5px}
+  .xp-date{font-family:var(--mono);font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--faint);white-space:nowrap;padding-top:6px}
+  .xp-body{margin-top:20px;display:grid;gap:11px}
+  .xp-body li{list-style:none;position:relative;padding-left:22px;color:var(--mut);font-size:14.5px;line-height:1.6}
+  .xp-body li::before{content:'';position:absolute;left:2px;top:9px;width:7px;height:7px;border-radius:50%;background:var(--gold-line);border:1px solid var(--gold)}
+  .xp-body li b{color:var(--white);font-weight:600}
+  .xp-tags{margin-top:18px;display:flex;flex-wrap:wrap;gap:8px}
+  .xp-tag{font-family:var(--mono);font-size:10.5px;letter-spacing:.05em;color:var(--mut);border:1px solid var(--line);border-radius:6px;padding:5px 10px}
+
+  /* ---------- SELECTED WORK CARDS ---------- */
+  .works{display:grid;grid-template-columns:repeat(2,1fr);gap:18px}
+  @media(max-width:760px){.works{grid-template-columns:1fr}}
+  .work{border:1px solid var(--line);border-radius:18px;overflow:hidden;background:var(--panel);
+    transition:border-color .45s,transform .45s var(--ease);display:flex;flex-direction:column}
+  .work:hover{border-color:var(--gold-line);transform:translateY(-4px)}
+  .work .thumb{position:relative;aspect-ratio:16/10;overflow:hidden}
+  .work .thumb svg{position:absolute;inset:0;width:100%;height:100%}
+  .work .thumb .badge2{position:absolute;left:16px;top:16px;font-family:var(--mono);font-size:10px;letter-spacing:.14em;text-transform:uppercase;
+    color:var(--gold);background:rgba(11,11,12,.72);border:1px solid var(--gold-line);border-radius:999px;padding:6px 12px;backdrop-filter:blur(6px)}
+  .work .thumb .big-n{position:absolute;right:20px;bottom:14px;font-family:var(--disp);font-weight:800;color:rgba(255,255,255,.14);font-size:clamp(3rem,7vw,5rem);line-height:1;letter-spacing:-.04em}
+  .work .w-body{padding:22px 24px 26px}
+  .work .w-t{font-family:var(--disp);font-weight:700;color:var(--white);font-size:clamp(1.15rem,2.3vw,1.45rem);letter-spacing:-.015em;line-height:1.12}
+  .work .w-d{color:var(--mut);font-size:14px;line-height:1.6;margin-top:10px}
+  .work .w-d b{color:var(--white);font-weight:600}
+  .work .w-tags{margin-top:16px;display:flex;flex-wrap:wrap;gap:7px}
+  .work .w-tag{font-family:var(--mono);font-size:10px;letter-spacing:.06em;text-transform:uppercase;color:var(--gold);background:var(--gold-soft);border:1px solid var(--gold-line);border-radius:6px;padding:5px 10px}
+
   @media (prefers-reduced-motion:reduce){
     html{scroll-behavior:auto}
     *{animation:none!important;transition:none!important}
@@ -209,7 +270,8 @@
 <header class="nav" id="nav">
   <a class="brand" href="#top"><span class="d"></span>Bharath&nbsp;Vamsi</a>
   <nav class="set">
-    <a class="ghost" href="#work">Work</a>
+    <a class="ghost" href="#experience">Experience</a>
+    <a class="ghost" href="#selected">Work</a>
     <a class="ghost" href="#case">Case Study</a>
     <a href="https://www.linkedin.com/in/bharath-vamsi-reddy" target="_blank" rel="noopener">LinkedIn</a>
     <a class="cta" href="mailto:vamsisonamic@gmail.com?subject=R%C3%A9sum%C3%A9%20request%20%E2%80%94%20Bharath%20Vamsi">Résumé →</a>
@@ -227,7 +289,7 @@
         <span>Retail Media</span><span class="sep"></span>
         <span>Automation &amp; Risk</span>
       </div>
-      <p class="lead rv d3">I govern high-volume retail-media portfolios where a single pacing slip costs six figures — and I build the automation, QA gates, and FMEA-driven controls that make execution <b>flawless, predictive, and infinitely scalable.</b></p>
+      <p class="lead rv d3">I run high-volume retail-media portfolios where one pacing slip costs six figures. So I build the automation and QA gates that keep delivery steady when the spend gets loud, and the FMEA controls that turn failure into something you <b>design out ahead of time.</b></p>
       <div class="actions rv d4">
         <a class="btn primary" href="#work">View the numbers <span class="ar">→</span></a>
         <a class="btn ghost" href="#case">Read the case study</a>
@@ -244,7 +306,7 @@
           <div class="c-k">Portfolio Scale</div>
           <div>
             <div class="c-v"><span class="u">$</span><span class="count" data-to="390" data-dur="1700">0</span><span class="u">M</span></div>
-            <div class="c-d">Annual run-rate governed across global retail-media networks &amp; programmatic ecosystems — $275M–$390M, run as one coherent system.</div>
+            <div class="c-d">Annual run-rate governed across global retail-media networks and programmatic ecosystems. $275M to $390M, run as one system rather than a pile of campaigns.</div>
           </div>
         </div>
         <div class="cell rv d1" data-tilt>
@@ -260,16 +322,17 @@
         <div class="cell wide rv d3" data-tilt>
           <div class="c-k">Automation Recovered</div>
           <div><div class="c-v"><span class="count" data-to="12" data-dur="1300">0</span><span class="u">&nbsp;hrs / week / pod</span></div>
-          <div class="c-d">10–12 hours of manual data pulls engineered out per pod via custom compliance check-gates &amp; scrapers — team focus pivoted entirely to macro optimization.</div></div>
+          <div class="c-d">10 to 12 hours of manual data pulls engineered out per pod with custom compliance check-gates and scrapers. That time went straight back into optimization.</div></div>
         </div>
       </div>
     </div>
   </section>
 
-  <!-- ================= TECH ROW ================= -->
+  <!-- ================= PLATFORMS I WORK WITH ================= -->
   <section id="stack">
     <div class="wrap">
-      <div class="head rv"><span class="idx">/ 02</span><h2>Platform command</h2></div>
+      <div class="head rv"><span class="idx">/ 02</span><h2>Platforms I work with</h2></div>
+      <p class="lead-note rv">These are the buying and measurement platforms I run day to day. The four below are where most of the spend lives.</p>
       <div class="tech">
         <div class="plat rv" data-tilt>
           <div class="glyph"><svg viewBox="0 0 24 24" fill="none" stroke="#c5a880" stroke-width="1.6"><path d="M12 3v18M4 8l8 5 8-5"/><circle cx="12" cy="12" r="9"/></svg></div>
@@ -277,7 +340,7 @@
         </div>
         <div class="plat rv d1" data-tilt>
           <div class="glyph"><svg viewBox="0 0 24 24" fill="none" stroke="#c5a880" stroke-width="1.6"><path d="M4 18l6-12 4 8 2-4 4 8"/></svg></div>
-          <div class="p-n">The Trade Desk</div><div class="p-c">Kokai · DSP</div>
+          <div class="p-n">The Trade Desk</div><div class="p-c">Kokai DSP</div>
         </div>
         <div class="plat rv d2" data-tilt>
           <div class="glyph"><svg viewBox="0 0 24 24" fill="none" stroke="#c5a880" stroke-width="1.6"><path d="M3 15c5 3 13 3 18 0"/><path d="M17 14l2 1-.6 2.2"/><circle cx="12" cy="8" r="3"/></svg></div>
@@ -285,8 +348,43 @@
         </div>
         <div class="plat rv d3" data-tilt>
           <div class="glyph"><svg viewBox="0 0 24 24" fill="none" stroke="#c5a880" stroke-width="1.6"><path d="M4 16c0-5 2-8 4-8s3 3 4 6 2 6 4 6 4-3 4-8"/></svg></div>
-          <div class="p-n">Meta</div><div class="p-c">Advantage+ · Social</div>
+          <div class="p-n">Meta</div><div class="p-c">Advantage+ Social</div>
         </div>
+      </div>
+
+      <!-- marquee wall of the wider stack -->
+      <div class="logowall rv" style="margin-top:26px" aria-label="Wider platform and tool stack">
+        <div class="lw-track" aria-hidden="true">
+          <span class="lw-item"><svg viewBox="0 0 24 24" fill="none" stroke="#c5a880" stroke-width="1.5"><path d="M12 3v18M4 8l8 5 8-5"/></svg><span class="n">DV360</span></span>
+          <span class="lw-item"><svg viewBox="0 0 24 24" fill="none" stroke="#c5a880" stroke-width="1.5"><path d="M4 18l6-12 4 8 2-4 4 8"/></svg><span class="n">The Trade Desk</span></span>
+          <span class="lw-item"><svg viewBox="0 0 24 24" fill="none" stroke="#c5a880" stroke-width="1.5"><path d="M3 15c5 3 13 3 18 0"/><circle cx="12" cy="8" r="3"/></svg><span class="n">Amazon DSP</span></span>
+          <span class="lw-item"><svg viewBox="0 0 24 24" fill="none" stroke="#c5a880" stroke-width="1.5"><path d="M4 16c0-5 2-8 4-8s3 3 4 6 2 6 4 6 4-3 4-8"/></svg><span class="n">Meta</span></span>
+          <span class="lw-item"><svg viewBox="0 0 24 24" fill="none" stroke="#c5a880" stroke-width="1.5"><circle cx="12" cy="12" r="9"/><path d="M12 8v8M8 12h8"/></svg><span class="n">Pinterest</span></span>
+          <span class="lw-item"><svg viewBox="0 0 24 24" fill="none" stroke="#c5a880" stroke-width="1.5"><rect x="4" y="4" width="16" height="16" rx="2"/><path d="M8 15l3-6 2 4 3-3"/></svg><span class="n">GAM 360</span></span>
+          <span class="lw-item"><svg viewBox="0 0 24 24" fill="none" stroke="#c5a880" stroke-width="1.5"><path d="M4 20V9M10 20V4M16 20v-7M22 20H2"/></svg><span class="n">Campaign Manager 360</span></span>
+          <span class="lw-item"><svg viewBox="0 0 24 24" fill="none" stroke="#c5a880" stroke-width="1.5"><path d="M4 16l5-6 4 4 7-8"/><circle cx="20" cy="6" r="1.4"/></svg><span class="n">Google Analytics 4</span></span>
+          <span class="lw-item"><svg viewBox="0 0 24 24" fill="none" stroke="#c5a880" stroke-width="1.5"><path d="M12 3l8 4v6c0 5-4 7-8 8-4-1-8-3-8-8V7z"/></svg><span class="n">Floodlight</span></span>
+          <!-- duplicate set for seamless loop -->
+          <span class="lw-item"><svg viewBox="0 0 24 24" fill="none" stroke="#c5a880" stroke-width="1.5"><path d="M12 3v18M4 8l8 5 8-5"/></svg><span class="n">DV360</span></span>
+          <span class="lw-item"><svg viewBox="0 0 24 24" fill="none" stroke="#c5a880" stroke-width="1.5"><path d="M4 18l6-12 4 8 2-4 4 8"/></svg><span class="n">The Trade Desk</span></span>
+          <span class="lw-item"><svg viewBox="0 0 24 24" fill="none" stroke="#c5a880" stroke-width="1.5"><path d="M3 15c5 3 13 3 18 0"/><circle cx="12" cy="8" r="3"/></svg><span class="n">Amazon DSP</span></span>
+          <span class="lw-item"><svg viewBox="0 0 24 24" fill="none" stroke="#c5a880" stroke-width="1.5"><path d="M4 16c0-5 2-8 4-8s3 3 4 6 2 6 4 6 4-3 4-8"/></svg><span class="n">Meta</span></span>
+          <span class="lw-item"><svg viewBox="0 0 24 24" fill="none" stroke="#c5a880" stroke-width="1.5"><circle cx="12" cy="12" r="9"/><path d="M12 8v8M8 12h8"/></svg><span class="n">Pinterest</span></span>
+          <span class="lw-item"><svg viewBox="0 0 24 24" fill="none" stroke="#c5a880" stroke-width="1.5"><rect x="4" y="4" width="16" height="16" rx="2"/><path d="M8 15l3-6 2 4 3-3"/></svg><span class="n">GAM 360</span></span>
+          <span class="lw-item"><svg viewBox="0 0 24 24" fill="none" stroke="#c5a880" stroke-width="1.5"><path d="M4 20V9M10 20V4M16 20v-7M22 20H2"/></svg><span class="n">Campaign Manager 360</span></span>
+          <span class="lw-item"><svg viewBox="0 0 24 24" fill="none" stroke="#c5a880" stroke-width="1.5"><path d="M4 16l5-6 4 4 7-8"/><circle cx="20" cy="6" r="1.4"/></svg><span class="n">Google Analytics 4</span></span>
+          <span class="lw-item"><svg viewBox="0 0 24 24" fill="none" stroke="#c5a880" stroke-width="1.5"><path d="M12 3l8 4v6c0 5-4 7-8 8-4-1-8-3-8-8V7z"/></svg><span class="n">Floodlight</span></span>
+        </div>
+      </div>
+
+      <!-- brands / accounts (anonymized for confidentiality) -->
+      <div class="head rv" style="margin-top:64px"><span class="idx">/ 02b</span><h2>Brands and accounts</h2></div>
+      <p class="lead-note rv">Client names stay under NDA, so here is the shape of the work instead. Every account below was run at enterprise scale across peak retail cycles.</p>
+      <div class="sectors">
+        <div class="sector rv"><div class="s-t">Top-5 US retail media network</div><div class="s-d">Flagship account</div></div>
+        <div class="sector rv d1"><div class="s-t">Fortune 500 CPG portfolios</div><div class="s-d">Multi-brand</div></div>
+        <div class="sector rv d2"><div class="s-t">Global grocery and QSR</div><div class="s-d">High-frequency</div></div>
+        <div class="sector rv d3"><div class="s-t">Enterprise D2C and retail</div><div class="s-d">Full-funnel</div></div>
       </div>
     </div>
   </section>
@@ -320,11 +418,11 @@
           <div class="story-side">
             <div class="ts-k">Executive Narrative</div>
             <div class="tl">
-              <div class="step rv"><div class="st-n">01 · Signal</div><h4>An anomaly no dashboard flagged</h4><p>Creatives began failing approval at volume during a high-spend window. Surface metrics read “disapproved” — a dead end that would normally trigger a creative rework loop and days of lost pacing.</p></div>
-              <div class="step rv"><div class="st-n">02 · Diagnosis</div><h4>Rejecting the obvious answer</h4><p>Rather than rebuild assets, I isolated the pattern: the failures were <b>uniform, not creative-specific</b>. That pointed away from the creative and toward the delivery path itself.</p></div>
-              <div class="step key rv"><div class="st-n">03 · Root Cause</div><h4>One line, blocking an entire crawler</h4><p>The ads verification crawler was disallowed in <b>robots.txt</b> while the standard index crawler remained open — so the platform could never fetch the landing page to verify it. Not a media problem. An <b>infrastructure</b> problem.</p></div>
-              <div class="step rv"><div class="st-n">04 · Resolution</div><h4>Confirmed, escalated, cleared</h4><p>I documented the exact mechanism and the fix, escalated with evidence, and had it <b>externally confirmed by the platform in writing</b> — clearing the rejections before client-visible impact.</p></div>
-              <div class="step key rv"><div class="st-n">05 · Systemized</div><h4>Designed out for good</h4><p>Crawlability is now a standing <b>pre-launch QA check-gate</b>. A one-time forensic win became a permanent control — the essence of FMEA in media.</p></div>
+              <div class="step rv"><div class="st-n">01 · Signal</div><h4>An anomaly no dashboard flagged</h4><p>Creatives started failing approval at volume during a high-spend window. The surface metric just said "disapproved." Left alone, that reads as a creative problem and burns days on a rework loop.</p></div>
+              <div class="step rv"><div class="st-n">02 · Diagnosis</div><h4>Rejecting the obvious answer</h4><p>Instead of rebuilding assets, I looked at the pattern. The failures were <b>uniform, not creative-specific</b>. That pointed away from the creative and toward the delivery path.</p></div>
+              <div class="step key rv"><div class="st-n">03 · Root Cause</div><h4>One line, blocking an entire crawler</h4><p>The ads verification crawler was disallowed in <b>robots.txt</b> while the standard index crawler stayed open. The platform could never fetch the landing page to verify it. This was never a media problem. It was an <b>infrastructure</b> one.</p></div>
+              <div class="step rv"><div class="st-n">04 · Resolution</div><h4>Confirmed, escalated, cleared</h4><p>I wrote up the exact mechanism and the fix, escalated with evidence, and had it <b>confirmed by the platform in writing.</b> The rejections cleared before any client noticed.</p></div>
+              <div class="step key rv"><div class="st-n">05 · Systemized</div><h4>Designed out for good</h4><p>Crawlability is now a standing <b>pre-launch QA check-gate.</b> A one-time forensic win became a permanent control. That is what FMEA looks like in media.</p></div>
             </div>
           </div>
         </div>
@@ -332,11 +430,168 @@
     </div>
   </section>
 
+  <!-- ================= WORK EXPERIENCE ================= -->
+  <section id="experience">
+    <div class="wrap">
+      <div class="head rv"><span class="idx">/ 04</span><h2>Work experience</h2></div>
+      <div class="xp">
+
+        <article class="xp-card rv">
+          <div class="xp-top">
+            <div class="xp-id">
+              <span class="xp-logo"><svg viewBox="0 0 24 24" fill="none" stroke="#c5a880" stroke-width="1.6"><path d="M12 3v18M4 8l8 5 8-5"/><circle cx="12" cy="12" r="9"/></svg></span>
+              <div><div class="xp-role">Senior Account Manager, Programmatic</div><div class="xp-org">Global Tier-1 Media Agency Network</div></div>
+            </div>
+            <div class="xp-date">Apr 2026 — Present</div>
+          </div>
+          <ul class="xp-body">
+            <li>Own pacing and optimization on a <b>$286M to $390M</b> annual DSP and SSP portfolio across five platforms, with no backup.</li>
+            <li>Took program <b>ROAS from 1.8x to 4.2x</b> by rebuilding audience segmentation and bid strategy on guaranteed deals.</li>
+            <li>Cut cost per acquisition by <b>18%</b> using cohort-level bid logic read against weekly conversion data.</li>
+          </ul>
+          <div class="xp-tags"><span class="xp-tag">DV360</span><span class="xp-tag">The Trade Desk</span><span class="xp-tag">Amazon DSP</span><span class="xp-tag">GAM 360</span><span class="xp-tag">Meta</span></div>
+        </article>
+
+        <article class="xp-card rv">
+          <div class="xp-top">
+            <div class="xp-id">
+              <span class="xp-logo"><svg viewBox="0 0 24 24" fill="none" stroke="#c5a880" stroke-width="1.6"><rect x="4" y="4" width="16" height="16" rx="2"/><path d="M8 15l3-6 2 4 3-3"/></svg></span>
+              <div><div class="xp-role">Account Manager, Programmatic</div><div class="xp-org">Global Tier-1 Media Agency Network</div></div>
+            </div>
+            <div class="xp-date">Dec 2023 — Mar 2026</div>
+          </div>
+          <ul class="xp-body">
+            <li>Built an AI screenshot and reporting pipeline that ships <b>70+ vendor decks a week</b> inside a strict five-day SLA.</li>
+            <li>Wrote custom Copilot agents and alerting that catch under-delivery before the morning standup, not at the QBR.</li>
+            <li>Held <b>delivery-in-full above 98%</b> while the book of business kept growing.</li>
+          </ul>
+          <div class="xp-tags"><span class="xp-tag">Automation</span><span class="xp-tag">Copilot agents</span><span class="xp-tag">QA gates</span><span class="xp-tag">Pacing</span></div>
+        </article>
+
+        <article class="xp-card rv">
+          <div class="xp-top">
+            <div class="xp-id">
+              <span class="xp-logo"><svg viewBox="0 0 24 24" fill="none" stroke="#c5a880" stroke-width="1.6"><path d="M4 18l6-12 4 8 2-4 4 8"/></svg></span>
+              <div><div class="xp-role">Programmatic Advertising Specialist</div><div class="xp-org">International Tech Consulting Enterprise</div></div>
+            </div>
+            <div class="xp-date">Apr 2023 — Oct 2023</div>
+          </div>
+          <ul class="xp-body">
+            <li>Led a full DV360 migration and lifted campaign <b>ROAS by 48%</b>.</li>
+            <li>Dropped <b>CPA 15%</b> and raised <b>CTR 25%</b> through disciplined creative and audience testing across CTV, video, and display.</li>
+          </ul>
+          <div class="xp-tags"><span class="xp-tag">DV360</span><span class="xp-tag">CTV</span><span class="xp-tag">A/B testing</span></div>
+        </article>
+
+        <article class="xp-card rv">
+          <div class="xp-top">
+            <div class="xp-id">
+              <span class="xp-logo"><svg viewBox="0 0 24 24" fill="none" stroke="#c5a880" stroke-width="1.6"><path d="M4 20V9M10 20V4M16 20v-7M22 20H2"/></svg></span>
+              <div><div class="xp-role">Programmatic and SEO Specialist</div><div class="xp-org">Global IT Solutions Provider</div></div>
+            </div>
+            <div class="xp-date">Dec 2021 — Apr 2023</div>
+          </div>
+          <ul class="xp-body">
+            <li>Ran real-time bidding across <b>12 advertiser accounts</b> worth <b>$15M+</b> in annual spend and improved quarterly ROAS by about 20%.</li>
+            <li>Built performance dashboards that pulled campaign, deal, and audience data into one place the team actually used.</li>
+          </ul>
+          <div class="xp-tags"><span class="xp-tag">CM360</span><span class="xp-tag">Dashboards</span><span class="xp-tag">RTB</span></div>
+        </article>
+
+        <article class="xp-card rv">
+          <div class="xp-top">
+            <div class="xp-id">
+              <span class="xp-logo"><svg viewBox="0 0 24 24" fill="none" stroke="#c5a880" stroke-width="1.6"><path d="M12 3l8 4v6c0 5-4 7-8 8-4-1-8-3-8-8V7z"/></svg></span>
+              <div><div class="xp-role">SEO Manager to Co-Founder</div><div class="xp-org">Digital Technology Agency and Independent Venture</div></div>
+            </div>
+            <div class="xp-date">2015 — 2021</div>
+          </div>
+          <ul class="xp-body">
+            <li>Grew organic visibility <b>30%</b> across 10 client portfolios while managing paid media on Google Ads, Meta, and DV360.</li>
+            <li>Co-founded and ran a digital venture end to end. That is where the habit of building systems first started.</li>
+          </ul>
+          <div class="xp-tags"><span class="xp-tag">SEO</span><span class="xp-tag">Growth</span><span class="xp-tag">Founder</span></div>
+        </article>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= SELECTED WORK ================= -->
+  <section id="selected">
+    <div class="wrap">
+      <div class="head rv"><span class="idx">/ 05</span><h2>Selected work</h2></div>
+      <div class="works">
+
+        <article class="work rv">
+          <div class="thumb">
+            <svg viewBox="0 0 400 250" preserveAspectRatio="xMidYMid slice"><defs><linearGradient id="g1" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#1b1a16"/><stop offset="1" stop-color="#0a0a0b"/></linearGradient></defs><rect width="400" height="250" fill="url(#g1)"/><g stroke="#c5a880" stroke-width="1" opacity=".5" fill="none"><path d="M40 200 Q120 60 200 120 T360 70"/><path d="M40 220 Q120 110 200 160 T360 120" opacity=".4"/></g><circle cx="200" cy="120" r="4" fill="#c5a880"/><circle cx="360" cy="70" r="4" fill="#c5a880"/></svg>
+            <span class="badge2">Governance</span><span class="big-n">01</span>
+          </div>
+          <div class="w-body">
+            <div class="w-t">The $390M portfolio</div>
+            <div class="w-d">One operator, five platforms, no backup. Delivery stayed above <b>98%</b> through every peak week of the year.</div>
+            <div class="w-tags"><span class="w-tag">Retail media</span><span class="w-tag">Pacing</span></div>
+          </div>
+        </article>
+
+        <article class="work rv d1">
+          <div class="thumb">
+            <svg viewBox="0 0 400 250" preserveAspectRatio="xMidYMid slice"><defs><linearGradient id="g2" x1="0" y1="1" x2="1" y2="0"><stop offset="0" stop-color="#16140f"/><stop offset="1" stop-color="#0a0a0b"/></linearGradient></defs><rect width="400" height="250" fill="url(#g2)"/><g fill="#c5a880"><rect x="60" y="170" width="30" height="40" opacity=".35"/><rect x="110" y="140" width="30" height="70" opacity=".5"/><rect x="160" y="110" width="30" height="100" opacity=".6"/><rect x="210" y="80" width="30" height="130" opacity=".75"/><rect x="260" y="45" width="30" height="165" opacity=".9"/><rect x="310" y="30" width="30" height="180"/></g></svg>
+            <span class="badge2">Optimization</span><span class="big-n">02</span>
+          </div>
+          <div class="w-body">
+            <div class="w-t">The ROAS engine</div>
+            <div class="w-d"><b>1.8x to 4.2x.</b> Rebuilt segmentation and bid strategy on guaranteed deals until the return kept compounding.</div>
+            <div class="w-tags"><span class="w-tag">CVR</span><span class="w-tag">Bid strategy</span></div>
+          </div>
+        </article>
+
+        <article class="work rv d2">
+          <div class="thumb">
+            <svg viewBox="0 0 400 250" preserveAspectRatio="xMidYMid slice"><defs><linearGradient id="g3" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#101418"/><stop offset="1" stop-color="#0a0a0b"/></linearGradient></defs><rect width="400" height="250" fill="url(#g3)"/><g stroke="#c5a880" fill="none" stroke-width="1" opacity=".6"><circle cx="120" cy="90" r="22"/><circle cx="240" cy="150" r="22"/><circle cx="320" cy="80" r="16"/><path d="M138 100 L222 142M258 140 L308 92"/></g><g fill="#c5a880"><circle cx="120" cy="90" r="3"/><circle cx="240" cy="150" r="3"/><circle cx="320" cy="80" r="3"/></g></svg>
+            <span class="badge2">Automation</span><span class="big-n">03</span>
+          </div>
+          <div class="w-body">
+            <div class="w-t">The automation layer</div>
+            <div class="w-d"><b>70+ decks a week</b>, shipped by a pipeline instead of a person. Roughly 10 to 12 hours back per pod, every week.</div>
+            <div class="w-tags"><span class="w-tag">Copilot</span><span class="w-tag">Scrapers</span></div>
+          </div>
+        </article>
+
+        <article class="work rv d3">
+          <div class="thumb">
+            <svg viewBox="0 0 400 250" preserveAspectRatio="xMidYMid slice"><defs><linearGradient id="g4" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#1a1210"/><stop offset="1" stop-color="#0a0a0b"/></linearGradient></defs><rect width="400" height="250" fill="url(#g4)"/><g font-family="monospace" font-size="13" fill="#c5a880" opacity=".7"><text x="40" y="90">User-agent: AdsBot</text><text x="40" y="120" fill="#e5735f">Disallow: /</text><text x="40" y="160" fill="#565660">User-agent: Bot</text><text x="40" y="185" fill="#6bd39a">Allow: /</text></g></svg>
+            <span class="badge2">Root cause</span><span class="big-n">04</span>
+          </div>
+          <div class="w-body">
+            <div class="w-t">The crawl-defect forensic</div>
+            <div class="w-d">A mass creative rejection traced to <b>one line</b> in robots.txt. The platform confirmed it in writing before any client saw it.</div>
+            <div class="w-tags"><span class="w-tag">FMEA</span><span class="w-tag">Diagnosis</span></div>
+          </div>
+        </article>
+
+        <article class="work rv" style="grid-column:1/-1">
+          <div class="thumb" style="aspect-ratio:32/9">
+            <svg viewBox="0 0 800 225" preserveAspectRatio="xMidYMid slice"><defs><linearGradient id="g5" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#0a0a0b"/><stop offset=".5" stop-color="#17140e"/><stop offset="1" stop-color="#0a0a0b"/></linearGradient></defs><rect width="800" height="225" fill="url(#g5)"/><g stroke="#c5a880" fill="none" stroke-width="1.2"><path d="M0 150 L120 150 140 60 170 190 200 110 230 150 800 150" opacity=".8"/></g><circle cx="140" cy="60" r="4" fill="#c5a880"/></svg>
+            <span class="badge2">Peak cycle</span><span class="big-n">05</span>
+          </div>
+          <div class="w-body">
+            <div class="w-t">Peak-volume execution</div>
+            <div class="w-d"><b>$7.24M</b> through a single window at a <b>0% error rate</b>. The spike hit and nothing slipped.</div>
+            <div class="w-tags"><span class="w-tag">Risk</span><span class="w-tag">Black Friday</span><span class="w-tag">Cyber Week</span></div>
+          </div>
+        </article>
+
+      </div>
+    </div>
+  </section>
+
   <!-- ================= PHILOSOPHY ================= -->
   <section class="philo">
     <div class="wrap">
-      <div class="kick rv" style="margin-bottom:26px"><span class="bar"></span>Operating Philosophy</div>
-      <p class="rv d1">The best manual process is the one <em>engineered out of existence</em> — leadership is the infrastructure that makes execution flawless.</p>
+      <div class="kick rv" style="margin-bottom:26px"><span class="bar"></span>How I work</div>
+      <p class="rv d1">The best manual process is the one you <em>engineer out of existence.</em> Most of my job is quiet plumbing that keeps execution boring, in the best way.</p>
     </div>
   </section>
 </main>
