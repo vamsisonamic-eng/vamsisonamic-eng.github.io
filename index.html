@@ -316,6 +316,38 @@
     animation:grain 8s steps(10) infinite}
   @keyframes grain{0%,100%{transform:translate(0,0)}10%{transform:translate(-3%,2%)}30%{transform:translate(2%,-3%)}50%{transform:translate(-2%,3%)}70%{transform:translate(3%,1%)}90%{transform:translate(-1%,-2%)}}
   @media (prefers-reduced-motion:reduce){body::after,.mq-track,.h-scroll span{animation:none}html,a,button{cursor:auto}.cur-d,.cur-r{display:none}}
+
+  /* ===== benchmarks v2 ===== */
+  .cell{overflow:hidden}
+  .cell::before{content:'';position:absolute;left:0;top:0;right:0;height:2px;background:linear-gradient(90deg,var(--acc),transparent 65%);opacity:.65}
+  .cell.big{justify-content:flex-start;gap:16px}
+  #paceviz{width:100%;height:150px;display:block;margin:6px 0 2px;border-radius:10px}
+  .dualstat{display:grid;grid-template-columns:1fr 1fr;gap:18px}
+  @media(max-width:560px){.dualstat{grid-template-columns:1fr}}
+  .dualstat .c-v{font-size:clamp(1.7rem,3vw,2.5rem)!important}
+
+  /* ===== 3D platform ring ===== */
+  @media(min-width:901px){
+    .ring-stage{position:relative;height:520px;perspective:1400px;display:flex;align-items:center;justify-content:center;margin-top:10px;touch-action:pan-y}
+    .ring-stage .plat-grid{position:relative;width:230px;height:300px;display:block;transform-style:preserve-3d;margin:0}
+    .ring-stage .plat{position:absolute;inset:0;backface-visibility:hidden;-webkit-backface-visibility:hidden;min-height:0}
+    .ring-stage::after{content:'';position:absolute;left:50%;bottom:30px;transform:translateX(-50%);width:min(680px,80%);height:60px;border-radius:50%;background:radial-gradient(ellipse,rgba(255,106,61,.10),transparent 70%);filter:blur(8px);pointer-events:none}
+  }
+
+  /* ===== companies v2 ===== */
+  .co-grid{display:grid;grid-template-columns:repeat(5,1fr);gap:16px}
+  @media(max-width:1000px){.co-grid{grid-template-columns:repeat(2,1fr)}}
+  @media(max-width:520px){.co-grid{grid-template-columns:1fr}}
+  .co{position:relative;isolation:isolate;border-radius:18px;padding:24px 20px;background:linear-gradient(180deg,#12151f,#0e1119);border:1px solid var(--line);box-shadow:inset 0 1px 0 rgba(255,255,255,.05),0 8px 22px rgba(0,0,0,.05);transition:transform .3s var(--ease),border-color .3s,box-shadow .3s;overflow:hidden}
+  .co::after{content:'';position:absolute;right:-40px;top:-40px;width:140px;height:140px;border-radius:50%;background:radial-gradient(circle,var(--acc-dim),transparent 65%);opacity:0;transition:opacity .35s;filter:blur(14px);z-index:0}
+  .co:hover{transform:translateY(-6px);border-color:rgba(255,106,61,.4);box-shadow:0 22px 46px rgba(0,0,0,.35)}
+  .co:hover::after{opacity:1}
+  .co-n{position:relative;z-index:1;font-family:var(--disp);font-weight:800;font-size:clamp(1.15rem,1.7vw,1.45rem);color:var(--ink);letter-spacing:-.02em}
+  .co-r{position:relative;z-index:1;font-size:12px;color:var(--ink2);margin-top:6px;line-height:1.45;min-height:34px}
+  .co-bar{position:relative;z-index:1;height:3px;border-radius:99px;background:var(--line2);margin-top:14px;overflow:hidden}
+  .co-bar span{display:block;height:100%;width:0;border-radius:99px;background:linear-gradient(90deg,var(--acc),#ffb08f);transition:width 1.1s var(--ease) .3s}
+  .co.in .co-bar span{width:var(--w)}
+  .co-y{position:relative;z-index:1;font-family:var(--mono);font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:var(--ink3);margin-top:10px}
 </style>
 </head>
 <body>
@@ -360,7 +392,12 @@
     <div class="wrap">
       <div class="head rv"><span class="idx">/ 01</span><h2>Core operational benchmarks</h2></div>
       <div class="bento">
-        <div class="cell big rv"><div class="c-k">Weekly Portfolio Spend Governed</div><div><div class="c-v"><span class="u">$</span>5<span class="u">M&nbsp;&ndash;&nbsp;$</span><span class="count" data-to="8" data-dur="1400">0</span><span class="u">M</span></div><div class="c-d">Active capital allocation, rolling weekly. Buy-side DSP bidding unified with supply-side SSP yield so multi-million dollar budgets pace on target.</div></div></div>
+        <div class="cell big rv"><div class="c-k">Capital Governed</div>
+          <canvas id="paceviz" aria-hidden="true"></canvas>
+          <div class="dualstat">
+            <div><div class="c-v"><span class="u">$</span>5<span class="u">&ndash;</span><span class="count" data-to="8" data-dur="1400">0</span><span class="u">M&nbsp;/wk</span></div><div class="c-d">Rolling weekly allocation across the five-platform system.</div></div>
+            <div><div class="c-v"><span class="u">$</span>275<span class="u">&ndash;</span><span class="count" data-to="390" data-dur="1700">0</span><span class="u">M&nbsp;/yr</span></div><div class="c-d">Annual run-rate, buy-side and supply-side, run as one system.</div></div>
+          </div></div>
         <div class="cell rv d1"><div class="c-k">Simultaneous Optimization Cadence</div><div><div class="c-v"><span class="count" data-to="100" data-dur="1500">0</span><span class="u">+</span></div><div class="c-d">Concurrent live campaigns under active optimization.</div></div></div>
         <div class="cell rv d2"><div class="c-k">Budget Pacing Precision</div><div><div class="c-v"><span class="count" data-to="98" data-dur="1400">0</span><span class="u">%</span></div><div class="c-d">Systemic delivery baseline, held through peak cycles.</div></div></div>
         <div class="cell rv d3"><div class="c-k">Ecosystem Footprint</div><div><div class="c-v" style="font-size:clamp(1.5rem,2.6vw,2.1rem)">Dual-Control</div><div class="c-d">DSP and SSP infrastructure, both sides of the auction.</div></div></div>
@@ -372,8 +409,8 @@
   <section id="stack">
     <div class="wrap">
       <div class="head rv"><span class="idx">/ 02</span><h2>Platforms I <em class="run-it">run</em></h2></div>
-      <p class="lead-note rv">Real platforms, day to day. Hover for the brand color.</p>
-      <div class="plat-grid">
+      <p class="lead-note rv">Real platforms, day to day. Drag the ring, hover for the brand color.</p>
+      <div class="ring-stage rv"><div class="plat-grid" id="platRing">
         <div class="plat rv" tabindex="0" style="--brand:#34A853"><span class="plat-glow"></span><div class="plat-logo"><svg viewBox="0 0 24 24" aria-label="Display &amp; Video 360"><title>Display &amp; Video 360</title><path d="M4.421.01a2.947 2.947 0 0 0-2.828 1.52 2.967 2.967 0 0 0 1.094 4.076l10.6 6.064 4.79-2.672a3.546 3.546 0 0 1 1.811-.443L5.701.424A2.947 2.947 0 0 0 4.42.01ZM1.164 4.768v14.484a3.474 3.474 0 0 1 2.972-1.687 3.47 3.47 0 0 1 2.961 1.672l.004-10.53L2.44 6.04a3.433 3.433 0 0 1-1.275-1.271Zm18.42 4.289a3.08 3.08 0 0 0-1.264.379L7.6 15.414c.003 1.873-.011 3.745.003 5.617 0 .4-.072.988-.396 1.606l12.548-7.227 1.487-.83a2.978 2.978 0 0 0 1.463-3.511 3.08 3.08 0 0 0-3.121-2.012ZM4.136 18.065A2.967 2.967 0 1 0 4.134 24a2.967 2.967 0 0 0 .002-5.935z"/></svg></div><div class="plat-meta"><span class="plat-name">DV360</span><span class="plat-sub">DISPLAY &amp; VIDEO 360</span></div></div>
         <div class="plat rv d1" tabindex="0" style="--brand:#0866FF"><span class="plat-glow"></span><div class="plat-logo"><svg viewBox="0 0 24 24" aria-label="Meta"><title>Meta</title><path d="M6.915 4.03c-1.968 0-3.683 1.28-4.871 3.113C.704 9.208 0 11.883 0 14.449c0 .706.07 1.369.21 1.973a6.624 6.624 0 0 0 .265.86 5.297 5.297 0 0 0 .371.761c.696 1.159 1.818 1.927 3.593 1.927 1.497 0 2.633-.671 3.965-2.444.76-1.012 1.144-1.626 2.663-4.32l.756-1.339.186-.325c.061.1.121.196.183.3l2.152 3.595c.724 1.21 1.665 2.556 2.47 3.314 1.046.987 1.992 1.22 3.06 1.22 1.075 0 1.876-.355 2.455-.843a3.743 3.743 0 0 0 .81-.973c.542-.939.861-2.127.861-3.745 0-2.72-.681-5.357-2.084-7.45-1.282-1.912-2.957-2.93-4.716-2.93-1.047 0-2.088.467-3.053 1.308-.652.57-1.257 1.29-1.82 2.05-.69-.875-1.335-1.547-1.958-2.056-1.182-.966-2.315-1.303-3.454-1.303zm10.16 2.053c1.147 0 2.188.758 2.992 1.999 1.132 1.748 1.647 4.195 1.647 6.4 0 1.548-.368 2.9-1.839 2.9-.58 0-1.027-.23-1.664-1.004-.496-.601-1.343-1.878-2.832-4.358l-.617-1.028a44.908 44.908 0 0 0-1.255-1.98c.07-.109.141-.224.211-.327 1.12-1.667 2.118-2.602 3.358-2.602zm-10.201.553c1.265 0 2.058.791 2.675 1.446.307.327.737.871 1.234 1.579l-1.02 1.566c-.757 1.163-1.882 3.017-2.837 4.338-1.191 1.649-1.81 1.817-2.486 1.817-.524 0-1.038-.237-1.383-.794-.263-.426-.464-1.13-.464-2.046 0-2.221.63-4.535 1.66-6.088.454-.687.964-1.226 1.533-1.533a2.264 2.264 0 0 1 1.088-.285z"/></svg></div><div class="plat-meta"><span class="plat-name">Meta</span><span class="plat-sub">FACEBOOK &amp; INSTAGRAM</span></div></div>
         <div class="plat rv d2" tabindex="0" style="--brand:#E60023"><span class="plat-glow"></span><div class="plat-logo"><svg viewBox="0 0 24 24" aria-label="Pinterest"><title>Pinterest</title><path d="M12.017 0C5.396 0 .029 5.367.029 11.987c0 5.079 3.158 9.417 7.618 11.162-.105-.949-.199-2.403.041-3.439.219-.937 1.406-5.957 1.406-5.957s-.359-.72-.359-1.781c0-1.663.967-2.911 2.168-2.911 1.024 0 1.518.769 1.518 1.688 0 1.029-.653 2.567-.992 3.992-.285 1.193.6 2.165 1.775 2.165 2.128 0 3.768-2.245 3.768-5.487 0-2.861-2.063-4.869-5.008-4.869-3.41 0-5.409 2.562-5.409 5.199 0 1.033.394 2.143.889 2.741.099.12.112.225.085.345-.09.375-.293 1.199-.334 1.363-.053.225-.172.271-.401.165-1.495-.69-2.433-2.878-2.433-4.646 0-3.776 2.748-7.252 7.92-7.252 4.158 0 7.392 2.967 7.392 6.923 0 4.135-2.607 7.462-6.233 7.462-1.214 0-2.354-.629-2.758-1.379l-.749 2.848c-.269 1.045-1.004 2.352-1.498 3.146 1.123.345 2.306.535 3.55.535 6.607 0 11.985-5.365 11.985-11.987C23.97 5.39 18.592.026 11.985.026L12.017 0z"/></svg></div><div class="plat-meta"><span class="plat-name">Pinterest</span><span class="plat-sub">PINTEREST ADS</span></div></div>
@@ -386,15 +423,15 @@
         <div class="plat rv d1" tabindex="0" style="--brand:#1A73E8"><span class="plat-glow"></span><div class="plat-logo"><span class="wordmark">CM360</span></div><div class="plat-meta"><span class="plat-sub">CAMPAIGN MANAGER</span></div></div>
         <div class="plat rv d2" tabindex="0" style="--brand:#FBBC04"><span class="plat-glow"></span><div class="plat-logo"><span class="wordmark">Floodlight</span></div><div class="plat-meta"><span class="plat-sub">CONVERSION TRACKING</span></div></div>
         <div class="plat rv d3" tabindex="0" style="--brand:#8B5CF6"><span class="plat-glow"></span><div class="plat-logo"><span class="wordmark">Copilot</span></div><div class="plat-meta"><span class="plat-sub">AGENTS &amp; AUTOMATION</span></div></div>
-      </div>
+      </div></div>
 
       <div class="head rv" style="margin-top:64px"><span class="idx">/ 02b</span><h2>Companies I've worked with</h2></div>
-      <div class="companies">
-        <div class="company rv"><span class="cw">Dentsu</span><span class="cr">2023 — Present</span></div>
-        <div class="company rv d1"><span class="cw">Freyr Solutions</span><span class="cr">2023</span></div>
-        <div class="company rv d2"><span class="cw">OTSI</span><span class="cr">2021 — 2023</span></div>
-        <div class="company rv d3"><span class="cw">Shiftwave</span><span class="cr">2018 — 2021</span></div>
-        <div class="company rv"><span class="cw">Myvash</span><span class="cr">Co-Founder · 2015 — 2017</span></div>
+      <div class="co-grid">
+        <div class="co rv" style="--w:100%"><div class="co-n">Dentsu</div><div class="co-r">Senior Programmatic Account Manager</div><div class="co-bar"><span></span></div><div class="co-y">2023 &mdash; Present</div></div>
+        <div class="co rv d1" style="--w:26%"><div class="co-n">Freyr Solutions</div><div class="co-r">Programmatic Specialist</div><div class="co-bar"><span></span></div><div class="co-y">2023</div></div>
+        <div class="co rv d2" style="--w:62%"><div class="co-n">OTSI</div><div class="co-r">Programmatic &amp; SEO</div><div class="co-bar"><span></span></div><div class="co-y">2021 &mdash; 2023</div></div>
+        <div class="co rv d3" style="--w:80%"><div class="co-n">Shiftwave</div><div class="co-r">SEO Manager</div><div class="co-bar"><span></span></div><div class="co-y">2018 &mdash; 2021</div></div>
+        <div class="co rv" style="--w:55%"><div class="co-n">Myvash</div><div class="co-r">Co-Founder &amp; Digital Strategist</div><div class="co-bar"><span></span></div><div class="co-y">2015 &mdash; 2017</div></div>
       </div>
       <p class="lead-note rv" style="margin-top:20px">Client brands stay under NDA. Every account was run at enterprise scale across peak retail cycles: a Top-5 US retail media network, Fortune 500 CPG portfolios, global grocery and QSR.</p>
     </div>
@@ -682,7 +719,7 @@
   /* ===== 3D tilt on cards ===== */
   (function(){
     if(matchMedia('(hover: none)').matches||matchMedia('(prefers-reduced-motion: reduce)').matches) return;
-    document.querySelectorAll('.eng,.plat,.cell').forEach(function(el){
+    document.querySelectorAll('.eng,.plat,.cell,.co').forEach(function(el){
       el.addEventListener('mousemove',function(e){
         var r=el.getBoundingClientRect();
         var px=(e.clientX-r.left)/r.width-.5, py=(e.clientY-r.top)/r.height-.5;
@@ -690,6 +727,72 @@
       });
       el.addEventListener('mouseleave',function(){el.style.transform='';});
     });
+  })();
+  /* ===== pacing visualization ===== */
+  (function(){
+    var cv=document.getElementById('paceviz'); if(!cv) return;
+    var ctx=cv.getContext('2d'), DPR=Math.min(devicePixelRatio||1,2), W,H;
+    function size(){W=cv.offsetWidth;H=cv.offsetHeight;cv.width=W*DPR;cv.height=H*DPR;ctx.setTransform(DPR,0,0,DPR,0,0);}
+    size();addEventListener('resize',size);
+    var reduce=matchMedia('(prefers-reduced-motion: reduce)').matches;
+    var n=26,bars=[],target=[];
+    for(var i=0;i<n;i++){var base=.45+.5*Math.abs(Math.sin(i*.7))+Math.random()*.12;bars.push(0);target.push(Math.min(1,base));}
+    var t=0, started=false;
+    function frame(){
+      ctx.clearRect(0,0,W,H);
+      var bw=W/n;
+      for(var i=0;i<n;i++){
+        bars[i]+=(target[i]-bars[i])*.06;
+        var wob=reduce?0:.05*Math.sin(t*1.4+i*.8);
+        var h=(bars[i]+wob)*(H-26);
+        var x=i*bw+bw*.18, y=H-14-h;
+        var g=ctx.createLinearGradient(0,y,0,H-14);
+        g.addColorStop(0,'rgba(255,106,61,.95)');g.addColorStop(1,'rgba(255,106,61,.12)');
+        ctx.fillStyle=(i%6===5)?'rgba(59,189,143,.8)':g;
+        ctx.beginPath();ctx.roundRect(x,y,bw*.64,h,3);ctx.fill();
+      }
+      // 98% pacing line
+      var py=H-14-(0.98*(H-26));
+      ctx.strokeStyle='rgba(242,240,234,.35)';ctx.setLineDash([5,5]);ctx.lineWidth=1;
+      ctx.beginPath();ctx.moveTo(0,py);ctx.lineTo(W,py);ctx.stroke();ctx.setLineDash([]);
+      ctx.font='9px JetBrains Mono,monospace';ctx.fillStyle='rgba(242,240,234,.55)';
+      ctx.fillText('98% PACING BASELINE',6,py-6);
+      t+=.016;
+      if(!reduce) requestAnimationFrame(frame); 
+    }
+    var io=new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting&&!started){started=true;frame();io.disconnect();}});},{threshold:.3});
+    io.observe(cv);
+  })();
+  /* ===== 3D ring carousel ===== */
+  (function(){
+    var ring=document.getElementById('platRing'); if(!ring) return;
+    var mq=matchMedia('(min-width: 901px)');
+    var reduce=matchMedia('(prefers-reduced-motion: reduce)').matches;
+    var cards=[].slice.call(ring.children).filter(function(c){return c.classList.contains('plat')});
+    var N=cards.length, R=430, rot=0, vel=reduce?0:0.12, dragging=false, lastX=0, raf=null, active=false;
+    function place(){
+      cards.forEach(function(c,i){
+        var base=i*(360/N);
+        c.style.transform='rotateY('+(base+rot)+'deg) translateZ('+R+'px)';
+      });
+      ring.style.transform='translateZ(-'+R+'px)';
+    }
+    function loop(){ if(!dragging) rot+=vel; place(); raf=requestAnimationFrame(loop); }
+    function enable(){ if(active) return; active=true;
+      cards.forEach(function(c){c.classList.add('in');});
+      if(raf)cancelAnimationFrame(raf); raf=requestAnimationFrame(loop); }
+    function disable(){ if(!active) return; active=false;
+      if(raf){cancelAnimationFrame(raf);raf=null;}
+      cards.forEach(function(c){c.style.transform='';}); ring.style.transform=''; }
+    function check(){ mq.matches?enable():disable(); }
+    mq.addEventListener?mq.addEventListener('change',check):mq.addListener(check);
+    check();
+    var stage=ring.parentElement;
+    stage.addEventListener('mouseenter',function(){vel=reduce?0:0.03;});
+    stage.addEventListener('mouseleave',function(){vel=reduce?0:0.12;dragging=false;});
+    stage.addEventListener('pointerdown',function(e){if(!active)return;dragging=true;lastX=e.clientX;stage.setPointerCapture(e.pointerId);});
+    stage.addEventListener('pointermove',function(e){if(dragging&&active){rot+=(e.clientX-lastX)*.25;lastX=e.clientX;}});
+    stage.addEventListener('pointerup',function(){dragging=false;});
   })();
 </script>
 </body>
