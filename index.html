@@ -400,7 +400,10 @@
   .asm-line b{color:var(--acc)}
   .asm-line.on{opacity:1;transform:none}
   .asm-labels{position:absolute;inset:0;z-index:4;pointer-events:none}
-  .al{position:absolute;font-family:var(--mono);font-size:10.5px;letter-spacing:.12em;text-transform:uppercase;color:var(--ink2);background:rgba(16,19,28,.7);border:1px solid var(--line);border-radius:999px;padding:7px 13px;opacity:0;transform:translateY(10px);transition:opacity .5s,transform .5s;backdrop-filter:blur(4px)}
+  .al{position:absolute;font-family:var(--mono);font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:var(--ink2);opacity:0;transform:translateY(16px) scale(.92);transition:opacity .6s var(--ease),transform .6s var(--ease);text-shadow:0 2px 18px rgba(7,8,13,.95)}
+  .al[style*="left"]{text-align:left}
+  .al[style*="right"]{text-align:right}
+  .al b{display:block;font-family:var(--disp);font-weight:800;font-size:clamp(1.9rem,3.6vw,3.2rem);letter-spacing:-.03em;line-height:1;color:var(--acc);margin-bottom:7px;text-shadow:0 0 34px rgba(255,106,61,.55),0 2px 18px rgba(7,8,13,.9)}
   .al.on{opacity:1;transform:none}
   .asm-hint{position:absolute;bottom:20px;left:50%;transform:translateX(-50%);font-family:var(--mono);font-size:9.5px;letter-spacing:.3em;text-transform:uppercase;color:var(--ink3);z-index:5}
   @media (prefers-reduced-motion:reduce){#assembly{height:auto}.asm-pin{position:relative;height:80vh}.asm-line[data-ph="0"],.al{opacity:1;transform:none}}
