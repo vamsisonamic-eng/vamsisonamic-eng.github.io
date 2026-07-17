@@ -395,8 +395,8 @@
   .mega{position:relative;transform-style:preserve-3d;width:0;height:0}
   .vox{position:absolute;transform-style:preserve-3d;will-change:transform}
   .vf{position:absolute;left:0;top:0;backface-visibility:hidden}
-  .asm-copy{position:absolute;left:0;right:0;top:12%;text-align:center;z-index:5;pointer-events:none}
-  .asm-line{position:absolute;left:0;right:0;font-family:var(--disp);font-weight:800;font-size:clamp(1.6rem,3.6vw,3rem);letter-spacing:-.02em;color:var(--ink);opacity:0;transform:translateY(14px);transition:opacity .5s,transform .5s}
+  .asm-copy{position:absolute;left:0;right:0;top:12%;text-align:center;z-index:40;pointer-events:none;transform:translateZ(0)}
+  .asm-line{position:absolute;left:0;right:0;text-shadow:0 2px 24px rgba(7,8,13,.9);font-family:var(--disp);font-weight:800;font-size:clamp(1.6rem,3.6vw,3rem);letter-spacing:-.02em;color:var(--ink);opacity:0;transform:translateY(14px);transition:opacity .5s,transform .5s}
   .asm-line b{color:var(--acc)}
   .asm-line.on{opacity:1;transform:none}
   .asm-labels{position:absolute;inset:0;z-index:4;pointer-events:none}
@@ -404,6 +404,27 @@
   .al.on{opacity:1;transform:none}
   .asm-hint{position:absolute;bottom:20px;left:50%;transform:translateX(-50%);font-family:var(--mono);font-size:9.5px;letter-spacing:.3em;text-transform:uppercase;color:var(--ink3);z-index:5}
   @media (prefers-reduced-motion:reduce){#assembly{height:auto}.asm-pin{position:relative;height:80vh}.asm-line[data-ph="0"],.al{opacity:1;transform:none}}
+
+  /* ===== assembly atmosphere ===== */
+  .asm-stars{position:absolute;inset:0;width:100%;height:100%;z-index:0}
+  .asm-neb{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%) scale(calc(.8 + var(--ex,0)*.7));width:60vmin;height:60vmin;border-radius:50%;z-index:0;pointer-events:none;
+    background:radial-gradient(circle,rgba(255,106,61,calc(.10 + var(--ex,0)*.16)),rgba(120,60,200,calc(.05 + var(--ex,0)*.05)) 45%,transparent 70%);filter:blur(28px);transition:none}
+  .asm-ring{position:absolute;left:50%;top:50%;border-radius:50%;pointer-events:none;z-index:1;
+    border:1px dashed rgba(255,106,61,calc(.12 + var(--ex,0)*.3));
+    width:calc(46vmin + var(--ex,0)*26vmin);height:calc(46vmin + var(--ex,0)*26vmin);
+    transform:translate(-50%,-50%) rotateX(66deg) rotate(calc(var(--rot,0deg)))}
+  .asm-ring.r2{border-color:rgba(160,170,200,calc(.10 + var(--ex,0)*.2));
+    width:calc(34vmin + var(--ex,0)*40vmin);height:calc(34vmin + var(--ex,0)*40vmin);
+    transform:translate(-50%,-50%) rotateX(66deg) rotate(calc(var(--rot,0deg) * -1.6))}
+  .asm-shock{position:absolute;left:50%;top:50%;width:10vmin;height:10vmin;border-radius:50%;z-index:1;pointer-events:none;
+    border:2px solid rgba(255,138,95,.8);opacity:0;transform:translate(-50%,-50%) scale(.2)}
+  .asm-shock.go{animation:shock 1.1s cubic-bezier(.2,.7,.3,1) forwards}
+  @keyframes shock{0%{opacity:.9;transform:translate(-50%,-50%) scale(.2)}100%{opacity:0;transform:translate(-50%,-50%) scale(9)}}
+  .asm-scene{z-index:2}.asm-labels{z-index:30}
+  @media (prefers-reduced-motion:reduce){.asm-stars,.asm-ring,.asm-shock{display:none}}
+
+  .al b{color:var(--acc);font-weight:700;margin-right:2px}
+  .al{transition-delay:calc(var(--d,0)*1ms)}
 </style>
 </head>
 <body>
@@ -446,19 +467,26 @@
 
   <section id="assembly" aria-label="The engine, exploded">
     <div class="asm-pin">
+      <canvas class="asm-stars" aria-hidden="true"></canvas>
+      <div class="asm-neb" aria-hidden="true"></div>
+      <div class="asm-ring r1" aria-hidden="true"></div>
+      <div class="asm-ring r2" aria-hidden="true"></div>
+      <div class="asm-shock" id="asmShock" aria-hidden="true"></div>
       <div class="asm-copy">
         <p class="asm-line" data-ph="0">One engine.</p>
-        <p class="asm-line" data-ph="1">A hundred moving parts.</p>
+        <p class="asm-line" data-ph="1">A hundred moving parts. Every one measured.</p>
         <p class="asm-line" data-ph="2">Every part, pacing at <b>98%</b>.</p>
       </div>
       <div class="asm-scene"><div class="mega" id="mega"></div></div>
       <div class="asm-labels">
-        <span class="al" data-ph="1" style="left:12%;top:26%">Buy-side &middot; DSP bidding</span>
-        <span class="al" data-ph="1" style="right:10%;top:22%">Supply-side &middot; SSP yield</span>
-        <span class="al" data-ph="1" style="left:9%;top:62%">CTV &middot; OTT &middot; video</span>
-        <span class="al" data-ph="1" style="right:8%;top:58%">Measurement &middot; GA4</span>
-        <span class="al" data-ph="1" style="left:16%;bottom:12%">PMP &middot; PG deals</span>
-        <span class="al" data-ph="1" style="right:14%;bottom:14%">Automation &middot; Copilot</span>
+        <span class="al" data-ph="1" style="left:10%;top:24%"><b>1.8x &rarr; 4.2x</b> ROAS &middot; retail media</span>
+        <span class="al" data-ph="1" style="right:9%;top:20%"><b>&minus;18%</b> CPA &middot; experimentation</span>
+        <span class="al" data-ph="1" style="left:7%;top:47%"><b>+48%</b> ROAS &middot; Slova Cosmetics</span>
+        <span class="al" data-ph="1" style="right:6%;top:44%"><b>+25%</b> CTR &middot; DCO &amp; frequency</span>
+        <span class="al" data-ph="1" style="left:9%;top:70%"><b>98%+</b> delivery &middot; 70&ndash;100 campaigns</span>
+        <span class="al" data-ph="1" style="right:8%;top:68%"><b>75%+</b> viewability &middot; brand-safe</span>
+        <span class="al" data-ph="1" style="left:16%;bottom:8%"><b>10+ hrs/wk</b> saved &middot; Copilot agents</span>
+        <span class="al" data-ph="1" style="right:14%;bottom:9%"><b>+20%</b> quarterly ROAS &middot; 12 accounts</span>
       </div>
       <div class="asm-hint">Scroll</div>
     </div>
@@ -993,9 +1021,16 @@
         c.el.style.transform='translate3d('+(c.x*D+c.jx*wob)+'px,'+(c.y*D+c.jy*wob)+'px,'+(c.z*D+c.jz*wob)+'px)';
       });
       // phases: 0 assembled intro, 1 exploded, 2 reassembled finale
+      var pin=sec.querySelector('.asm-pin');
+      pin.style.setProperty('--ex',ex.toFixed(3));
+      pin.style.setProperty('--rot',(p*260)+'deg');
+      window.__asmEx=ex;
+      var shock=document.getElementById('asmShock');
+      if(shock){ if(ex>.04&&!shock._armed){shock._armed=true;shock.classList.remove('go');void shock.offsetWidth;shock.classList.add('go');}
+                 if(ex<.02&&shock._armed){shock._armed=false;} }
       var ph = p<.2?0 : (p<.82?1:2);
       lines.forEach(function(l){l.classList.toggle('on', +l.dataset.ph===ph);});
-      labels.forEach(function(l){l.classList.toggle('on', ph===1 && ex>.6);});
+      labels.forEach(function(l,i){l.style.setProperty('--d',i*90);l.classList.toggle('on', ph===1 && ex>.6);});
     }
     function onScroll(){ if(!ticking){ticking=true;requestAnimationFrame(update);} }
     if(reduce){
@@ -1006,6 +1041,46 @@
       addEventListener('resize',onScroll);
       update();
     }
+  })();
+  /* ===== assembly warp starfield ===== */
+  (function(){
+    var cv=document.querySelector('.asm-stars'); if(!cv) return;
+    if(matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+    var ctx=cv.getContext('2d'), DPR=Math.min(devicePixelRatio||1,2), W,H;
+    function size(){W=cv.offsetWidth;H=cv.offsetHeight;cv.width=W*DPR;cv.height=H*DPR;ctx.setTransform(DPR,0,0,DPR,0,0);}
+    size();addEventListener('resize',size);
+    var N=innerWidth<700?60:120, S=[];
+    for(var i=0;i<N;i++){S.push({a:Math.random()*Math.PI*2, r:Math.random(), z:.3+Math.random()*.7, tw:Math.random()*Math.PI*2});}
+    var t=0, vis=false;
+    var io=new IntersectionObserver(function(es){es.forEach(function(e){vis=e.isIntersecting;});});
+    io.observe(cv);
+    function frame(){
+      if(vis){
+        ctx.clearRect(0,0,W,H);
+        var ex=window.__asmEx||0, cx=W/2, cy=H/2, maxR=Math.hypot(W,H)/2;
+        for(var i=0;i<N;i++){
+          var st=S[i];
+          st.r+=0.0004*st.z + ex*0.012*st.z;
+          if(st.r>1)st.r=0.02;
+          var rr=st.r*maxR;
+          var x=cx+Math.cos(st.a)*rr, y=cy+Math.sin(st.a)*rr;
+          var al=(.25+.45*st.z)*(.6+.4*Math.sin(t*2+st.tw));
+          if(ex>.05){
+            var len=rr*ex*.14*st.z+1;
+            var x2=cx+Math.cos(st.a)*(rr-len), y2=cy+Math.sin(st.a)*(rr-len);
+            ctx.strokeStyle=(i%10===0)?'rgba(255,138,95,'+al+')':'rgba(200,210,230,'+(al*.7)+')';
+            ctx.lineWidth=st.z*1.4;
+            ctx.beginPath();ctx.moveTo(x2,y2);ctx.lineTo(x,y);ctx.stroke();
+          } else {
+            ctx.fillStyle=(i%10===0)?'rgba(255,138,95,'+al+')':'rgba(200,210,230,'+(al*.6)+')';
+            ctx.beginPath();ctx.arc(x,y,st.z*1.3,0,7);ctx.fill();
+          }
+        }
+        t+=.016;
+      }
+      requestAnimationFrame(frame);
+    }
+    frame();
   })();
 </script>
 </body>
