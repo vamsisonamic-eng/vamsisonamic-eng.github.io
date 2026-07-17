@@ -387,6 +387,23 @@
     .bcover .bt{font-family:'Fraunces',Georgia,serif;font-style:italic;font-size:26px;color:var(--ink)}
     .bcover .bs2{font-family:var(--mono);font-size:9.5px;letter-spacing:.2em;text-transform:uppercase}
   }
+
+  /* ===== exploded assembly (scroll-scrubbed) ===== */
+  #assembly{position:relative;height:340vh;background:var(--bg)}
+  .asm-pin{position:sticky;top:0;height:100vh;overflow:hidden;display:flex;align-items:center;justify-content:center}
+  .asm-scene{position:relative;width:100%;height:100%;display:flex;align-items:center;justify-content:center;perspective:1200px}
+  .mega{position:relative;transform-style:preserve-3d;width:0;height:0}
+  .vox{position:absolute;transform-style:preserve-3d;will-change:transform}
+  .vf{position:absolute;left:0;top:0;backface-visibility:hidden}
+  .asm-copy{position:absolute;left:0;right:0;top:12%;text-align:center;z-index:5;pointer-events:none}
+  .asm-line{position:absolute;left:0;right:0;font-family:var(--disp);font-weight:800;font-size:clamp(1.6rem,3.6vw,3rem);letter-spacing:-.02em;color:var(--ink);opacity:0;transform:translateY(14px);transition:opacity .5s,transform .5s}
+  .asm-line b{color:var(--acc)}
+  .asm-line.on{opacity:1;transform:none}
+  .asm-labels{position:absolute;inset:0;z-index:4;pointer-events:none}
+  .al{position:absolute;font-family:var(--mono);font-size:10.5px;letter-spacing:.12em;text-transform:uppercase;color:var(--ink2);background:rgba(16,19,28,.7);border:1px solid var(--line);border-radius:999px;padding:7px 13px;opacity:0;transform:translateY(10px);transition:opacity .5s,transform .5s;backdrop-filter:blur(4px)}
+  .al.on{opacity:1;transform:none}
+  .asm-hint{position:absolute;bottom:20px;left:50%;transform:translateX(-50%);font-family:var(--mono);font-size:9.5px;letter-spacing:.3em;text-transform:uppercase;color:var(--ink3);z-index:5}
+  @media (prefers-reduced-motion:reduce){#assembly{height:auto}.asm-pin{position:relative;height:80vh}.asm-line[data-ph="0"],.al{opacity:1;transform:none}}
 </style>
 </head>
 <body>
@@ -426,6 +443,26 @@
     <span>CTV</span><i>&#10022;</i><span>OTT</span><i>&#10022;</i><span>OLV</span><i>&#10022;</i><span>YouTube</span><i>&#10022;</i><span>Display</span><i>&#10022;</i><span>Native</span><i>&#10022;</i><span>Audio</span><i>&#10022;</i><span>PMP</span><i>&#10022;</i><span>Programmatic Guaranteed</span><i>&#10022;</i><span>Open Exchange</span><i>&#10022;</i><span>DSP</span><i>&#10022;</i><span>SSP</span><i>&#10022;</i>
     <span>CTV</span><i>&#10022;</i><span>OTT</span><i>&#10022;</i><span>OLV</span><i>&#10022;</i><span>YouTube</span><i>&#10022;</i><span>Display</span><i>&#10022;</i><span>Native</span><i>&#10022;</i><span>Audio</span><i>&#10022;</i><span>PMP</span><i>&#10022;</i><span>Programmatic Guaranteed</span><i>&#10022;</i><span>Open Exchange</span><i>&#10022;</i><span>DSP</span><i>&#10022;</i><span>SSP</span><i>&#10022;</i>
   </div></div>
+
+  <section id="assembly" aria-label="The engine, exploded">
+    <div class="asm-pin">
+      <div class="asm-copy">
+        <p class="asm-line" data-ph="0">One engine.</p>
+        <p class="asm-line" data-ph="1">A hundred moving parts.</p>
+        <p class="asm-line" data-ph="2">Every part, pacing at <b>98%</b>.</p>
+      </div>
+      <div class="asm-scene"><div class="mega" id="mega"></div></div>
+      <div class="asm-labels">
+        <span class="al" data-ph="1" style="left:12%;top:26%">Buy-side &middot; DSP bidding</span>
+        <span class="al" data-ph="1" style="right:10%;top:22%">Supply-side &middot; SSP yield</span>
+        <span class="al" data-ph="1" style="left:9%;top:62%">CTV &middot; OTT &middot; video</span>
+        <span class="al" data-ph="1" style="right:8%;top:58%">Measurement &middot; GA4</span>
+        <span class="al" data-ph="1" style="left:16%;bottom:12%">PMP &middot; PG deals</span>
+        <span class="al" data-ph="1" style="right:14%;bottom:14%">Automation &middot; Copilot</span>
+      </div>
+      <div class="asm-hint">Scroll</div>
+    </div>
+  </section>
 
   <section id="work">
     <canvas class="voxfield" aria-hidden="true"></canvas>
@@ -900,6 +937,75 @@
     stage.addEventListener('mouseleave',auto);
     var vis=new IntersectionObserver(function(es){es.forEach(function(e){ if(e.isIntersecting){auto();} else if(timer)clearInterval(timer);});},{threshold:.3});
     vis.observe(stage);
+  })();
+  /* ===== exploded assembly scrub ===== */
+  (function(){
+    var mega=document.getElementById('mega'); if(!mega) return;
+    var sec=document.getElementById('assembly');
+    var reduce=matchMedia('(prefers-reduced-motion: reduce)').matches;
+    var small=innerWidth<700, SZ=small?34:52, GAP=small?40:62;
+    var cubes=[];
+    var hotset={};['0,0,0','1,1,1','-1,0,1','1,-1,0'].forEach(function(k){hotset[k]=1;});
+    for(var x=-1;x<=1;x++)for(var y=-1;y<=1;y++)for(var z=-1;z<=1;z++){
+      var el=document.createElement('div');el.className='vox';
+      var hot=hotset[x+','+y+','+z];
+      var faces=[
+        ['translateZ('+(SZ/2)+'px)','#1c2233','#ff8a5f'],
+        ['rotateY(180deg) translateZ('+(SZ/2)+'px)','#10141f','#a8431f'],
+        ['rotateY(90deg) translateZ('+(SZ/2)+'px)','#141a29','#c9552c'],
+        ['rotateY(-90deg) translateZ('+(SZ/2)+'px)','#181f30','#d96438'],
+        ['rotateX(90deg) translateZ('+(SZ/2)+'px)','#232c42','#ffab88'],
+        ['rotateX(-90deg) translateZ('+(SZ/2)+'px)','#0d1019','#8f3316']
+      ];
+      faces.forEach(function(f){
+        var d=document.createElement('div');d.className='vf';
+        d.style.width=SZ+'px';d.style.height=SZ+'px';
+        d.style.transform='translate(-50%,-50%) '+f[0];
+        d.style.background=hot?f[2]:f[1];
+        d.style.border='1px solid rgba(255,255,255,.06)';
+        el.appendChild(d);
+      });
+      var mag=Math.sqrt(x*x+y*y+z*z)||1;
+      cubes.push({el:el,x:x,y:y,z:z,nx:x/mag,ny:y/mag,nz:z/mag,
+                  jx:(Math.random()-.5),jy:(Math.random()-.5),jz:(Math.random()-.5)});
+      mega.appendChild(el);
+    }
+    var lines=[].slice.call(document.querySelectorAll('.asm-line'));
+    var labels=[].slice.call(document.querySelectorAll('.al'));
+    function ease(t){return t<.5?2*t*t:1-Math.pow(-2*t+2,2)/2;}
+    var ticking=false;
+    function update(){
+      ticking=false;
+      var r=sec.getBoundingClientRect();
+      var total=r.height-innerHeight;
+      var p=Math.min(1,Math.max(0,-r.top/total));
+      // explode amount: 0→0 .18→start 0.55→max hold 0.8→ back to 0 by 0.97
+      var ex;
+      if(p<.18)ex=0;
+      else if(p<.55)ex=ease((p-.18)/.37);
+      else if(p<.78)ex=1;
+      else ex=1-ease(Math.min(1,(p-.78)/.19));
+      var rotY=p*360+22, rotX=-18+Math.sin(p*6.28)*6;
+      mega.style.transform='rotateX('+rotX+'deg) rotateY('+rotY+'deg)';
+      var D=GAP+ex*(small?150:260);
+      cubes.forEach(function(c){
+        var wob=ex*14;
+        c.el.style.transform='translate3d('+(c.x*D+c.jx*wob)+'px,'+(c.y*D+c.jy*wob)+'px,'+(c.z*D+c.jz*wob)+'px)';
+      });
+      // phases: 0 assembled intro, 1 exploded, 2 reassembled finale
+      var ph = p<.2?0 : (p<.82?1:2);
+      lines.forEach(function(l){l.classList.toggle('on', +l.dataset.ph===ph);});
+      labels.forEach(function(l){l.classList.toggle('on', ph===1 && ex>.6);});
+    }
+    function onScroll(){ if(!ticking){ticking=true;requestAnimationFrame(update);} }
+    if(reduce){
+      mega.style.transform='rotateX(-18deg) rotateY(30deg)';
+      var D=GAP;cubes.forEach(function(c){c.el.style.transform='translate3d('+(c.x*D)+'px,'+(c.y*D)+'px,'+(c.z*D)+'px)';});
+    } else {
+      addEventListener('scroll',onScroll,{passive:true});
+      addEventListener('resize',onScroll);
+      update();
+    }
   })();
 </script>
 </body>
