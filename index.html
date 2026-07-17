@@ -326,13 +326,6 @@
   @media(max-width:560px){.dualstat{grid-template-columns:1fr}}
   .dualstat .c-v{font-size:clamp(1.7rem,3vw,2.5rem)!important}
 
-  /* ===== 3D platform ring ===== */
-  @media(min-width:901px){
-    .ring-stage{position:relative;height:520px;perspective:1400px;display:flex;align-items:center;justify-content:center;margin-top:10px;touch-action:pan-y}
-    .ring-stage .plat-grid{position:relative;width:230px;height:300px;display:block;transform-style:preserve-3d;margin:0}
-    .ring-stage .plat{position:absolute;inset:0;backface-visibility:hidden;-webkit-backface-visibility:hidden;min-height:0}
-    .ring-stage::after{content:'';position:absolute;left:50%;bottom:30px;transform:translateX(-50%);width:min(680px,80%);height:60px;border-radius:50%;background:radial-gradient(ellipse,rgba(255,106,61,.10),transparent 70%);filter:blur(8px);pointer-events:none}
-  }
 
   /* ===== companies v2 ===== */
   .co-grid{display:grid;grid-template-columns:repeat(5,1fr);gap:16px}
@@ -362,6 +355,38 @@
   #work,#stack{position:relative;isolation:isolate;overflow:hidden}
   .voxfield{position:absolute;inset:0;width:100%;height:100%;z-index:-1;opacity:.5;pointer-events:none}
   #paceviz{height:190px}
+
+  /* ===== the platforms book ===== */
+  .book-stage{display:none}
+  @media(min-width:901px){
+    .plat-grid{display:none}
+    .book-stage{position:relative;display:flex;align-items:center;justify-content:center;height:600px;perspective:1800px;margin-top:6px}
+    .book{position:relative;width:min(780px,90%);height:450px;transform-style:preserve-3d;transform:rotateX(10deg)}
+    .book-glow{position:absolute;left:50%;top:54%;transform:translate(-50%,-50%);width:130%;height:120%;border-radius:50%;pointer-events:none;z-index:-1;
+      background:radial-gradient(50% 50% at 50% 50%,var(--bglow,rgba(255,106,61,.6)),transparent 70%);opacity:.16;filter:blur(30px);transition:background .6s}
+    .bpage{position:absolute;top:0;width:50%;height:100%;border:1px solid var(--line);background:linear-gradient(180deg,#141826,#0e1119)}
+    .bpage.l{left:0;border-radius:16px 4px 4px 16px;box-shadow:inset -26px 0 40px -28px rgba(0,0,0,.9)}
+    .bpage.r{left:50%;border-radius:4px 16px 16px 4px;box-shadow:inset 26px 0 40px -28px rgba(0,0,0,.9)}
+    .spine{position:absolute;left:50%;top:0;width:2px;height:100%;transform:translateX(-1px);background:linear-gradient(180deg,transparent,rgba(255,106,61,.5),transparent);z-index:60}
+    .sheet{position:absolute;left:50%;top:0;width:50%;height:100%;transform-origin:left center;transform-style:preserve-3d;transition:transform 1.05s cubic-bezier(.35,.08,.2,1)}
+    .sheet.flipped{transform:rotateY(-180deg)}
+    .bface{position:absolute;inset:0;backface-visibility:hidden;-webkit-backface-visibility:hidden;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:16px;
+      background:linear-gradient(180deg,#151a29,#0f1220);border:1px solid var(--line);overflow:hidden}
+    .bface.f{border-radius:4px 16px 16px 4px;box-shadow:inset 22px 0 34px -26px rgba(0,0,0,.85)}
+    .bface.b{transform:rotateY(180deg);border-radius:16px 4px 4px 16px;box-shadow:inset -22px 0 34px -26px rgba(0,0,0,.85)}
+    .bface .bl{height:74px;display:flex;align-items:center;justify-content:center}
+    .bface .bl svg{height:64px;width:auto;fill:var(--pb,#c9cdd6);filter:drop-shadow(0 0 18px color-mix(in srgb,var(--pb,#ff6a3d) 55%,transparent))}
+    .bface .bw{font-family:var(--disp);font-weight:800;font-size:30px;color:var(--pb,#c9cdd6);text-align:center;line-height:1.1;text-shadow:0 0 24px color-mix(in srgb,var(--pb,#ff6a3d) 45%,transparent)}
+    .bface .bn{font-family:var(--disp);font-weight:700;font-size:17px;color:var(--ink)}
+    .bface .bs{font-family:var(--mono);font-size:9.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--ink3)}
+    .bface .pgn{position:absolute;bottom:12px;font-family:var(--mono);font-size:9px;color:var(--ink3)}
+    .bface.f .pgn{right:16px}.bface.b .pgn{left:16px}
+    .bface::after{content:'';position:absolute;inset:0;background:radial-gradient(80% 60% at 50% 40%,color-mix(in srgb,var(--pb,#ff6a3d) 10%,transparent),transparent 70%);pointer-events:none}
+    .book-hint{position:absolute;bottom:22px;left:50%;transform:translateX(-50%);font-family:var(--mono);font-size:9.5px;letter-spacing:.24em;text-transform:uppercase;color:var(--ink3)}
+    .bcover{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:10px;position:absolute;inset:0;color:var(--ink3)}
+    .bcover .bt{font-family:'Fraunces',Georgia,serif;font-style:italic;font-size:26px;color:var(--ink)}
+    .bcover .bs2{font-family:var(--mono);font-size:9.5px;letter-spacing:.2em;text-transform:uppercase}
+  }
 </style>
 </head>
 <body>
@@ -425,8 +450,9 @@
     <canvas class="voxfield" aria-hidden="true"></canvas>
     <div class="wrap">
       <div class="head rv"><span class="idx">/ 02</span><h2>Platforms I <em class="run-it">run</em></h2></div>
-      <p class="lead-note rv">Real platforms, day to day. Drag the ring, hover for the brand color.</p>
-      <div class="ring-stage rv"><div class="plat-grid" id="platRing">
+      <p class="lead-note rv">Real platforms, day to day. Turn the pages of the field manual.</p>
+      <div class="book-stage rv" id="bookStage" aria-label="Platforms book"></div>
+      <div class="plat-grid" id="platRing">
         <div class="plat rv" tabindex="0" style="--brand:#34A853"><span class="plat-glow"></span><div class="plat-logo"><svg viewBox="0 0 24 24" aria-label="Display &amp; Video 360"><title>Display &amp; Video 360</title><path d="M4.421.01a2.947 2.947 0 0 0-2.828 1.52 2.967 2.967 0 0 0 1.094 4.076l10.6 6.064 4.79-2.672a3.546 3.546 0 0 1 1.811-.443L5.701.424A2.947 2.947 0 0 0 4.42.01ZM1.164 4.768v14.484a3.474 3.474 0 0 1 2.972-1.687 3.47 3.47 0 0 1 2.961 1.672l.004-10.53L2.44 6.04a3.433 3.433 0 0 1-1.275-1.271Zm18.42 4.289a3.08 3.08 0 0 0-1.264.379L7.6 15.414c.003 1.873-.011 3.745.003 5.617 0 .4-.072.988-.396 1.606l12.548-7.227 1.487-.83a2.978 2.978 0 0 0 1.463-3.511 3.08 3.08 0 0 0-3.121-2.012ZM4.136 18.065A2.967 2.967 0 1 0 4.134 24a2.967 2.967 0 0 0 .002-5.935z"/></svg></div><div class="plat-meta"><span class="plat-name">DV360</span><span class="plat-sub">DISPLAY &amp; VIDEO 360</span></div></div>
         <div class="plat rv d1" tabindex="0" style="--brand:#0866FF"><span class="plat-glow"></span><div class="plat-logo"><svg viewBox="0 0 24 24" aria-label="Meta"><title>Meta</title><path d="M6.915 4.03c-1.968 0-3.683 1.28-4.871 3.113C.704 9.208 0 11.883 0 14.449c0 .706.07 1.369.21 1.973a6.624 6.624 0 0 0 .265.86 5.297 5.297 0 0 0 .371.761c.696 1.159 1.818 1.927 3.593 1.927 1.497 0 2.633-.671 3.965-2.444.76-1.012 1.144-1.626 2.663-4.32l.756-1.339.186-.325c.061.1.121.196.183.3l2.152 3.595c.724 1.21 1.665 2.556 2.47 3.314 1.046.987 1.992 1.22 3.06 1.22 1.075 0 1.876-.355 2.455-.843a3.743 3.743 0 0 0 .81-.973c.542-.939.861-2.127.861-3.745 0-2.72-.681-5.357-2.084-7.45-1.282-1.912-2.957-2.93-4.716-2.93-1.047 0-2.088.467-3.053 1.308-.652.57-1.257 1.29-1.82 2.05-.69-.875-1.335-1.547-1.958-2.056-1.182-.966-2.315-1.303-3.454-1.303zm10.16 2.053c1.147 0 2.188.758 2.992 1.999 1.132 1.748 1.647 4.195 1.647 6.4 0 1.548-.368 2.9-1.839 2.9-.58 0-1.027-.23-1.664-1.004-.496-.601-1.343-1.878-2.832-4.358l-.617-1.028a44.908 44.908 0 0 0-1.255-1.98c.07-.109.141-.224.211-.327 1.12-1.667 2.118-2.602 3.358-2.602zm-10.201.553c1.265 0 2.058.791 2.675 1.446.307.327.737.871 1.234 1.579l-1.02 1.566c-.757 1.163-1.882 3.017-2.837 4.338-1.191 1.649-1.81 1.817-2.486 1.817-.524 0-1.038-.237-1.383-.794-.263-.426-.464-1.13-.464-2.046 0-2.221.63-4.535 1.66-6.088.454-.687.964-1.226 1.533-1.533a2.264 2.264 0 0 1 1.088-.285z"/></svg></div><div class="plat-meta"><span class="plat-name">Meta</span><span class="plat-sub">FACEBOOK &amp; INSTAGRAM</span></div></div>
         <div class="plat rv d2" tabindex="0" style="--brand:#E60023"><span class="plat-glow"></span><div class="plat-logo"><svg viewBox="0 0 24 24" aria-label="Pinterest"><title>Pinterest</title><path d="M12.017 0C5.396 0 .029 5.367.029 11.987c0 5.079 3.158 9.417 7.618 11.162-.105-.949-.199-2.403.041-3.439.219-.937 1.406-5.957 1.406-5.957s-.359-.72-.359-1.781c0-1.663.967-2.911 2.168-2.911 1.024 0 1.518.769 1.518 1.688 0 1.029-.653 2.567-.992 3.992-.285 1.193.6 2.165 1.775 2.165 2.128 0 3.768-2.245 3.768-5.487 0-2.861-2.063-4.869-5.008-4.869-3.41 0-5.409 2.562-5.409 5.199 0 1.033.394 2.143.889 2.741.099.12.112.225.085.345-.09.375-.293 1.199-.334 1.363-.053.225-.172.271-.401.165-1.495-.69-2.433-2.878-2.433-4.646 0-3.776 2.748-7.252 7.92-7.252 4.158 0 7.392 2.967 7.392 6.923 0 4.135-2.607 7.462-6.233 7.462-1.214 0-2.354-.629-2.758-1.379l-.749 2.848c-.269 1.045-1.004 2.352-1.498 3.146 1.123.345 2.306.535 3.55.535 6.607 0 11.985-5.365 11.985-11.987C23.97 5.39 18.592.026 11.985.026L12.017 0z"/></svg></div><div class="plat-meta"><span class="plat-name">Pinterest</span><span class="plat-sub">PINTEREST ADS</span></div></div>
@@ -439,7 +465,7 @@
         <div class="plat rv d1" tabindex="0" style="--brand:#1A73E8"><span class="plat-glow"></span><div class="plat-logo"><span class="wordmark">CM360</span></div><div class="plat-meta"><span class="plat-sub">CAMPAIGN MANAGER</span></div></div>
         <div class="plat rv d2" tabindex="0" style="--brand:#FBBC04"><span class="plat-glow"></span><div class="plat-logo"><span class="wordmark">Floodlight</span></div><div class="plat-meta"><span class="plat-sub">CONVERSION TRACKING</span></div></div>
         <div class="plat rv d3" tabindex="0" style="--brand:#8B5CF6"><span class="plat-glow"></span><div class="plat-logo"><span class="wordmark">Copilot</span></div><div class="plat-meta"><span class="plat-sub">AGENTS &amp; AUTOMATION</span></div></div>
-      </div></div>
+      </div>
 
       <div class="head rv" style="margin-top:64px"><span class="idx">/ 02b</span><h2>Companies I've worked with</h2></div>
       <div class="co-grid">
@@ -827,36 +853,53 @@
       frame();
     });
   })();
-  /* ===== 3D ring carousel ===== */
+  /* ===== the platforms book ===== */
   (function(){
-    var ring=document.getElementById('platRing'); if(!ring) return;
-    var mq=matchMedia('(min-width: 901px)');
+    var stage=document.getElementById('bookStage'), grid=document.getElementById('platRing');
+    if(!stage||!grid) return;
+    if(!matchMedia('(min-width: 901px)').matches){return;}
     var reduce=matchMedia('(prefers-reduced-motion: reduce)').matches;
-    var cards=[].slice.call(ring.children).filter(function(c){return c.classList.contains('plat')});
-    var N=cards.length, R=430, rot=0, vel=reduce?0:0.12, dragging=false, lastX=0, raf=null, active=false;
-    function place(){
-      cards.forEach(function(c,i){
-        var base=i*(360/N);
-        c.style.transform='rotateY('+(base+rot)+'deg) translateZ('+R+'px)';
-      });
-      ring.style.transform='translateZ(-'+R+'px)';
+    var plats=[].slice.call(grid.querySelectorAll('.plat')).map(function(c){
+      var logo=c.querySelector('.plat-logo').innerHTML;
+      var name=c.querySelector('.plat-name'); var word=c.querySelector('.wordmark');
+      var sub=c.querySelector('.plat-sub');
+      return {logo:logo, name:name?name.textContent:(word?word.textContent:''), sub:sub?sub.textContent:'',
+              brand:(c.getAttribute('style')||'').replace(/.*--brand:([^;\"]+).*/,'$1')||'#ff6a3d',
+              isWord:!!word};
+    });
+    var html='<div class="book"><div class="book-glow" id="bkGlow"></div><div class="bpage l"><div class="bcover"><div class="bs2">Field Manual</div><div class="bt">Platforms I run</div><div class="bs2">12 systems &middot; one operator</div></div></div><div class="bpage r"><div class="bcover"><div class="bt">&hellip;and whatever ships next.</div><div class="bs2">Always learning</div></div></div>';
+    function face(pd,cls,pg){
+      var inner=pd.isWord?('<div class="bw" style="--pb:'+pd.brand+'">'+pd.name+'</div>')
+                        :('<div class="bl" style="--pb:'+pd.brand+'">'+pd.logo+'</div><div class="bn">'+pd.name+'</div>');
+      return '<div class="bface '+cls+'" style="--pb:'+pd.brand+'">'+inner+'<div class="bs">'+pd.sub+'</div><div class="pgn">'+pg+' / 12</div></div>';
     }
-    function loop(){ if(!dragging) rot+=vel; place(); raf=requestAnimationFrame(loop); }
-    function enable(){ if(active) return; active=true;
-      cards.forEach(function(c){c.classList.add('in');});
-      if(raf)cancelAnimationFrame(raf); raf=requestAnimationFrame(loop); }
-    function disable(){ if(!active) return; active=false;
-      if(raf){cancelAnimationFrame(raf);raf=null;}
-      cards.forEach(function(c){c.style.transform='';}); ring.style.transform=''; }
-    function check(){ mq.matches?enable():disable(); }
-    mq.addEventListener?mq.addEventListener('change',check):mq.addListener(check);
-    check();
-    var stage=ring.parentElement;
-    stage.addEventListener('mouseenter',function(){vel=reduce?0:0.03;});
-    stage.addEventListener('mouseleave',function(){vel=reduce?0:0.12;dragging=false;});
-    stage.addEventListener('pointerdown',function(e){if(!active)return;dragging=true;lastX=e.clientX;stage.setPointerCapture(e.pointerId);});
-    stage.addEventListener('pointermove',function(e){if(dragging&&active){rot+=(e.clientX-lastX)*.25;lastX=e.clientX;}});
-    stage.addEventListener('pointerup',function(){dragging=false;});
+    var S=plats.length/2;
+    for(var i=S-1;i>=0;i--){
+      html+='<div class="sheet" data-i="'+i+'" style="z-index:'+(10+ (S-i))+'">'+face(plats[2*i],'f',2*i+1)+face(plats[2*i+1],'b',2*i+2)+'</div>';
+    }
+    html+='<div class="spine"></div></div><div class="book-hint">Click to turn &middot; the platform field manual</div>';
+    stage.innerHTML=html;
+    var sheets=[].slice.call(stage.querySelectorAll('.sheet')).sort(function(a,b){return a.dataset.i-b.dataset.i;});
+    var glow=document.getElementById('bkGlow');
+    var cur=0, timer=null;
+    function zfix(){sheets.forEach(function(sh,i){sh.style.zIndex=sh.classList.contains('flipped')?(10+i):(10+(S-i));});}
+    function setGlow(){
+      var idx=Math.min(plats.length-1,cur*2);
+      glow.style.setProperty('--bglow',plats[Math.max(0,idx-1)].brand);
+    }
+    function fwd(){ if(cur<S){sheets[cur].classList.add('flipped');cur++;zfix();setGlow();}
+      else{ sheets.slice().reverse().forEach(function(sh,k){setTimeout(function(){sh.classList.remove('flipped');zfix();},k*90);}); cur=0; setGlow(); } }
+    function back(){ if(cur>0){cur--;sheets[cur].classList.remove('flipped');zfix();setGlow();} }
+    function auto(){ if(timer)clearInterval(timer); if(!reduce) timer=setInterval(fwd, 2800); }
+    stage.addEventListener('click',function(e){
+      var r=stage.getBoundingClientRect();
+      (e.clientX-r.left)<r.width/2?back():fwd();
+      auto();
+    });
+    stage.addEventListener('mouseenter',function(){if(timer)clearInterval(timer);});
+    stage.addEventListener('mouseleave',auto);
+    var vis=new IntersectionObserver(function(es){es.forEach(function(e){ if(e.isIntersecting){auto();} else if(timer)clearInterval(timer);});},{threshold:.3});
+    vis.observe(stage);
   })();
 </script>
 </body>
