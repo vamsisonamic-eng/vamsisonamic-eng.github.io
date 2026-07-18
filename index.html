@@ -428,6 +428,41 @@
 
   .al b{color:var(--acc);font-weight:700;margin-right:2px}
   .al{transition-delay:calc(var(--d,0)*1ms)}
+
+  .eng-grid.two{grid-template-columns:repeat(2,1fr)}
+  @media(max-width:900px){.eng-grid.two{grid-template-columns:1fr}}
+  .eng-list{list-style:none;margin-top:12px;padding:0;position:relative;z-index:1}
+  .eng-list li{position:relative;padding:10px 0 10px 22px;font-size:13.5px;line-height:1.65;color:var(--ink2);border-bottom:1px solid var(--line2)}
+  .eng-list li:last-child{border-bottom:none}
+  .eng-list li::before{content:'';position:absolute;left:2px;top:17px;width:7px;height:7px;border-radius:2px;background:var(--acc);transform:rotate(45deg)}
+  .eng-list b{color:var(--ink)}
+
+  /* ===== deal desk case studies ===== */
+  .cs-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:16px}
+  @media(max-width:900px){.cs-grid{grid-template-columns:1fr}}
+  .cs{position:relative;border-radius:20px;padding:clamp(22px,2.6vw,32px);background:linear-gradient(180deg,#12151f,#0e1119);border:1px solid var(--line);box-shadow:inset 0 1px 0 rgba(255,255,255,.05),0 8px 22px rgba(0,0,0,.05);transition:transform .3s var(--ease),border-color .3s}
+  .cs:hover{transform:translateY(-5px);border-color:rgba(255,106,61,.35)}
+  .cs-badge{display:inline-block;font-family:var(--mono);font-size:10px;letter-spacing:.16em;text-transform:uppercase;color:var(--acc);border:1px solid rgba(255,106,61,.4);border-radius:999px;padding:6px 12px}
+  .cs h3{font-size:clamp(1.05rem,1.6vw,1.3rem);line-height:1.3;margin:14px 0 6px}
+  .cs-block{margin-top:14px;padding-top:12px;border-top:1px solid var(--line2)}
+  .cs-k{display:block;font-family:var(--mono);font-size:10px;letter-spacing:.18em;text-transform:uppercase;color:var(--ink3);margin-bottom:7px}
+  .cs-block.res .cs-k{color:var(--good)}
+  .cs-block p{font-size:13.5px;line-height:1.65;color:var(--ink2)}
+  .cs-block b{color:var(--ink)}
+  .cs-block ul{list-style:none;padding:0}
+  .cs-block li{position:relative;padding:5px 0 5px 20px;font-size:13.5px;line-height:1.6;color:var(--ink2)}
+  .cs-block li::before{content:'';position:absolute;left:2px;top:12px;width:6px;height:6px;border-radius:50%;background:var(--acc)}
+
+  /* ===== stack sheet ===== */
+  .stk-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:16px}
+  @media(max-width:1000px){.stk-grid{grid-template-columns:repeat(2,1fr)}}
+  @media(max-width:520px){.stk-grid{grid-template-columns:1fr}}
+  .stk{border-radius:18px;padding:22px 20px;background:linear-gradient(180deg,#12151f,#0e1119);border:1px solid var(--line);transition:transform .3s var(--ease),border-color .3s}
+  .stk:hover{transform:translateY(-5px);border-color:rgba(255,106,61,.35)}
+  .stk h4{font-family:var(--mono);font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--acc);padding-bottom:11px;border-bottom:1px solid var(--line);font-weight:500}
+  .stk ul{list-style:none;padding:0;margin-top:10px}
+  .stk li{position:relative;padding:6px 0 6px 22px;font-size:13.5px;color:var(--ink2)}
+  .stk li::before{content:'\2713';position:absolute;left:2px;top:6px;color:var(--good);font-size:12px}
 </style>
 </head>
 <body>
@@ -449,11 +484,11 @@
     <div class="hero-glow" aria-hidden="true"></div>
     <div class="wrap hero-inner">
       <div class="h-left">
-        <span class="h-badge rv">8+ years &middot; Programmatic leadership &middot; Retail media</span>
-        <h1 class="h-title rv d1">Performance,<br><em>engineered.</em></h1>
-        <p class="h-sub rv d2">End-to-end strategy and delivery of a <b>$286M&ndash;$390M</b> annual Fortune 500 retail media portfolio. Display, native, video, YouTube, CTV and audio &mdash; <b>one cross-channel engine</b>, 70&ndash;100 concurrent campaigns, pacing at <b>98%+</b>.</p>
+        <span class="h-badge rv">8+ years &middot; Exchange &amp; deal desk operations &middot; Omni-channel</span>
+        <h1 class="h-title rv d1">Yield &amp; performance,<br><em>engineered.</em></h1>
+        <p class="h-sub rv d2">Commercial governance, yield management and operational triage for a <b>$286M&ndash;$390M</b> annual programmatic portfolio. GTM strategy bridged with hands-on execution, from DSP deal architecture to SSP yield &mdash; <b>70&ndash;100 concurrent global campaigns at 98%+ pacing</b>, margins guarded throughout.</p>
         <div class="h-cta rv d3">
-          <a class="btn primary" href="mailto:vamsisonamic@gmail.com">Let&rsquo;s talk strategy <span class="ar">&rarr;</span></a>
+          <a class="btn primary" href="mailto:vamsisonamic@gmail.com">Optimize my GTM strategy <span class="ar">&rarr;</span></a>
           <a class="btn ghost" href="#engine">See the engine</a>
         </div>
       </div>
@@ -509,7 +544,25 @@
         <div class="cell rv d1"><div class="c-k">Concurrent Campaigns</div><div><div class="c-v">70<span class="u">&ndash;</span><span class="count" data-to="100" data-dur="1500">0</span></div><div class="c-d">Live campaigns under continuous optimization at any time.</div></div></div>
         <div class="cell rv d2"><div class="c-k">Budget Pacing Precision</div><div><div class="c-v"><span class="count" data-to="98" data-dur="1400">0</span><span class="u">%</span></div><div class="c-d">Systemic delivery baseline, held through peak cycles.</div></div></div>
         <div class="cell rv d3"><div class="c-k">Performance Yield</div><div><div class="c-v">1.8<span class="u">x&nbsp;&rarr;&nbsp;</span><span class="count" data-to="4" data-dur="1200">0</span>.2<span class="u">x</span></div><div class="c-d">+133% account ROAS, with CPA cut 18%, via segmentation, PG renegotiation and structured experimentation.</div></div></div>
+        <div class="cell rv d1"><div class="c-k">Deal Desk SLA</div><div><div class="c-v">&lt;<span class="count" data-to="4" data-dur="1100">0</span><span class="u">&nbsp;hrs</span></div><div class="c-d">Critical deal desk turnaround, held under a four-hour SLA.</div></div></div>
         <div class="cell wide rv"><div class="c-k">Leadership &amp; Governance</div><div><div class="c-v"><span class="count" data-to="30" data-dur="1300">0</span><span class="u">&nbsp;traders coached</span></div><div class="c-d">SOP/QA frameworks and certification tracks sustaining <b>98%+ delivery</b> and <b>75%+ viewability</b>. PMP, Programmatic Guaranteed and open exchange, negotiated and governed.</div></div></div>
+      </div>
+      <div class="head rv" style="margin-top:64px"><span class="idx">/ 01b</span><h2>Deal desk case studies</h2></div>
+      <div class="cs-grid">
+        <article class="cs rv">
+          <div class="cs-badge">Margin Recovery</div>
+          <h3>Resolving revenue leakage &amp; margin erosion in high-scale PMPs</h3>
+          <div class="cs-block"><span class="cs-k">Situation</span><p>A strategic agency partner was scaling cross-channel spend on TTD and DV360, but gross margins on custom PMPs kept sliding: unoptimized platform costs, fluctuating data fees, mismatched floor configurations.</p></div>
+          <div class="cs-block"><span class="cs-k">Action</span><ul><li>Ran an exhaustive deal-level P&amp;L breakdown of tech fees, inventory rebates and cost allocations.</li><li>Queried programmatic transaction logs with SQL, uncovering buyers bypassing private auction tiers through overlapping inclusion logic in GAM.</li><li>Implemented a dynamic floor pricing matrix that adjusts bids in real time on historical context, no manual intervention.</li></ul></div>
+          <div class="cs-block res"><span class="cs-k">Result</span><p>Plugged a <b>4.5% revenue leakage gap</b>, recovered gross margins to corporate compliance, and standardized a PMP commercial playbook now used globally.</p></div>
+        </article>
+        <article class="cs rv d1">
+          <div class="cs-badge">Operational Velocity</div>
+          <h3>Streamlining deal desk TAT for a global omni-channel portfolio</h3>
+          <div class="cs-block"><span class="cs-k">Situation</span><p>Non-standard enterprise agreements spanning open web and paid social stalled in the pipeline. Disparate timelines between regional sales and central operations delayed executions and cost revenue.</p></div>
+          <div class="cs-block"><span class="cs-k">Action</span><ul><li>Acted as central triage lead and re-architected the deal evaluation flow from the ground up.</li><li>Embedded an automated approval matrix in Salesforce with explicit discount tiers and exception conditions.</li><li>Built synchronized handover protocols and automated alerts bridging cross-time-zone handoffs between onshore AMs and offshore execution.</li></ul></div>
+          <div class="cs-block res"><span class="cs-k">Result</span><p>Cut deal desk turnaround <b>40%, to under 4 hours</b>, and eliminated 100% of non-compliant exception pricing.</p></div>
+        </article>
       </div>
     </div>
   </section>
@@ -535,7 +588,14 @@
         <div class="plat rv d3" tabindex="0" style="--brand:#8B5CF6"><span class="plat-glow"></span><div class="plat-logo"><span class="wordmark">Copilot</span></div><div class="plat-meta"><span class="plat-sub">AGENTS &amp; AUTOMATION</span></div></div>
       </div>
 
-      <div class="head rv" style="margin-top:64px"><span class="idx">/ 02b</span><h2>Companies I've worked with</h2></div>
+      <div class="head rv" style="margin-top:64px"><span class="idx">/ 02b</span><h2>The stack sheet</h2></div>
+      <div class="stk-grid">
+        <div class="stk rv"><h4>Demand-Side (DSP)</h4><ul><li>The Trade Desk (Kokai)</li><li>DV360</li><li>Amazon DSP</li></ul></div>
+        <div class="stk rv d1"><h4>Supply-Side (SSP)</h4><ul><li>Google Ad Manager</li><li>Dynamic floor logics</li><li>PMP / PG / Private Auction</li></ul></div>
+        <div class="stk rv d2"><h4>Social Platforms</h4><ul><li>Meta Business Manager</li><li>Pinterest Ads</li><li>Google Ads (legacy)</li></ul></div>
+        <div class="stk rv d3"><h4>Analytics &amp; CRM</h4><ul><li>SQL &middot; Looker &middot; Tableau</li><li>Salesforce (SFDC)</li><li>Advanced Excel modeling</li></ul></div>
+      </div>
+      <div class="head rv" style="margin-top:64px"><span class="idx">/ 02c</span><h2>Companies I've worked with</h2></div>
       <div class="co-grid">
         <div class="co rv" style="--w:100%"><div class="co-n">Dentsu</div><div class="co-r">Senior Programmatic Account Manager</div><div class="co-bar"><span></span></div><div class="co-y">2023 &mdash; Present</div></div>
         <div class="co rv d1" style="--w:26%"><div class="co-n">Freyr Solutions</div><div class="co-r">Programmatic Specialist</div><div class="co-bar"><span></span></div><div class="co-y">2023</div></div>
@@ -553,24 +613,26 @@
     <div class="wrap">
       <div class="head rv"><span class="idx">/ 03</span><h2>The Engine: DSP/SSP synergy &amp; funnel mapping</h2></div>
       <p class="lead-note rv">True performance optimization means mastering both sides of the digital auction &mdash; deep platform interoperability plus premium PMP and Programmatic Guaranteed deal frameworks, guiding audiences down the purchase funnel. Display, native, video, YouTube, CTV and audio, run as one system.</p>
-      <div class="eng-grid">
+      <div class="eng-grid two">
         <div class="eng rv" style="--brand:#0098DB"><span class="plat-glow"></span>
-          <div class="eng-k">A &middot; The Buy-Side</div>
-          <h3>DSPs: The Trade Desk Kokai &amp; DV360</h3>
-          <div class="eng-scope">Full-funnel direct response &amp; acquisition</div>
-          <p>Machine-learning bidding models, dynamic prospecting rules, and retargeting environments across cross-screen inventory: CTV, OTT, online video, YouTube, and high-impact display.</p>
+          <div class="eng-k">01 &middot; Ecosystem &amp; Inventory Orchestration</div>
+          <h3>Multi-platform programmatic architecture</h3>
+          <div class="eng-scope">PMP &middot; PG &middot; Private Auction frameworks</div>
+          <ul class="eng-list">
+            <li><b>DSP mastery.</b> Deep operational command of The Trade Desk, Amazon DSP and DV360.</li>
+            <li><b>SSP &amp; yield infrastructure.</b> Hands-on monetization in Google Ad Manager: dynamic floor pricing logic, header bidding priorities and unified auction rules that stop inventory undervaluation.</li>
+            <li><b>Omni-channel integration.</b> Full-funnel activation from paid social (Meta, Pinterest) through open-web CTV, video, display and native.</li>
+          </ul>
         </div>
-        <div class="eng rv d1" style="--brand:#00897B"><span class="plat-glow"></span>
-          <div class="eng-k">B &middot; The Supply-Side</div>
-          <h3>SSPs &amp; Ad Server: Google Ad Manager</h3>
-          <div class="eng-scope">Inventory integrity &amp; yield governance</div>
-          <p>Floor price rules, publisher monetization structures, and traffic audits. Programmatic Guaranteed agreements and custom PMP contracts secure high-viewability supply before it hits open exchanges.</p>
-        </div>
-        <div class="eng rv d2" style="--brand:#0866FF"><span class="plat-glow"></span>
-          <div class="eng-k">C &middot; Walled Garden Anchors</div>
-          <h3>Meta &amp; Pinterest</h3>
-          <div class="eng-scope">Social intent capture &amp; lookalike scaling</div>
-          <p>High-intent lookalike acquisition loops on Meta and visual discovery trend mapping on Pinterest, capturing demand generated by top-of-funnel video placements.</p>
+        <div class="eng rv d1" style="--brand:#3bbd8f"><span class="plat-glow"></span>
+          <div class="eng-k">02 &middot; Commercial Governance &amp; Deal Operations</div>
+          <h3>Financial rigor &amp; yield optimization</h3>
+          <div class="eng-scope">Operations as a profit center</div>
+          <ul class="eng-list">
+            <li><b>Margin safeguards.</b> Auditing non-standard enterprise deals &mdash; tech fees, data costs, rebate allocations &mdash; to keep margins inside corporate guardrails.</li>
+            <li><b>Data-driven triage.</b> Targeted SQL queries and Looker/Tableau dashboards that surface auction anomalies, drop-offs and pricing pressure in real time.</li>
+            <li><b>SOP velocity.</b> Streamlined deal desk approval matrices in Salesforce, slashing turnaround between regional sales and central operations.</li>
+          </ul>
         </div>
       </div>
     </div>
@@ -611,7 +673,7 @@
       <div class="xp">
         <article class="xp-card rv">
           <div class="xp-top"><div class="xp-id"><span class="xp-logo">d</span><div><div class="xp-role">Account Manager, Programmatic &mdash; Fortune 500 Retail Media <span style="font-weight:600;color:var(--ink2)">(Associate Director&ndash;level scope)</span></div><div class="xp-org">Dentsu · Hyderabad</div></div></div><div class="xp-date">Dec 2023 — Present</div></div>
-          <ul class="xp-body"><li>Own end-to-end programmatic strategy and delivery for a Fortune 500 Retail Media Network: a <b>$286M&ndash;$390M annual portfolio</b> across <b>70&ndash;100 concurrent campaigns</b> on DV360, The Trade Desk, GAM360, Meta and Pinterest.</li><li>Scaled account ROAS <b>1.8x &rarr; 4.2x (+133%)</b> and cut <b>CPA 18%</b> by restructuring segmentation, renegotiating PG terms and floor prices, and running structured experimentation frameworks.</li><li>Trained and coached <b>30 programmatic traders and managers</b> across onshore and offshore hubs, raising delivery consistency to <b>98%+</b> through SOP/QA frameworks and certification tracks.</li><li>Sustained <b>75%+ viewability</b>, above industry benchmark, via ad verification workflows, pre-bid targeting and blocklist governance.</li><li>Saved <b>10+ hours weekly</b> and accelerated <b>70+ SLA-bound reports</b> with custom Microsoft Copilot Studio agents and API automation; independently diagnosed a DV360 creative-rejection root cause later <b>confirmed by Google</b>.</li><li>Secured continued multi-hundred-million-dollar investment, evidenced by <b>two consecutive Dentsu performance awards</b>, by leading QBRs and strategy decks for U.S. and global stakeholders.</li></ul>
+          <ul class="xp-body"><li>Own end-to-end programmatic strategy and delivery for a Fortune 500 Retail Media Network: a <b>$286M&ndash;$390M annual portfolio</b> across <b>70&ndash;100 concurrent campaigns</b> on DV360, The Trade Desk, GAM360, Meta and Pinterest.</li><li>Scaled account ROAS <b>1.8x &rarr; 4.2x (+133%)</b> and cut <b>CPA 18%</b> by restructuring segmentation, renegotiating PG terms and floor prices, and running structured experimentation frameworks.</li><li>Trained and coached <b>30 programmatic traders and managers</b> across onshore and offshore hubs, raising delivery consistency to <b>98%+</b> through SOP/QA frameworks and certification tracks.</li><li>Sustained <b>75%+ viewability</b>, above industry benchmark, via ad verification workflows, pre-bid targeting and blocklist governance.</li><li>Saved <b>10+ hours weekly</b> and accelerated <b>70+ SLA-bound reports</b> with custom Microsoft Copilot Studio agents and API automation; independently diagnosed a DV360 creative-rejection root cause later <b>confirmed by Google</b>.</li><li>Led cross-functional communication bridging <b>North American commercial demands with central operations</b>, maintaining 24/7 data continuity across time zones.</li><li>Designed <b>automated pricing templates and commercial playbooks</b> adopted across business units.</li><li>Secured continued multi-hundred-million-dollar investment, evidenced by <b>two consecutive Dentsu performance awards</b>, by leading QBRs and strategy decks for U.S. and global stakeholders.</li></ul>
           <div class="xp-tags"><span class="xp-tag">DV360</span><span class="xp-tag">TTD Kokai</span><span class="xp-tag">Amazon DSP</span><span class="xp-tag">GAM360</span><span class="xp-tag">Meta</span><span class="xp-tag">Pinterest</span></div>
         </article>
         <article class="xp-card rv">
