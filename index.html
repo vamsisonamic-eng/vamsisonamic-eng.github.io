@@ -8,6 +8,7 @@
 <meta name="theme-color" content="#07080d" />
 <link rel="preconnect" href="https://fonts.googleapis.com" />
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://api.fontshare.com/v2/css?f[]=clash-display@400,500,600,700&display=swap" rel="stylesheet" />
 <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&family=Fraunces:ital,wght@1,400;1,500;1,600&display=swap" rel="stylesheet" />
 <style>
   :root{
@@ -15,7 +16,7 @@
     --ink:#f2f0ea; --ink2:#9aa0ad; --ink3:#5c6270;
     --line:rgba(242,240,234,.09); --line2:rgba(242,240,234,.045);
     --acc:#ff6a3d; --acc-dim:rgba(255,106,61,.14); --good:#3bbd8f;
-    --disp:'Plus Jakarta Sans',system-ui,sans-serif; --body:'Inter',system-ui,sans-serif; --mono:'JetBrains Mono',ui-monospace,monospace;
+    --disp:'Clash Display','Plus Jakarta Sans',system-ui,sans-serif; --body:'Inter',system-ui,sans-serif; --mono:'JetBrains Mono',ui-monospace,monospace;
     --ease:cubic-bezier(.2,.7,.2,1);
   }
   *{margin:0;padding:0;box-sizing:border-box}
@@ -455,6 +456,11 @@
   html.calm .asm-ring,html.calm .asm-neb{display:none}
   .mtog{font-family:var(--mono);font-size:10px;letter-spacing:.12em;text-transform:uppercase;color:var(--ink3);background:none;border:1px solid var(--line);border-radius:10px;padding:8px 12px;margin-right:4px;transition:color .3s,border-color .3s}
   .mtog:hover{color:var(--acc);border-color:var(--acc)}
+
+  /* ===== exhibit stamps (dossier system) ===== */
+  .head .idx{display:inline-flex;align-items:center;gap:9px;font-family:var(--mono);font-size:10px;letter-spacing:.2em;text-transform:uppercase;color:var(--acc);border:1px solid rgba(255,106,61,.45);border-radius:3px;padding:6px 12px;white-space:nowrap}
+  .sdot{width:6px;height:6px;border-radius:50%;background:var(--acc);display:inline-block}
+  .head{align-items:center}
 </style>
 </head>
 <body>
@@ -507,7 +513,7 @@
   <section id="work">
     <canvas class="voxfield" aria-hidden="true"></canvas>
     <div class="wrap">
-      <div class="head rv"><span class="idx">/ 01</span><h2>Core operational benchmarks</h2></div>
+      <div class="head rv"><span class="idx"><i class="sdot"></i>Exhibit 01 &middot; Scale</span><h2>Core operational benchmarks</h2></div>
       <div class="bento">
         <div class="cell big rv"><div class="c-k">Capital Governed</div>
           <canvas id="paceviz" aria-hidden="true"></canvas>
@@ -521,7 +527,7 @@
         <div class="cell rv d1"><div class="c-k">Deal Desk SLA</div><div><div class="c-v">&lt;<span class="count" data-to="4" data-dur="1100">0</span><span class="u">&nbsp;hrs</span></div><div class="c-d">Critical deal desk turnaround, held under a four-hour SLA.</div></div></div>
         <div class="cell wide rv"><div class="c-k">Leadership &amp; Governance</div><div><div class="c-v"><span class="count" data-to="30" data-dur="1300">0</span><span class="u">&nbsp;traders coached</span></div><div class="c-d">SOP/QA frameworks and certification tracks sustaining <b>98%+ delivery</b> and <b>75%+ viewability</b>. PMP, Programmatic Guaranteed and open exchange, negotiated and governed.</div></div></div>
       </div>
-      <div class="head rv" style="margin-top:64px"><span class="idx">/ 01b</span><h2>Deal desk case studies</h2></div>
+      <div class="head rv" style="margin-top:64px"><span class="idx"><i class="sdot"></i>Exhibit 01B &middot; Deal Desk</span><h2>Deal desk case studies</h2></div>
       <div class="cs-grid">
         <article class="cs rv">
           <div class="cs-badge">Margin Recovery</div>
@@ -570,7 +576,7 @@
   <section id="stack">
     <canvas class="voxfield" aria-hidden="true"></canvas>
     <div class="wrap">
-      <div class="head rv"><span class="idx">/ 02</span><h2>Platforms I <em class="run-it">run</em></h2></div>
+      <div class="head rv"><span class="idx"><i class="sdot"></i>Exhibit 02 &middot; Platforms</span><h2>Platforms I <em class="run-it">run</em></h2></div>
       <p class="lead-note rv">Real platforms, day to day. Hover for the brand color.</p>
       <div class="plat-grid" id="platRing">
         <div class="plat rv" tabindex="0" style="--brand:#34A853"><span class="plat-glow"></span><div class="plat-logo"><svg viewBox="0 0 24 24" aria-label="Display &amp; Video 360"><title>Display &amp; Video 360</title><path d="M4.421.01a2.947 2.947 0 0 0-2.828 1.52 2.967 2.967 0 0 0 1.094 4.076l10.6 6.064 4.79-2.672a3.546 3.546 0 0 1 1.811-.443L5.701.424A2.947 2.947 0 0 0 4.42.01ZM1.164 4.768v14.484a3.474 3.474 0 0 1 2.972-1.687 3.47 3.47 0 0 1 2.961 1.672l.004-10.53L2.44 6.04a3.433 3.433 0 0 1-1.275-1.271Zm18.42 4.289a3.08 3.08 0 0 0-1.264.379L7.6 15.414c.003 1.873-.011 3.745.003 5.617 0 .4-.072.988-.396 1.606l12.548-7.227 1.487-.83a2.978 2.978 0 0 0 1.463-3.511 3.08 3.08 0 0 0-3.121-2.012ZM4.136 18.065A2.967 2.967 0 1 0 4.134 24a2.967 2.967 0 0 0 .002-5.935z"/></svg></div><div class="plat-meta"><span class="plat-name">DV360</span><span class="plat-sub">DISPLAY &amp; VIDEO 360</span></div></div>
@@ -587,14 +593,14 @@
         <div class="plat rv d3" tabindex="0" style="--brand:#8B5CF6"><span class="plat-glow"></span><div class="plat-logo"><span class="wordmark">Copilot</span></div><div class="plat-meta"><span class="plat-sub">AGENTS &amp; AUTOMATION</span></div></div>
       </div>
 
-      <div class="head rv" style="margin-top:64px"><span class="idx">/ 02b</span><h2>The stack sheet</h2></div>
+      <div class="head rv" style="margin-top:64px"><span class="idx"><i class="sdot"></i>Exhibit 02B &middot; Stack</span><h2>The stack sheet</h2></div>
       <div class="stk-grid">
         <div class="stk rv"><h4>Demand-Side (DSP)</h4><ul><li>The Trade Desk (Kokai)</li><li>DV360</li><li>Amazon DSP</li></ul></div>
         <div class="stk rv d1"><h4>Supply-Side (SSP)</h4><ul><li>Google Ad Manager</li><li>Dynamic floor logics</li><li>PMP / PG / Private Auction</li></ul></div>
         <div class="stk rv d2"><h4>Social Platforms</h4><ul><li>Meta Business Manager</li><li>Pinterest Ads</li><li>Google Ads (legacy)</li></ul></div>
         <div class="stk rv d3"><h4>Analytics &amp; CRM</h4><ul><li>SQL &middot; Looker &middot; Tableau</li><li>Salesforce (SFDC)</li><li>Advanced Excel modeling</li></ul></div>
       </div>
-      <div class="head rv" style="margin-top:64px"><span class="idx">/ 02c</span><h2>Companies I've worked with</h2></div>
+      <div class="head rv" style="margin-top:64px"><span class="idx"><i class="sdot"></i>Exhibit 02C &middot; Tenure</span><h2>Companies I've worked with</h2></div>
       <div class="co-grid">
         <div class="co rv" style="--w:100%"><div class="co-n">Dentsu</div><div class="co-r">Senior Programmatic Account Manager</div><div class="co-bar"><span></span></div><div class="co-y">2023 &mdash; Present</div></div>
         <div class="co rv d1" style="--w:26%"><div class="co-n">Freyr Solutions</div><div class="co-r">Programmatic Specialist</div><div class="co-bar"><span></span></div><div class="co-y">2023</div></div>
@@ -610,7 +616,7 @@
     <video class="eng-vid" autoplay muted loop playsinline preload="none" aria-hidden="true"><source src="engine-loop.webm" type="video/webm" /><source src="engine-loop.mp4" type="video/mp4" /></video>
     <div class="eng-shade" aria-hidden="true"></div>
     <div class="wrap">
-      <div class="head rv"><span class="idx">/ 03</span><h2>The Engine: DSP/SSP synergy &amp; funnel mapping</h2></div>
+      <div class="head rv"><span class="idx"><i class="sdot"></i>Exhibit 03 &middot; The Engine</span><h2>The Engine: DSP/SSP synergy &amp; funnel mapping</h2></div>
       <p class="lead-note rv">True performance optimization means mastering both sides of the digital auction &mdash; deep platform interoperability plus premium PMP and Programmatic Guaranteed deal frameworks, guiding audiences down the purchase funnel. Display, native, video, YouTube, CTV and audio, run as one system.</p>
       <div class="eng-grid two">
         <div class="eng rv" style="--brand:#0098DB"><span class="plat-glow"></span>
@@ -640,7 +646,7 @@
 
   <section id="experience">
     <div class="wrap">
-      <div class="head rv"><span class="idx">/ 04</span><h2>Work experience</h2></div>
+      <div class="head rv"><span class="idx"><i class="sdot"></i>Exhibit 04 &middot; The Journey</span><h2>Work experience</h2></div>
       <div class="xp">
         <article class="xp-card rv">
           <div class="xp-top"><div class="xp-id"><span class="xp-logo">d</span><div><div class="xp-role">Account Manager, Programmatic &mdash; Fortune 500 Retail Media <span style="font-weight:600;color:var(--ink2)">(Associate Director&ndash;level scope)</span></div><div class="xp-org">Dentsu · Hyderabad</div></div></div><div class="xp-date">Dec 2023 — Present</div></div>
@@ -673,7 +679,7 @@
 
   <section id="skills">
     <div class="wrap">
-      <div class="head rv"><span class="idx">/ 05</span><h2>What I actually do</h2></div>
+      <div class="head rv"><span class="idx"><i class="sdot"></i>Exhibit 05 &middot; Craft</span><h2>What I actually do</h2></div>
       <div class="skills">
         <div class="skcol rv"><h4>Programmatic &amp; DSP</h4><ul><li>DV360</li><li>The Trade Desk · Kokai</li><li>Amazon DSP</li><li>GAM 360 (SSP)</li><li>Meta · Pinterest</li><li>Connected TV · RTB</li></ul></div>
         <div class="skcol rv d1"><h4>Performance &amp; Data</h4><ul><li>ROAS optimization</li><li>Bid-strategy calibration</li><li>Audience cohort analysis</li><li>A/B experimentation</li><li>Behavioral data reporting</li><li>GTM · Floodlight</li></ul></div>
@@ -686,7 +692,7 @@
 
   <section id="case">
     <div class="wrap">
-      <div class="head rv"><span class="idx">/ 06</span><h2>Featured case study</h2></div>
+      <div class="head rv"><span class="idx"><i class="sdot"></i>Exhibit 06 &middot; Case Study</span><h2>Featured case study</h2></div>
       <div class="case rv">
         <div class="case-top"><h3>Governing a volatile $390M retail media ecosystem without budget drift.</h3><span class="badge">STAR &middot; Buy + Supply Side</span></div>
         <div class="split">
@@ -714,7 +720,7 @@
 
   <section id="certs">
     <div class="wrap">
-      <div class="head rv"><span class="idx">/ 07</span><h2>Certifications &amp; awards</h2></div>
+      <div class="head rv"><span class="idx"><i class="sdot"></i>Exhibit 07 &middot; Credentials</span><h2>Certifications &amp; awards</h2></div>
       <p class="lead-note rv">Six certifications and two awards, all current and verifiable.</p>
       <div class="certgrid">
         <div class="cf-card rv"><div class="cf-seal"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4.421.01a2.947 2.947 0 0 0-2.828 1.52 2.967 2.967 0 0 0 1.094 4.076l10.6 6.064 4.79-2.672a3.546 3.546 0 0 1 1.811-.443L5.701.424A2.947 2.947 0 0 0 4.42.01ZM1.164 4.768v14.484a3.474 3.474 0 0 1 2.972-1.687 3.47 3.47 0 0 1 2.961 1.672l.004-10.53L2.44 6.04a3.433 3.433 0 0 1-1.275-1.271Zm18.42 4.289a3.08 3.08 0 0 0-1.264.379L7.6 15.414c.003 1.873-.011 3.745.003 5.617 0 .4-.072.988-.396 1.606l12.548-7.227 1.487-.83a2.978 2.978 0 0 0 1.463-3.511 3.08 3.08 0 0 0-3.121-2.012ZM4.136 18.065A2.967 2.967 0 1 0 4.134 24a2.967 2.967 0 0 0 .002-5.935z"/></svg></div><div class="cf-issuer">The Trade Desk</div><div class="cf-name">Kokai Certification</div><div class="cf-tag">Edge Academy · Advanced Programmatic</div><span class="cf-verify">Verified</span></div>
@@ -750,7 +756,7 @@
     <a class="mail rv d2" href="mailto:vamsisonamic@gmail.com">vamsisonamic@gmail.com</a>
     <div class="frow rv d3">
       <div class="lset"><a href="https://www.linkedin.com/in/bharath-vamsi-reddy" target="_blank" rel="noopener">LinkedIn</a><a href="https://github.com/vamsisonamic-eng" target="_blank" rel="noopener">GitHub</a><a href="mailto:vamsisonamic@gmail.com?subject=R%C3%A9sum%C3%A9%20request">Résumé</a></div>
-      <span>Bharath Vamsi · Hyderabad, IN · © 2026</span>
+      <span>Case file BV&middot;2026 &middot; Bharath Vamsi &middot; Hyderabad, IN &middot; © 2026</span>
     </div>
   </div>
 </footer>
