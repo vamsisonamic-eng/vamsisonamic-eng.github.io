@@ -12,6 +12,8 @@ import {
   Plus,
   Menu,
   X,
+  Sun,
+  Moon,
 } from "lucide-react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
@@ -21,6 +23,7 @@ const HeroScene = React.lazy(() => import("./scene"));
 import "./styles.css";
 import "./experience.css";
 import "./testimonials.css";
+import "./themes.css";
 import Testimonials from "./testimonials";
 import {
   PlatformTicker,
@@ -71,7 +74,22 @@ function App() {
     ),
     [status, setStatus] = useState(""),
     [emailDraft, setEmailDraft] = useState(""),
-    [selection, setSelection] = useState(null);
+    [selection, setSelection] = useState(null),
+    [theme, setTheme] = useState(() => {
+      try {
+        return localStorage.getItem("portfolio-theme") === "day"
+          ? "day"
+          : "night";
+      } catch {
+        return "night";
+      }
+    });
+  useEffect(() => {
+    document.documentElement.dataset.theme = theme;
+    try {
+      localStorage.setItem("portfolio-theme", theme);
+    } catch {}
+  }, [theme]);
   useEffect(() => {
     document.documentElement.dataset.motion = motion ? "on" : "off";
     if (!motion) return;
@@ -231,7 +249,7 @@ function App() {
                 <div className="scene-loading">INITIALIZING NETWORK</div>
               }
             >
-              <HeroScene mode={mode} motion={motion} />
+              <HeroScene mode={mode} motion={motion} theme={theme} />
             </Suspense>
             <div className="node-label label-one">
               <i />{" "}
@@ -259,10 +277,20 @@ function App() {
           </div>
           <div className="hero-bottom">
             <span>BASED IN HYDERABAD · THINKING GLOBALLY</span>
-            <button onClick={() => setMotion(!motion)} aria-pressed={motion}>
-              MOTION {motion ? "ON" : "OFF"}{" "}
-              <span className={motion ? "switch on" : "switch"} />
-            </button>
+            <div className="view-controls">
+              <button
+                className="theme-switch"
+                onClick={() => setTheme(theme === "night" ? "day" : "night")}
+                aria-label={`Switch to ${theme === "night" ? "Day" : "Night"} vision`}
+              >
+                {theme === "night" ? <Sun size={15} /> : <Moon size={15} />}{" "}
+                {theme === "night" ? "DAY VISION" : "NIGHT VISION"}
+              </button>
+              <button onClick={() => setMotion(!motion)} aria-pressed={motion}>
+                MOTION {motion ? "ON" : "OFF"}{" "}
+                <span className={motion ? "switch on" : "switch"} />
+              </button>
+            </div>
           </div>
         </section>
         <PlatformTicker motion={motion} onOpen={setSelection} />

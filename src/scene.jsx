@@ -1,8 +1,10 @@
 import React, { useMemo, useRef, useEffect, useState, Component } from "react";
 import { Canvas, useFrame } from "@react-three/fiber";
 import * as THREE from "three";
-const palette = ["#a9f58a", "#83c7ff", "#c5a1ff"];
-function NetworkGlobe({ mode, motion }) {
+const nightPalette = ["#a9f58a", "#83c7ff", "#c5a1ff"];
+function NetworkGlobe({ mode, motion, theme }) {
+  const palette =
+    theme === "day" ? ["#367918", "#236caa", "#7340ad"] : nightPalette;
   const group = useRef();
   const particles = useRef();
   const { nodes, edges, stars } = useMemo(() => {
@@ -88,7 +90,13 @@ function NetworkGlobe({ mode, motion }) {
           <mesh key={i} position={p}>
             <sphereGeometry args={[i % 9 === 0 ? 0.052 : 0.022, 8, 8]} />
             <meshBasicMaterial
-              color={i % 9 === 0 ? "#eaffde" : palette[mode]}
+              color={
+                i % 9 === 0
+                  ? theme === "day"
+                    ? "#22482a"
+                    : "#eaffde"
+                  : palette[mode]
+              }
             />
           </mesh>
         ))}
@@ -104,7 +112,9 @@ function NetworkGlobe({ mode, motion }) {
             </mesh>
             <mesh position={[2.85 + n * 0.14, 0, 0]}>
               <sphereGeometry args={[0.06, 12, 12]} />
-              <meshBasicMaterial color="#edffe4" />
+              <meshBasicMaterial
+                color={theme === "day" ? "#22482a" : "#edffe4"}
+              />
             </mesh>
           </group>
         ))}
@@ -142,7 +152,7 @@ class Boundary extends Component {
     return this.state.failed ? this.props.fallback : this.props.children;
   }
 }
-export default function HeroScene({ mode, motion }) {
+export default function HeroScene({ mode, motion, theme }) {
   const ref = useRef();
   const [visible, setVisible] = useState(true);
   const [available] = useState(() => {
@@ -183,7 +193,7 @@ export default function HeroScene({ mode, motion }) {
             frameloop={visible && motion ? "always" : "demand"}
             gl={{ antialias: true, alpha: true, powerPreference: "low-power" }}
           >
-            <NetworkGlobe mode={mode} motion={motion} />
+            <NetworkGlobe mode={mode} motion={motion} theme={theme} />
           </Canvas>
         </Boundary>
       ) : (

@@ -24,3 +24,5 @@ Phone dimensions are browser emulation; no physical-device test was performed. C
 Reproduce with `npm run build`, `npm run preview`, `node scripts/verify-details.mjs`, `node scripts/verify-controls.mjs`, `node scripts/verify-interactions.mjs`, and `npm run check` (set TEST_URL to the preview URL).
 
 Testimonials update: 12 excerpts from six colleagues/stakeholders were checked against the recognition screenshots. Five featured cards and expandable collection passed at desktop, mobile, compact mobile and reduced motion. Expansion/collapse and absence of horizontal overflow verified. Source screenshot files remain private.
+
+Day/Night update: persistent theme switching, theme-aware 3D colors, and independent motion controls passed at desktop, mobile and compact mobile. Day hero, engine, toolkit, testimonials, career dialog and contact were visually inspected; low-contrast labels and resume-button styling were corrected.

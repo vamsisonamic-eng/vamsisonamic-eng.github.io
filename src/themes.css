@@ -1,0 +1,215 @@
+.view-controls {
+  display: flex;
+  align-items: center;
+  gap: 24px;
+}
+.hero-bottom .view-controls button {
+  display: flex;
+  align-items: center;
+  gap: 9px;
+  background: none;
+  border: 0;
+  color: var(--muted);
+  font-size: 9px;
+  letter-spacing: 0.5px;
+  padding: 10px 0;
+}
+.hero-bottom .view-controls button:hover {
+  color: var(--accent);
+}
+html[data-theme="day"] {
+  --bg: #f3f6f2;
+  --surface: #ffffff;
+  --ink: #162522;
+  --muted: #526760;
+  --accent: #367918;
+  --border: #213c2420;
+  color-scheme: light;
+}
+html[data-theme="day"] .glass {
+  background: linear-gradient(135deg, #ffffffef, #ffffffa6);
+  border-color: #26432b25;
+  border-top-color: #26432b35;
+  box-shadow: 0 15px 35px #2d4c3010;
+}
+html[data-theme="day"]
+  :is(
+    nav,
+    .hero-bottom,
+    .scene-meta,
+    .visual-footer,
+    .simulation-note,
+    .role-description,
+    .role-explore,
+    .platform-legend,
+    .ticker-label,
+    .platform-chip small,
+    .credential-intro p,
+    .credential small,
+    .credential > span,
+    .testimonial-context,
+    .testimonial-top span,
+    .testimonial-date,
+    .testimonial figcaption small,
+    .testimonial-foot > span,
+    .detail-intro,
+    .detail-columns li,
+    .detail-note,
+    .detail-subtitle,
+    .detail-metrics span,
+    .detail-footer,
+    .progression-step > span,
+    .case-story p,
+    .concept-label,
+    .mockup-kicker,
+    .mockup-bar,
+    .project-pagination span,
+    .terminal-header,
+    .terminal small,
+    .resume-note
+  ) {
+  color: #526760;
+}
+html[data-theme="day"] :is(h1 .quiet, h2 > span) {
+  color: #60766b;
+}
+html[data-theme="day"]
+  :is(
+    .avatar,
+    .testimonial-avatar,
+    .promotion-badge,
+    .recognition-band,
+    .platform-tabs button[aria-pressed="true"],
+    .testimonial-expand
+  ) {
+  background: #3679180a;
+  border-color: #36791840;
+  color: var(--accent);
+}
+html[data-theme="day"]
+  :is(
+    .node-label,
+    .mode-switch,
+    .platform-chip,
+    .credential,
+    .mockup,
+    .detail-panel,
+    .detail-header,
+    .full-credentials > div
+  ) {
+  background: #ffffffed;
+  border-color: #26432b25;
+  color: var(--ink);
+}
+html[data-theme="day"] .mode-switch button {
+  color: #526760;
+}
+html[data-theme="day"] .mode-switch button[aria-pressed="true"] {
+  background: #36791815;
+  color: var(--accent);
+}
+html[data-theme="day"]
+  :is(
+    .platform-tabs button,
+    .platform-chip strong,
+    .testimonial figcaption strong,
+    .role-company,
+    .detail-body h3
+  ) {
+  color: var(--ink);
+}
+html[data-theme="day"]
+  :is(.platform-mark, .detail-platform-mark, .detail-status) {
+  color: color-mix(
+    in srgb,
+    var(--platform-color, var(--detail-accent)),
+    #16331b 65%
+  );
+  border-color: #26432b30;
+  background: #f3f6f2;
+}
+html[data-theme="day"] .detail-panel {
+  --detail-accent: #367918 !important;
+  box-shadow: 0 28px 100px #233c2925;
+}
+html[data-theme="day"] .detail-dialog::backdrop {
+  background: #dce5dedb;
+}
+html[data-theme="day"]
+  :is(
+    .detail-header,
+    .detail-footer,
+    .detail-metrics,
+    .testimonial figcaption,
+    .roas-story,
+    .recognition-band
+  ) {
+  border-color: var(--border);
+}
+html[data-theme="day"]
+  :is(.progression-line, .progression-step.current:before) {
+  background: var(--accent);
+}
+html[data-theme="day"] :is(.testimonial-featured, .competency.featured) {
+  background: linear-gradient(135deg, #ebf4e6, #ffffff);
+  border-color: #36791840;
+}
+html[data-theme="day"] :is(.button.primary, .mockup-button) {
+  background: #367918;
+  color: #ffffff;
+}
+html[data-theme="day"] :is(.tags span, .detail-tools span) {
+  border-color: #26432b25;
+  color: #526760;
+}
+html[data-theme="day"] :is(input, textarea) {
+  color: var(--ink);
+  border-color: #26432b35;
+  background: transparent;
+}
+html[data-theme="day"] .scene-poster {
+  filter: invert(1) hue-rotate(160deg);
+  mix-blend-mode: multiply;
+}
+html[data-theme="day"] nav.open {
+  background: #f3f6f2f5;
+}
+@media (max-width: 760px) {
+  .view-controls {
+    gap: 18px;
+  }
+  .hero-bottom {
+    flex-wrap: wrap;
+    gap: 10px;
+  }
+  .hero-bottom .view-controls button {
+    font-size: 8px;
+  }
+}
+html[data-theme="day"]
+  :is(
+    .eyebrow,
+    .card-number,
+    .terminal label,
+    .terminal > p,
+    .detail-header > span,
+    .detail-header button,
+    .recognition-band > div > span,
+    .recognition-band > div > div > span,
+    footer,
+    footer a,
+    h1 .amp
+  ) {
+  color: #526760;
+}
+html[data-theme="day"] .button.resume {
+  background: #ffffff;
+  border-color: #36791850;
+  color: #285719;
+}
+html[data-theme="day"] .ticker-group button {
+  color: #526760;
+}
+html[data-theme="day"] .ticker-group button > span {
+  color: #367918 !important;
+}
