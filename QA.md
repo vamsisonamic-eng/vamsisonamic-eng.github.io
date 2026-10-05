@@ -26,3 +26,5 @@ Reproduce with `npm run build`, `npm run preview`, `node scripts/verify-details.
 Testimonials update: 12 excerpts from six colleagues/stakeholders were checked against the recognition screenshots. Five featured cards and expandable collection passed at desktop, mobile, compact mobile and reduced motion. Expansion/collapse and absence of horizontal overflow verified. Source screenshot files remain private.
 
 Day/Night update: persistent theme switching, theme-aware 3D colors, and independent motion controls passed at desktop, mobile and compact mobile. Day hero, engine, toolkit, testimonials, career dialog and contact were visually inspected; low-contrast labels and resume-button styling were corrected.
+
+Production verification: published to https://vamsisonamic-eng.github.io/ from `gh-pages` release 1e57ec5. GitHub Pages deployment 37300084588 completed successfully. Public-URL checks passed for desktop, phone, compact phone and reduced motion with no JavaScript errors or page overflow. Public Day/Night persistence, independent motion, career dialog, navigation, project controls, form validation and master PDF download passed.
