@@ -26,7 +26,8 @@ Node.js 22 or later is required. Production files are generated in `dist/`. Sour
 
 The interface supports reduced motion, a global motion switch, paused platform animation, native modal focus containment and focus restoration. The static master PDF downloads directly. The contact form validates inputs and creates a draft that the visitor sends from their own email application. No server or external form service is required.
 
-ProgrammaticOS and Myvash mockups are labeled interface concepts; inquiry links use the public email. The 3D network is illustrative rather than live DSP telemetry. Testimonials are faithful excerpts with context; original correspondence is not published.
+ProgrammaticOS launches its live learning workspace at https://programmaticos.ai.studio/ . Mockups are labeled interface concepts; Myvash inquiries use the public email. The 3D network is illustrative rather than live DSP telemetry. Testimonials are faithful excerpts with context; original correspondence is not published.
 
 See `QA.md` for tested viewports, controls and practical limits. Browser checks use Playwright and the installed Chrome executable; adapt its path for your machine.
+
 

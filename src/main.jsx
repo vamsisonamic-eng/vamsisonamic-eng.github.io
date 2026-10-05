@@ -137,9 +137,9 @@ function App() {
       name: "ProgrammaticOS",
       type: "AI-POWERED LEARNING",
       description:
-        "Turning complex ad tech into a connected learning system. A place to explore programmatic media with AI at the core.",
-      label: "Ask about ProgrammaticOS",
-      screen: "programmatic.os",
+        "An independent ad-tech learning workspace connecting structured modules, visual labs, an AI tutor interface, and interview practice.",
+      label: "Launch ProgrammaticOS",
+      screen: "programmaticos.ai.studio",
       tags: ["AI learning", "Ad tech", "Independent build"],
     },
     {
@@ -468,7 +468,13 @@ function App() {
                 ))}
               </div>
               <a
-                href={`mailto:vamsisonamic@gmail.com?subject=${encodeURIComponent(project ? "Myvash project inquiry" : "ProgrammaticOS inquiry")}`}
+                href={
+                  project === 0
+                    ? "https://programmaticos.ai.studio/"
+                    : "mailto:vamsisonamic@gmail.com?subject=Myvash%20project%20inquiry"
+                }
+                target={project === 0 ? "_blank" : undefined}
+                rel={project === 0 ? "noopener noreferrer" : undefined}
                 className="text-link"
               >
                 {projects[project].label} <ArrowUpRight size={17} />

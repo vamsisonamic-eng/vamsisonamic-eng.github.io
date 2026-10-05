@@ -12,6 +12,7 @@ import {
   Layers,
 } from "lucide-react";
 import gsap from "gsap";
+import CreativeCase from "./creative-case";
 import {
   platforms,
   platformGroups,
@@ -391,15 +392,18 @@ function CaseContent({ data }) {
   return (
     <>
       <p className="detail-intro">{data.intro}</p>
-      <div className="workflow" aria-label="Illustrative workflow">
-        {data.steps.map((step, i) => (
-          <div className="workflow-step" key={step}>
-            <span>0{i + 1}</span>
-            <strong>{step}</strong>
-            <Check size={14} />
-          </div>
-        ))}
-      </div>
+      {data.id === "diagnosis" && <CreativeCase />}
+      {data.id !== "diagnosis" && (
+        <div className="workflow" aria-label="Illustrative workflow">
+          {data.steps.map((step, i) => (
+            <div className="workflow-step" key={step}>
+              <span>0{i + 1}</span>
+              <strong>{step}</strong>
+              <Check size={14} />
+            </div>
+          ))}
+        </div>
+      )}
       <div className="case-story">
         {[
           ["The challenge", data.situation],

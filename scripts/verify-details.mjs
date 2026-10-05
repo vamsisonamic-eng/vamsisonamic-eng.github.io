@@ -105,7 +105,10 @@ for (const [name, width, height, reduced] of [
   for (const trigger of await page.locator(".case-row").all()) {
     await trigger.click();
     await page.waitForTimeout(reduced ? 50 : 1300);
-    if ((await page.locator(".workflow-step").count()) !== 4)
+    if (
+      (await page.locator(".workflow-step").count()) !== 4 &&
+      (await page.locator(".investigation-node").count()) !== 3
+    )
       throw Error("Missing workflow");
     await close();
   }
